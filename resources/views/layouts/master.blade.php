@@ -38,7 +38,8 @@
 
         <div class="row">
             {{-- SIDEBAR --}}
-            @include('inc.admin.sidebar')
+            @yield('sidebar')
+            
             {{-- SUDEBAR END --}}
 
             {{-- MAINBAR --}}
@@ -49,12 +50,28 @@
         </div>
         
     </div>
-    <script>
+    {{-- <script>
         $('#summernote').summernote({
         placeholder: 'Tulis Konten Disini',
         tabsize: 2,
         height: 500
         });
+    </script> --}}
+    <script>
+        $('#summernote').summernote({
+        placeholder: 'Tulis Konten Disini',
+        tabsize: 2,
+        height: 500,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['']]
+        ]
+      });
     </script>
 </body>
 </html>

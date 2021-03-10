@@ -1,18 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminAkunController;
 use App\Http\Controllers\AdminDashboardController;
-use App\Http\Controllers\AdminProfileController;
-use App\Http\Controllers\AdminAdmisiController;
-use App\Http\Controllers\AdminAkademikController;
-use App\Http\Controllers\AdminAlumniController;
-use App\Http\Controllers\AdminKemahasiswaanController;
-use App\Http\Controllers\AdminPembelajaranController;
-use App\Http\Controllers\AdminPenelitianController;
-use App\Http\Controllers\AdminBeritaController;
-use App\Http\Controllers\AdminArticleController;
 use App\Http\Controllers\AdminBerandaController;
+use App\Http\Controllers\AdminContentController;
+use App\Http\Controllers\AdminMenuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,14 +29,14 @@ Route::prefix('admin')->group(function () {
 
     Route::resource('', AdminDashboardController::class, ['as' => 'admin']);
     Route::resource('beranda', AdminBerandaController::class, ['as' => 'admin']);
-    Route::resource('akun', AdminAkunController::class, ['as' => 'admin']);
-    Route::resource('profile', AdminProfileController::class, ['as' => 'admin']);
-    Route::resource('admisi', AdminAdmisiController::class, ['as' => 'admin']);
-    Route::resource('akademik', AdminAkademikController::class, ['as' => 'admin']);
-    Route::resource('alumni', AdminAlumniController::class, ['as' => 'admin']);
-    Route::resource('article', AdminArticleController::class, ['as' => 'admin']);
-    Route::resource('kemahasiswaan', AdminKemahasiswaanController::class, ['as' => 'admin']);
-    Route::resource('pembelajaran', AdminPembelajaranController::class, ['as' => 'admin']);
-    Route::resource('penelitian', AdminPenelitianController::class, ['as' => 'admin']);
-    Route::resource('berita', AdminBeritaController::class, ['as' => 'admin']);
+    // Route::resource('content', AdminContentController::class, ['as' => 'admin']);
+    Route::resource('menu', AdminMenuController::class, ['as' => 'admin']);
+
+    Route::get('content/create', [App\Http\Controllers\AdminContentController::class, 'create'])->name('admin.content.create');
+    Route::get('content/{menu}', [App\Http\Controllers\AdminContentController::class, 'index'])->name('admin.content.index');
+    Route::get('content/{menu}/{judul}', [App\Http\Controllers\AdminContentController::class, 'show'])->name('admin.content.show');
+    Route::get('content/edit/{menu}/{judul}', [App\Http\Controllers\AdminContentController::class, 'edit'])->name('admin.content.edit');
+    Route::post('content', [App\Http\Controllers\AdminContentController::class, 'store'])->name('admin.content.store');
+    Route::put('content/{id}', [App\Http\Controllers\AdminContentController::class, 'update'])->name('admin.content.update');
+    Route::delete('content/{id}', [App\Http\Controllers\AdminContentController::class, 'destroy'])->name('admin.content.destroy');
 });

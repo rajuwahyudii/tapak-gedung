@@ -15,9 +15,11 @@ class CreateContentsTable extends Migration
     {
         Schema::create('contents', function (Blueprint $table) {
             $table->id();
-            $table->string('kategori')->default('-');
+            $table->enum('bahasa', ['id', 'en'])->default('id');
+            $table->string('menu')->default('-');
+            $table->integer('urutan')->default(0);
             $table->string('judul')->default('-');
-            $table->string('kontent')->default('-');
+            $table->text('kontent')->default('-');
             $table->string('author')->default('-');
             $table->timestamps();
         });

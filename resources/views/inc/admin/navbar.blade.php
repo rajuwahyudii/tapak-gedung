@@ -8,32 +8,11 @@
         <li class="nav-item {{ Route::is('admin.beranda.*') ? 'active' : '' }}">
             <a class="nav-link text-uppercase" href="{{route('admin.beranda.index')}}">Beranda <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item {{ Route::is('admin.profile.*') ? 'active' : '' }}">
-            <a class="nav-link text-uppercase" href="{{route('admin.profile.index')}}">Profile</a>
+          <li class="nav-item {{ Route::is('admin.content.*') ? 'active' : '' }}">
+            <a class="nav-link text-uppercase" href="{{route('admin.content.index', 'daftar-content')}}">Content</a>
           </li>
-          <li class="nav-item {{ Route::is('admin.admisi.*') ? 'active' : '' }}">
-              <a class="nav-link text-uppercase" href="{{route('admin.admisi.index')}}">Admisi</a>
-          </li>
-          <li class="nav-item {{ Route::is('admin.alumni.*') ? 'active' : '' }}">
-              <a class="nav-link text-uppercase" href="{{route('admin.alumni.index')}}">Alumni</a>
-          </li>
-          <li class="nav-item {{ Route::is('admin.kemahasiswaan.*') ? 'active' : '' }}">
-              <a class="nav-link text-uppercase" href="{{route('admin.kemahasiswaan.index')}}">Kemahasiswaan</a>
-          </li>
-          <li class="nav-item {{ Route::is('admin.akademik.*') ? 'active' : '' }}">
-              <a class="nav-link text-uppercase" href="{{route('admin.akademik.index')}}">Akademik</a>
-          </li>
-          <li class="nav-item {{ Route::is('admin.penelitian.*') ? 'active' : '' }}">
-              <a class="nav-link text-uppercase" href="{{route('admin.penelitian.index')}}">Penelitian</a>
-          </li>
-          <li class="nav-item {{ Route::is('admin.pembelajaran.*') ? 'active' : '' }}">
-              <a class="nav-link text-uppercase" href="{{route('admin.pembelajaran.index')}}">Pembelajaran</a>
-          </li>
-          <li class="nav-item {{ Route::is('admin.berita.*') ? 'active' : '' }}">
-              <a class="nav-link text-uppercase" href="{{route('admin.berita.index')}}">Berita</a>
-          </li>
-          <li class="nav-item {{ Route::is('admin.article.*') ? 'active' : '' }}">
-              <a class="nav-link text-uppercase" href="{{route('admin.article.index')}}">Article</a>
+          <li class="nav-item {{ Route::is('admin.menu.*') ? 'active' : '' }}">
+            <a class="nav-link text-uppercase" href="{{route('admin.menu.index')}}">Menu</a>
           </li>
       </ul>
 

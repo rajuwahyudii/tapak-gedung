@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Content;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Path\To\DOMdocument;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class AdminProfileController extends Controller
 {
@@ -19,7 +23,6 @@ class AdminProfileController extends Controller
 
     public function index()
     {
-        return view('admin.profile.index');
     }
 
     /**
@@ -29,7 +32,6 @@ class AdminProfileController extends Controller
      */
     public function create()
     {
-        return view('admin.profile.create');
     }
 
     /**
@@ -48,9 +50,8 @@ class AdminProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($judul)
     {
-        //
     }
 
     /**
@@ -59,10 +60,8 @@ class AdminProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($judul)
     {
-
-        return view('admin.profile.create');
     }
 
     /**
@@ -74,7 +73,6 @@ class AdminProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**
@@ -85,6 +83,5 @@ class AdminProfileController extends Controller
      */
     public function destroy($id)
     {
-        //
     }
 }
