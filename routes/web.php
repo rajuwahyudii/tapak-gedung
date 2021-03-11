@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminBerandaController;
 use App\Http\Controllers\AdminBeritaController;
+use App\Http\Controllers\AdminAkunController;
 use App\Http\Controllers\AdminContentController;
 use App\Http\Controllers\AdminMenuController;
 
@@ -32,6 +33,7 @@ Route::prefix('admin')->group(function () {
 
     Route::resource('', AdminDashboardController::class, ['as' => 'admin']);
     Route::resource('beranda', AdminBerandaController::class, ['as' => 'admin']);
+    Route::resource('akun', AdminAkunController::class, ['as' => 'admin']);
     Route::resource('berita', AdminBeritaController::class, ['as' => 'admin']);
     // Route::resource('content', AdminContentController::class, ['as' => 'admin']);
     Route::resource('menu', AdminMenuController::class, ['as' => 'admin']);

@@ -25,7 +25,7 @@
         </a>
       
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="#">Tambah Admin</a>
+          <a class="dropdown-item" href="{{route('admin.akun.index')}}">Tambah Admin</a>
           <a class="dropdown-item" href="#">Ganti Password</a>
           <hr>
           <a class="dropdown-item" href="{{ route('logout') }}"
