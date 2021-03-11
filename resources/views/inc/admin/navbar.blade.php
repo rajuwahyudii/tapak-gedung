@@ -1,12 +1,15 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white mb-3 pr-5 pl-5 pb-3 pt-3">
+<nav class="navbar navbar-expand-lg navbar-light bg-white mb-5 pr-5 pl-5 pb-3 pt-3">
     <a class="navbar-brand" href="#">LOGO</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav m-auto">
-        <li class="nav-item {{ Route::is('admin.beranda.*') ? 'active' : '' }}">
+          <li class="nav-item {{ Route::is('admin.beranda.*') ? 'active' : '' }}">
             <a class="nav-link text-uppercase" href="{{route('admin.beranda.index')}}">Beranda <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item {{ Route::is('admin.berita.*') ? 'active' : '' }}">
+            <a class="nav-link text-uppercase" href="{{route('admin.berita.index')}}">Berita <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item {{ Route::is('admin.content.*') ? 'active' : '' }}">
             <a class="nav-link text-uppercase" href="{{route('admin.content.index', 'daftar-content')}}">Content</a>

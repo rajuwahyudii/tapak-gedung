@@ -1,23 +1,23 @@
 @extends('layouts.master')
 
 @section('sidebar')
-    @include('inc.admin.sidebar')
+    @include('inc.admin.berita_sidebar')
 @endsection
 
 @section('content')
 <div>
-    <h1>content</h1>
-    <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.content.index', 'daftar-content')}}">content</a> / <a href="{{route('admin.content.index', $content->menu)}}">{{$content->menu}}</a> / {{ strtolower($content->judul)}} </p>
+    <h1>Berita</h1> 
+    <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.berita.index')}}">berita</a> / <a href="{{route('admin.berita.index')}}"> {{ strtolower($berita->judul)}}</a></p>
 </div>
 <div class="bg-white p-5">
     <div class="container">
         <div class="row">
             <div class="col-xl-6">
-                <h5>{{$content->judul}}</h5>
-                <small>Penulis : {{$content->author}} | Di buat pada : {{$content->created_at}}</small>
+                <h5>{{$berita->judul}}</h5>
+                <small>Penulis : {{$berita->penulis}} | Di buat pada : {{$berita->created_at}}</small>
             </div>
             <div class="col-xl-4 text-left">
-                <a href="{{route('admin.content.edit', [ $content->menu, $content->judul])}}">
+                <a href="{{route('admin.berita.edit', $berita->id)}}">
                     <button class="btn btn-success mt-3"> <i class="fas fa-pen"></i> Edit</button>
                 </a>
                 <a href="#">
@@ -25,7 +25,7 @@
                 </a>
             </div>
             <div class="col-xl-2 text-right">
-                <form action="{{route('admin.content.destroy', $content->id)}}" method="POST">
+                <form action="{{route('admin.berita.destroy', $berita->id)}}" method="POST">
                     @csrf
                     {{ method_field('DELETE') }}
                     <button class="btn btn-danger mt-3"> <i class="fas fa-trash"></i> Hapus</button>
@@ -36,7 +36,9 @@
     
     <hr class="mb-5">
     <div>
-        {!!$content->kontent!!}
-    </div>
+        <img src=" {{ URL::asset('storage/berita') }}/{{$berita->thumbnail}} " alt="thumbnail" class="img-fluid">
+    </div>  
+    <hr>
+    {!!$berita->konten!!}
 </div>
 @endsection

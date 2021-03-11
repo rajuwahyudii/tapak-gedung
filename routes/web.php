@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminBerandaController;
+use App\Http\Controllers\AdminBeritaController;
 use App\Http\Controllers\AdminContentController;
 use App\Http\Controllers\AdminMenuController;
 
@@ -26,11 +27,15 @@ Auth::routes();
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::prefix('admin')->group(function () {
+    Route::get('berita_filter/bahasa/{bahasa}', [App\Http\Controllers\AdminBeritaFilterController::class, 'bahasaFilter'])->name('admin.berita.bahasa_filter');
+
 
     Route::resource('', AdminDashboardController::class, ['as' => 'admin']);
     Route::resource('beranda', AdminBerandaController::class, ['as' => 'admin']);
+    Route::resource('berita', AdminBeritaController::class, ['as' => 'admin']);
     // Route::resource('content', AdminContentController::class, ['as' => 'admin']);
     Route::resource('menu', AdminMenuController::class, ['as' => 'admin']);
+
 
     Route::get('content/create', [App\Http\Controllers\AdminContentController::class, 'create'])->name('admin.content.create');
     Route::get('content/{menu}', [App\Http\Controllers\AdminContentController::class, 'index'])->name('admin.content.index');

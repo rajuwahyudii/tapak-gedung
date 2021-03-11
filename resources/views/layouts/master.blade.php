@@ -27,26 +27,31 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
+
+    
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body style="background-color: #f9f7f7">
-    <div id="app container-fluid">
+<body class="flex justify-content-center bg-light">
+    <div id="app container-fluid" style="width: 85%; margin: auto;">
         {{-- NAVBAR --}}
         @include('inc.admin.navbar')
         {{-- NAVBAR END --}}
 
-        <div class="row">
-            {{-- SIDEBAR --}}
-            @yield('sidebar')
-            
-            {{-- SUDEBAR END --}}
+        <div class="row" style="width: 101%">
 
             {{-- MAINBAR --}}
-            <div class="main col-xl-10 p-5">
+            <div class="main col-xl-10 mb-5" style="overflow-x: hidden;"> 
                 @yield('content')
             </div>
-            {{-- MAINBAR END --}}
+            {{-- MAINBAR END --}}  
+
+            {{-- SIDEBAR --}}
+            <div class="sidebar col-xl-2 bg-white pr-4 pl-4 pt-3 pb-5">
+                @yield('sidebar')
+            </div>
+            {{-- SUDEBAR END --}}
+            
         </div>
         
     </div>
@@ -57,6 +62,12 @@
         height: 500
         });
     </script> --}}
+    <script>
+        $(function () {
+         $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+
     <script>
         $('#summernote').summernote({
         placeholder: 'Tulis Konten Disini',

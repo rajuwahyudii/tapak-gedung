@@ -6,12 +6,14 @@
 
 @section('content')
 <div>
-    <h1>content</h1>
+    <h1>Content</h1>
     <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.content.index', 'daftar-content')}}">content</a>  / {{Request::segment(3)}}</p>
 </div>
 <div class="bg-white p-5">
+    @include('inc.messages')
+
     <a href="{{route('admin.content.create')}}">
-        <button type="button" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Tambah Judul</button>
+        <button type="button" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Tambah Konten</button>
     </a>
     <table class="table bg-white mb-5">
         <thead class="thead-dark">

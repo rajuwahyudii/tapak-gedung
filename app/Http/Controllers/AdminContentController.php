@@ -92,28 +92,29 @@ class AdminContentController extends Controller
      */
     public function store(Request $request)
     {
-        $storage = 'storage/content';
-        $dom = new \DOMDocument();
-        libxml_use_internal_errors(true);
-        $dom->loadHTML($request->kontent, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
-        libxml_clear_errors();
-        $images = $dom->getElementsByTagName('img');
-        foreach ($images as $img) {
-            $src = $img->getAttribute('src');
-            if (preg_match('/data:image/', $src)) {
-                preg_match('/data:image\/(?<mime>.*?)\;/', $src, $group);
-                $mimetype = $group['mime'];
-                $fileNameContent = uniqid();
-                $fileNameContentRand = substr(md5($fileNameContent), 6, 6) . '_' . time();
-                $filepath = ("$storage/$fileNameContentRand.$mimetype");
-                $image = Image::make($src)
-                    // ->resize(1200, 1200)
-                    ->encode($mimetype, 100)
-                    ->save(public_path($filepath));
-                $new_src = asset($filepath);
-                $img->removeAttribute('src');
-                $img->setAttribute('src', $new_src);
-                $img->setAttribute('class', 'img-responsive');
+        if (!empty($request->kontent)) {
+            $storage = 'storage/content';
+            $dom = new \DOMDocument();
+            libxml_use_internal_errors(true);
+            $dom->loadHTML($request->kontent, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
+            libxml_clear_errors();
+            $images = $dom->getElementsByTagName('img');
+            foreach ($images as $img) {
+                $src = $img->getAttribute('src');
+                if (preg_match('/data:image/', $src)) {
+                    preg_match('/data:image\/(?<mime>.*?)\;/', $src, $group);
+                    $mimetype = $group['mime'];
+                    $fileNameContent = uniqid();
+                    $fileNameContentRand = substr(md5($fileNameContent), 6, 6) . '_' . time();
+                    $filepath = ("$storage/$fileNameContentRand.$mimetype");
+                    $image = Image::make($src)
+                        ->encode($mimetype, 100)
+                        ->save(public_path($filepath));
+                    $new_src = asset($filepath);
+                    $img->removeAttribute('src');
+                    $img->setAttribute('src', $new_src);
+                    $img->setAttribute('class', 'img-fluid');
+                }
             }
         }
 
@@ -121,7 +122,11 @@ class AdminContentController extends Controller
         $content->urutan = $request->input('urutan');
         $content->menu_id = $request->input('menu_id');
         $content->judul = $request->input('judul');
-        $content->kontent = $dom->saveHTML();
+        if (!empty($request->kontent)) {
+            $content->kontent = $dom->saveHTML();
+        } else {
+            $content->kontent = " - ";
+        }
         $content->author = Auth::user()->name;
         $content->save();
 
@@ -212,28 +217,29 @@ class AdminContentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $storage = 'storage/content';
-        $dom = new \DOMDocument();
-        libxml_use_internal_errors(true);
-        $dom->loadHTML($request->kontent, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
-        libxml_clear_errors();
-        $images = $dom->getElementsByTagName('img');
-        foreach ($images as $img) {
-            $src = $img->getAttribute('src');
-            if (preg_match('/data:image/', $src)) {
-                preg_match('/data:image\/(?<mime>.*?)\;/', $src, $group);
-                $mimetype = $group['mime'];
-                $fileNameContent = uniqid();
-                $fileNameContentRand = substr(md5($fileNameContent), 6, 6) . '_' . time();
-                $filepath = ("$storage/$fileNameContentRand.$mimetype");
-                $image = Image::make($src)
-                    // ->resize(1200, 1200)
-                    ->encode($mimetype, 100)
-                    ->save(public_path($filepath));
-                $new_src = asset($filepath);
-                $img->removeAttribute('src');
-                $img->setAttribute('src', $new_src);
-                $img->setAttribute('class', 'img-responsive');
+        if (!empty($request->kontent)) {
+            $storage = 'storage/content';
+            $dom = new \DOMDocument();
+            libxml_use_internal_errors(true);
+            $dom->loadHTML($request->kontet, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
+            libxml_clear_errors();
+            $images = $dom->getElementsByTagName('img');
+            foreach ($images as $img) {
+                $src = $img->getAttribute('src');
+                if (preg_match('/data:image/', $src)) {
+                    preg_match('/data:image\/(?<mime>.*?)\;/', $src, $group);
+                    $mimetype = $group['mime'];
+                    $fileNameContent = uniqid();
+                    $fileNameContentRand = substr(md5($fileNameContent), 6, 6) . '_' . time();
+                    $filepath = ("$storage/$fileNameContentRand.$mimetype");
+                    $image = Image::make($src)
+                        ->encode($mimetype, 100)
+                        ->save(public_path($filepath));
+                    $new_src = asset($filepath);
+                    $img->removeAttribute('src');
+                    $img->setAttribute('src', $new_src);
+                    $img->setAttribute('class', 'img-fluid');
+                }
             }
         }
 
@@ -242,7 +248,11 @@ class AdminContentController extends Controller
         $content->judul = $request->input('judul');
         $content->urutan = $request->input('urutan');
         $content->kontent = $request->input('kontent');
-        $content->kontent = $dom->saveHTML();
+        if (!empty($request->kontent)) {
+            $content->kontent = $dom->saveHTML();
+        } else {
+            $content->kontent = " - ";
+        }
         $content->author = Auth::user()->name;
         $content->save();
 

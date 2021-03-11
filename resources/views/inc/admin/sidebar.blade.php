@@ -1,7 +1,6 @@
-<div class="sidebar col-xl-2 bg-white p-5" style="min-height: 100vh;">
     
     <a href="{{route('admin.content.index', 'daftar-content')}}">
-        <button class="btn btn-block btn-white"> <b> {{ Str::upper(Request::segment(2)) }} </b></button>
+        <button class="btn btn-block btn-white"> <b> DAFTAR MENU </b></button>
         {{-- <h5 class="small text-uppercase"><i class="fas fa-box w-5"></i> &nbsp; {{ Request::segment(2)  }} <hr></h5> --}}
     </a>
     <hr>
@@ -30,4 +29,3 @@
         <button class="btn btn-dark btn-block"> Pengantar </button>
     </a> --}}
     
-</div>
