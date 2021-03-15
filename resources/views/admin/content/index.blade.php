@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.duacol')
 
 @section('sidebar')
   @include('inc.admin.konten_sidebar')
@@ -6,8 +6,21 @@
 
 @section('content')
 <div>
-    <h1>Content</h1>
-    <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.content.index', 'daftar-content')}}">content</a>  / {{Request::segment(3)}}</p>
+
+  @if (Request::segment(3) != 'daftar-content')
+    @foreach ($menus as $menu)
+      @if ($menu->id == Request::segment(3))
+          <h1>Konten {{$menu->menu}}</h1>
+          <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.content.index', 'daftar-content')}}">content</a> / {{$menu->menu}}</p>
+      @endif
+    @endforeach
+  @else
+  <h1>Semua Konten</h1>
+  <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.content.index', 'daftar-content')}}">content</a> / Semua Content</p>
+  @endif
+   
+    
+    
 </div>
 <div class="bg-white p-5">
     @include('inc.messages')
@@ -23,7 +36,7 @@
             <th scope="col">Judul</th>
             <th scope="col">Tanggal Dibuat </th>
             <th scope="col">Penulis </th>
-            <th scope="col">Aksi </th>
+            <th scope="col" class="text-center">Aksi </th>
           </tr>
         </thead>
         <tbody>
@@ -39,8 +52,17 @@
               </td>
             </tr>
           @endforeach
-
         </tbody>
+        
     </table>  
+    <div class="row justify-content-center">
+      <nav class="mt-5" aria-label="...">
+          <ul class="pagination">
+              {{-- {{$tikets->appends('tikets')->links("pagination::bootstrap-4")}} --}}
+              {{$contents->links("pagination::bootstrap-4")}}
+              {{-- {!! $tikets->render() !!} --}}
+          </ul>
+      </nav>
+    </div>
 </div>
 @endsection

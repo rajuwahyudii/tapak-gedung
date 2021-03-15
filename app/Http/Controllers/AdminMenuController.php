@@ -142,6 +142,14 @@ class AdminMenuController extends Controller
         $menu = Menu::find($id);
         $menu->delete();
 
+        $contents = DB::table('contents')->where('menu_id', $id);
+        // if (!empty($contents)) {
+        //     foreach ($contents as $content) {
+        //         $content->delete();
+        //     }
+        // }
+        $contents->delete();
+
         return redirect()->route('admin.menu.index')->with('success', 'menu berhasil dihapus !!');
     }
 }

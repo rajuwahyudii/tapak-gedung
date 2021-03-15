@@ -6,8 +6,8 @@
     <hr>
     <h5 class="mb-4"><small> Indonesia </small></h5>
     @foreach ($indonesia_menus as $menu)
-    <a href="{{route('admin.content.index', $menu->menu)}}">
-        @if (Request::segment(3) == $menu->menu)
+    <a href="{{route('admin.content.index', $menu->id)}}">
+        @if (Request::segment(3) == $menu->id)
         <button class="btn mb-2 btn-block btn-dark text-left"> {{$menu->menu}} </button>
         @else
         <button class="btn mb-2 btn-block btn-white text-left"> {{$menu->menu}} </button>
@@ -17,8 +17,8 @@
     <hr>
     <h5 class="mb-4"><small> English </small></h5>
     @foreach ($english_menus as $menu)
-    <a href="{{route('admin.content.index', $menu->menu)}}">
-        @if (Request::segment(3) == $menu->menu)
+    <a href="{{route('admin.content.index', $menu->id)}}">
+        @if (Request::segment(3) == $menu->id)
         <button class="btn mb-2 btn-block btn-dark text-left"> {{$menu->menu}} </button>
         @else
         <button class="btn mb-2 btn-block btn-white text-left"> {{$menu->menu}} </button>

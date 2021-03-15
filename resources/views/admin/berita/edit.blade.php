@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.satucol')
 
 @section('sidebar')
     @include('inc.admin.berita_sidebar')
@@ -7,7 +7,7 @@
 @section('content')
 <div>
     <h1>Berita</h1>
-    <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.berita.index')}}">berita</a> / <a href="{{route('admin.berita.show', $berita->judul)}}">{{ strtolower($berita->judul)}}</a> / edit </p>
+    <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.berita.index', 'indonesia')}}">berita</a> / <a href="{{route('admin.berita.show', [$berita->bahasa,$berita->id])}}">{{ strtolower($berita->judul)}}</a> / edit </p>
 </div>
 <div class="bg-white p-5">
     <form action="{{route('admin.berita.update', $berita->id)}}" method="POST" enctype="multipart/form-data">

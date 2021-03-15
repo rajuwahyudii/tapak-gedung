@@ -21,17 +21,17 @@ class AdminContentController extends Controller
         $this->middleware('auth');
     }
 
-    public function index($menu)
+    public function index($menu_id)
     {
-        if ($menu == 'daftar-content') {
+        if ($menu_id == 'daftar-content') {
             $contents = DB::table('contents')
                 ->leftJoin('menus', 'contents.menu_id', 'menus.id')
                 ->select('contents.urutan', 'menus.menu', 'contents.judul', 'contents.created_at', 'contents.author')
                 ->orderBy('menus.menu', 'ASC')
                 ->orderBy('contents.urutan', 'ASC')
-                ->get();
+                ->paginate(10);
         } else {
-            $menu_id = DB::table('menus')->where('menu', $menu)->get()->first()->id;
+            // $menu_id = DB::table('menus')->where('id', $menu_id)->get()->first()->id;
 
             $contents = DB::table('contents')
                 ->leftJoin('menus', 'contents.menu_id', 'menus.id')
@@ -39,8 +39,13 @@ class AdminContentController extends Controller
                 ->select('contents.urutan', 'menus.menu', 'contents.judul', 'contents.created_at', 'contents.author')
                 ->orderBy('menus.menu', 'ASC')
                 ->orderBy('contents.urutan', 'ASC')
-                ->get();
+                ->paginate(10);
         }
+
+
+        $menus = DB::table('menus')
+            ->orderBy('menus.urutan', 'ASC')
+            ->get();
 
         $indonesia_menus = DB::table('menus')
             ->where('menus.bahasa', 'indonesia')
@@ -53,6 +58,7 @@ class AdminContentController extends Controller
             ->get();
 
         return view('admin.content.index')
+            ->with('menus', $menus)
             ->with('contents', $contents)
             ->with('indonesia_menus', $indonesia_menus)
             ->with('english_menus', $english_menus);
@@ -120,7 +126,11 @@ class AdminContentController extends Controller
 
         $content = new Content();
         $content->urutan = $request->input('urutan');
-        $content->menu_id = $request->input('menu_id');
+        if ($request->input('menu_id') == 'kosong') {
+            $content->menu_id = NULL;
+        } else {
+            $content->menu_id = $request->input('menu_id');
+        }
         $content->judul = $request->input('judul');
         if (!empty($request->kontent)) {
             $content->kontent = $dom->saveHTML();
@@ -130,9 +140,14 @@ class AdminContentController extends Controller
         $content->author = Auth::user()->name;
         $content->save();
 
-        $menu = DB::table('menus')->where('menus.id', $request->input('menu_id'))->get()->first()->menu;
+        if ($request->input('menu_id') == 'kosong') {
+            $menu = 'daftar-content';
+        } else {
+            $menu = DB::table('menus')->where('menus.id', $request->input('menu_id'))->get()->first()->menu;
+        }
 
-        return redirect()->route('admin.content.index', $menu)->with('success', 'konten berhasil dibuat !!');
+        return redirect()->route('admin.content.index', $request->input('menu_id'))
+            ->with('success', 'konten berhasil dibuat !!');
     }
 
     /**
@@ -221,7 +236,7 @@ class AdminContentController extends Controller
             $storage = 'storage/content';
             $dom = new \DOMDocument();
             libxml_use_internal_errors(true);
-            $dom->loadHTML($request->kontet, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
+            $dom->loadHTML($request->kontent, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
             libxml_clear_errors();
             $images = $dom->getElementsByTagName('img');
             foreach ($images as $img) {
@@ -258,7 +273,8 @@ class AdminContentController extends Controller
 
         $menu = DB::table('menus')->where('menus.id', $request->input('menu_id'))->get()->first()->menu;
 
-        return redirect()->route('admin.content.index', $menu)->with('success', 'konten berhasil diedit !!');
+        return redirect()->route('admin.content.index', $request->input('menu_id'))
+            ->with('success', 'konten berhasil diedit !!');
     }
 
     /**

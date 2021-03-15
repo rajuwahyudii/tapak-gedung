@@ -12,7 +12,7 @@ class AdminBeritaFilterController extends Controller
     {
         $beritas = DB::table('beritas')
             ->where('beritas.bahasa', $bahasa)
-            ->get();
+            ->paginate(5);
 
         return view('admin.berita.index')->with('beritas', $beritas);
     }

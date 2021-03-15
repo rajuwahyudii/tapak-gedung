@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.duacol')
 
 @section('sidebar')
     @include('inc.admin.konten_sidebar')

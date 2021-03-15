@@ -5,14 +5,21 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav m-auto">
-          <li class="nav-item {{ Route::is('admin.beranda.*') ? 'active' : '' }}">
-            <a class="nav-link text-uppercase" href="{{route('admin.beranda.index')}}">Beranda <span class="sr-only">(current)</span></a>
-          </li>
+          @if (Request::segment(2) == 'beranda')
+            <li class="nav-item active">
+              <a class="nav-link text-uppercase" href="{{route('admin.beranda.index', 'id')}}">Beranda</a>
+            </li>
+          @else
+            <li class="nav-item">
+              <a class="nav-link text-uppercase" href="{{route('admin.beranda.index', 'id')}}">Beranda</a>
+            </li>
+          @endif
+          
           <li class="nav-item {{ Route::is('admin.berita.*') ? 'active' : '' }}">
-            <a class="nav-link text-uppercase" href="{{route('admin.berita.index')}}">Berita <span class="sr-only">(current)</span></a>
+            <a class="nav-link text-uppercase" href="{{route('admin.berita.index', 'indonesia')}}">Berita</a>
           </li>
           <li class="nav-item {{ Route::is('admin.content.*') ? 'active' : '' }}">
-            <a class="nav-link text-uppercase" href="{{route('admin.content.index', 'daftar-content')}}">Content</a>
+            <a class="nav-link text-uppercase" href="{{route('admin.content.index', 'daftar-content')}}">Konten</a>
           </li>
           <li class="nav-item {{ Route::is('admin.menu.*') ? 'active' : '' }}">
             <a class="nav-link text-uppercase" href="{{route('admin.menu.index')}}">Menu</a>

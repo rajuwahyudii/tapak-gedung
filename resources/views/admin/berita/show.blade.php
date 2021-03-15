@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.satucol')
 
 @section('sidebar')
     @include('inc.admin.berita_sidebar')
@@ -7,17 +7,17 @@
 @section('content')
 <div>
     <h1>Berita</h1> 
-    <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.berita.index')}}">berita</a> / <a href="{{route('admin.berita.index')}}"> {{ strtolower($berita->judul)}}</a></p>
+    {{-- <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.berita.index', 'indonesia')}}">berita</a> / <a href="{{route('admin.berita.index', 'indonesia')}}"> {{ strtolower($berita->judul)}}</a></p> --}}
 </div>
 <div class="bg-white p-5">
     <div class="container">
         <div class="row">
-            <div class="col-xl-6">
+            <div class="col-xl-7">
                 <h5>{{$berita->judul}}</h5>
                 <small>Penulis : {{$berita->penulis}} | Di buat pada : {{$berita->created_at}}</small>
             </div>
-            <div class="col-xl-4 text-left">
-                <a href="{{route('admin.berita.edit', $berita->id)}}">
+            <div class="col-xl-3 text-left">
+                <a href="{{route('admin.berita.edit', [$berita->bahasa, $berita->id])}}">
                     <button class="btn btn-success mt-3"> <i class="fas fa-pen"></i> Edit</button>
                 </a>
                 <a href="#">
