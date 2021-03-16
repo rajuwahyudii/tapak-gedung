@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminContentController;
 use App\Http\Controllers\AdminMenuController;
 use App\Http\Controllers\AdminBerandaController;
 use App\Http\Controllers\AdminBerandaSliderController;
+use App\Http\Controllers\AdminBerandaKontenController;
 
 
 use Illuminate\Support\Facades\DB;
@@ -40,8 +41,9 @@ Route::prefix('admin')->group(function () {
     // ADMIN BERANDA ROUTE
     Route::get('beranda/{bahasa}', [App\Http\Controllers\AdminBerandaController::class, 'index'])->name('admin.beranda.index');
     Route::get('beranda/', function () {
-        return redirect('admin/beranda/id');
+        return redirect('admin/beranda/indonesia');
     });
+    Route::resource('beranda/konten', AdminBerandaKontenController::class, ['as' => 'admin.beranda']);
     Route::resource('beranda/slider', AdminBerandaSliderController::class, ['as' => 'admin']);
     // ADMIN BERANDA ROUTE END
 
@@ -52,7 +54,7 @@ Route::prefix('admin')->group(function () {
         return redirect('admin/berita/indonesia');
     });
     Route::get('berita/{bahasa}', [App\Http\Controllers\AdminBeritaController::class, 'index'])->name('admin.berita.index');
-    Route::get('berita/create', [App\Http\Controllers\AdminBeritaController::class, 'create'])->name('admin.berita.create');
+    Route::get('berita/{bahasa}/create', [App\Http\Controllers\AdminBeritaController::class, 'create'])->name('admin.berita.create');
     Route::get('berita/{bahasa}/{id}', [App\Http\Controllers\AdminBeritaController::class, 'show'])->name('admin.berita.show');
     Route::get('berita/{bahasa}/edit/{id}', [App\Http\Controllers\AdminBeritaController::class, 'edit'])->name('admin.berita.edit');
     Route::post('berita', [App\Http\Controllers\AdminBeritaController::class, 'store'])->name('admin.berita.store');

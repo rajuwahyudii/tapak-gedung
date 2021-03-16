@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div>
+{{-- <div>
 
   @if (Request::segment(3) != 'daftar-content')
     @foreach ($menus as $menu)
@@ -18,10 +18,43 @@
   <h1>Semua Konten</h1>
   <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.content.index', 'daftar-content')}}">content</a> / Semua Content</p>
   @endif
-   
     
+</div> --}}
+
+<div class="row">
+  <div class="col-xl-8">
+    @if (Request::segment(3) != 'daftar-content')
+    @foreach ($menus as $menu)
+        @if ($menu->id == Request::segment(3))
+            <h1>Konten {{$menu->menu}}</h1>
+            <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.content.index', 'daftar-content')}}">content</a> / {{$menu->menu}}</p>
+        @endif
+      @endforeach
+    @else
+    <h1>Semua Konten</h1>
+    <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.content.index', 'daftar-content')}}">content</a> / Semua Content</p>
+    @endif
+  </div>
+  <div class="col-xl-4 mt-5 pl-5">
+    @if (Request::segment(3) == 'english')  
+      <a href="">
+        <button type="button" class="btn mb-3 mr-3"><i class="fas fa-book"></i> Indonesia </button>
+      </a>
+      <a href="">
+          <button type="button" class="btn btn-dark mb-3"><i class="fas fa-book"></i> English</button>
+      </a>
+    @else
+      <a href="">
+        <button type="button" class="btn btn-dark mb-3 mr-3"><i class="fas fa-book"></i> Indonesia </button>
+      </a>
+      <a href="">
+          <button type="button" class="btn mb-3"><i class="fas fa-book"></i> English</button>
+      </a>
+    @endif
     
+  </div>
 </div>
+
 <div class="bg-white p-5">
     @include('inc.messages')
 

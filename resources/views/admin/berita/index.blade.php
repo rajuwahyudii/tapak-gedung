@@ -33,13 +33,14 @@
 
 <div class="bg-white p-5">
     @include('inc.messages')
-    <a href="{{route('admin.berita.create')}}">
+    <a href="{{route('admin.berita.create', $bahasa)}}">
         <button type="button" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Tambah Berita</button>
     </a>
     <table class="table bg-white mb-5">
         <thead class="thead-dark">
           <tr>
             <th scope="col">Bahasa</th>
+            <th scope="col">Kategori</th>
             <th scope="col">Judul</th>
             <th scope="col">Penulis</th>
             <th scope="col">Tanggal dibuat </th>
@@ -50,6 +51,7 @@
           @foreach ($beritas as $berita)
             <tr>
               <td>{{$berita->bahasa}}</td>
+              <td>{{$berita->kategori}}</td>
               <td>{{$berita->judul}}</td>
               <td>{{$berita->penulis}}</td>
               <td>{{$berita->created_at}}</td>

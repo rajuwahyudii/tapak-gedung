@@ -2,25 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Berandakonten;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class AdminDashboardController extends Controller
+class AdminBerandaKontenController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
-        return redirect('admin/beranda/indonesia');
-        // return view('admin.dashboard.index');
+        //
     }
 
     /**
@@ -30,7 +25,6 @@ class AdminDashboardController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -63,7 +57,8 @@ class AdminDashboardController extends Controller
      */
     public function edit($id)
     {
-        //
+        $berandakonten = DB::table('berandakontens')->where('id', $id)->get()->first();
+        return view('admin.beranda.konten.edit')->with('berandakonten', $berandakonten);
     }
 
     /**
@@ -75,7 +70,15 @@ class AdminDashboardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $berandakonten = Berandakonten::find($id);
+        $berandakonten->bahasa = $request->input('bahasa');
+        $berandakonten->judul = $request->input('judul');
+        $berandakonten->konten = $request->input('konten');
+        $berandakonten->url = $request->input('url');
+        $berandakonten->save();
+
+        return redirect()->route('admin.beranda.index', $request->input('bahasa'))->with('success', 'beranda konten berhasil diupdate ');
     }
 
     /**

@@ -24,12 +24,18 @@ class AdminContentController extends Controller
     public function index($menu_id)
     {
         if ($menu_id == 'daftar-content') {
-            $contents = DB::table('contents')
-                ->leftJoin('menus', 'contents.menu_id', 'menus.id')
-                ->select('contents.urutan', 'menus.menu', 'contents.judul', 'contents.created_at', 'contents.author')
-                ->orderBy('menus.menu', 'ASC')
-                ->orderBy('contents.urutan', 'ASC')
-                ->paginate(10);
+            $menu = DB::table('menus')
+                ->orderBy('menus.urutan', 'ASC')
+                ->get()
+                ->first();
+
+            return redirect()->route('admin.content.index', $menu->id);
+            // $contents = DB::table('contents')
+            //     ->leftJoin('menus', 'contents.menu_id', 'menus.id')
+            //     ->select('contents.urutan', 'menus.menu', 'contents.judul', 'contents.created_at', 'contents.author')
+            //     ->orderBy('menus.menu', 'ASC')
+            //     ->orderBy('contents.urutan', 'ASC')
+            //     ->paginate(10);
         } else {
             // $menu_id = DB::table('menus')->where('id', $menu_id)->get()->first()->id;
 

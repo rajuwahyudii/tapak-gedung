@@ -31,6 +31,7 @@
     
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     @yield('style')
 </head>
 <body class="flex justify-content-center bg-light">

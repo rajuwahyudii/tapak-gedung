@@ -13,11 +13,11 @@ class UserBeritaController extends Controller
 
         if ($bahasa == 'en') {
 
-            $beritas = DB::table('beritas')->where('bahasa', 'english')->get();
-            $menus = DB::table('menus')->where('menus.bahasa', 'english')->orderBy('menus.urutan')->get();
+            $beritas = DB::table('beritas')->orderBy('created_at')->where('bahasa', 'english')->get();
+            $menus = DB::table('menus')->where('beritas.menus.bahasa', 'english')->orderBy('menus.urutan')->get();
         } else {
 
-            $beritas = DB::table('beritas')->where('bahasa', 'indonesia')->get();
+            $beritas = DB::table('beritas')->orderBy('created_at')->where('bahasa', 'indonesia')->get();
             $menus = DB::table('menus')->where('menus.bahasa', 'indonesia')->orderBy('menus.urutan')->get();
         }
 

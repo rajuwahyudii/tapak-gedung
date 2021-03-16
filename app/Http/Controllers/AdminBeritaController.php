@@ -25,7 +25,7 @@ class AdminBeritaController extends Controller
             $beritas = DB::table('beritas')->where('bahasa', 'indonesia')->paginate(5);
         }
 
-        return view('admin.berita.index')->with('beritas', $beritas);
+        return view('admin.berita.index')->with('beritas', $beritas)->with('bahasa', $bahasa);
     }
 
     /**
@@ -35,7 +35,6 @@ class AdminBeritaController extends Controller
      */
     public function create()
     {
-
         return view('admin.berita.create');
     }
 
@@ -83,6 +82,7 @@ class AdminBeritaController extends Controller
 
         $berita = new Berita();
         $berita->judul = $request->input('judul');
+        $berita->kategori = $request->input('kategori');
         $berita->thumbnail = $thumbnailName;
         $berita->kategori = $request->input('kategori');
         $berita->bahasa = $request->input('bahasa');

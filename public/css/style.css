@@ -1,0 +1,66 @@
+.font-1 {
+    font-family: 'Lora', serif;
+}
+
+.text-blue {
+    color: #333652;
+}
+
+.text-yellow {
+    color: #FAD02C;
+}
+
+.text-white {
+    color: #FFFF;
+}
+
+.text-black {
+    color: #0000;
+}
+
+.bg-blue {
+    background-color: #333652;
+}
+
+.bg-yellow {
+    background-color: #FAD02C;
+}
+
+.bg-white {
+    background-color: #FFFF;
+}
+
+.bg-black {
+    background-color: #0000;
+}
+
+.navbar-custom {
+    background-color: #333652;
+}
+
+/* change the brand and text color */
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: #ffff;
+}
+
+/* change the link color */
+.navbar-custom .navbar-nav .nav-link {
+    color: #ffff;
+}
+
+/* change the color of active or hovered links */
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #FAD02C;
+}
+
+.carousel-item:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+}

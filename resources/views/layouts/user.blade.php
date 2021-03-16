@@ -27,10 +27,14 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
+    {{-- FONT --}}
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    @yield('style')
 
 </head>
 <body style="background: #ffff;">
@@ -38,11 +42,9 @@
         {{-- NAVBAR --}}
         @include('inc.user.navbar')
         {{-- NAVBAR END --}}
-
         <div>
             @yield('content')
         </div>
-        
     </div>
     {{-- <script>
         $('#summernote').summernote({

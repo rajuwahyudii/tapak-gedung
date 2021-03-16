@@ -21,12 +21,41 @@
         
         <div class="form-group row">
             
-            <div class="col-xl-7">
+            <div class="col-xl-8">
                 <label for="judul">Judul : </label>
                 <input type="text" name="judul" class="form-control" id="judul" aria-describedby="judul" placeholder="Masukan judul">
                 
             </div>
-            <div class="col-xl-4 mt-2">
+            <br>
+            <div class="col-xl-12 mt-5">
+                <label>Kategori : </label>
+                <br>
+                <div class="d-inline-block mt-2">
+                    <input type="radio" id="berita" name="kategori" value="berita" checked>
+                    <label for="berita" class="mr-5">Berita Umum</label>
+                </div>
+                <div class="d-inline-block mt-2"> 
+                    <input type="radio" id="pengumuman" name="kategori" value="pengumuman">
+                    <label for="pengumuman">Pengumuman</label>
+                </div>
+                <div class="d-inline-block mt-2 ml-5"> 
+                    <input type="radio" id="acara" name="kategori" value="acara">
+                    <label for="acara">Acara</label>
+                </div>
+                <div class="d-inline-block mt-2 ml-5"> 
+                    <input type="radio" id="beasiswa" name="kategori" value="beasiswa">
+                    <label for="beasiswa">Beasiswa</label>
+                </div>
+                <div class="d-inline-block mt-2 ml-5"> 
+                    <input type="radio" id="lowongankerja" name="kategori" value="lowongankerja">
+                    <label for="lowongankerja">Lowongan Kerja</label>
+                </div>
+                <div class="d-inline-block mt-2 ml-5"> 
+                    <input type="radio" id="bukurekomendasi" name="kategori" value="bukurekomendasi">
+                    <label for="bukurekomendasi">Buku Rekomendasi</label>
+                </div>
+            </div>
+            <div class="col-xl-6 mt-5">
                 <label>Bahasa : </label>
                 <br>
                 <div class="d-inline-block mt-2">
@@ -40,7 +69,7 @@
                 
             </div>
         </div>
-        <p>Konten :</p>
+        <p class=" mt-5">Konten :</p>
         <textarea name="konten" class="form-control" id="summernote" cols="30" rows="10">
            
         </textarea>

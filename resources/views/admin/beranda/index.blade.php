@@ -1,20 +1,5 @@
 @extends('layouts.satucol')
 
-@section('style')
-    <style>
-      .carousel-item:after {
-        content:"";
-        position:absolute;
-        top:0;
-        bottom:0;
-        left:0;
-        right:0;
-        background:rgba(0,0,0,0.6);
-      }
-    </style>
-@endsection
-
-
 @section('content')
 <div class="row">
     <div class="col-xl-9">
@@ -50,18 +35,15 @@
       <ol class="carousel-indicators">
         @foreach ($sliders as $slider)
           <li data-target="#sliderIndicators" data-slide-to="0" class="active"></li>
-            
         @endforeach
-        {{-- <li data-target="#sliderIndicators" data-slide-to="1"></li>
-        <li data-target="#sliderIndicators" data-slide-to="2"></li> --}}
       </ol>
       <div class="carousel-inner">
       @foreach ($sliders as $key => $slider)
         <div class="carousel-item {{$key == 0 ? 'active' : '' }}">
-            <img class="d-block w-100" src="{{ URL::asset('storage/slider') }}/{{$slider->gambar}}" alt="First slide">
+            <img style="height: 100vh;" class="d-block w-100" src="{{ URL::asset('storage/slider') }}/{{$slider->gambar}}" alt="First slide">
             <div class="carousel-caption d-none d-md-block mb-5">
-                <h3>{{$slider->title}}</h3>
-                <p>{{$slider->caption}}</p>
+                <h1 class="font-1 display-5">{{$slider->title}}</h1>
+                <p style="margin-bottom: 15em;">{{$slider->caption}}</p>
             </div>
         </div>
       @endforeach
@@ -118,6 +100,36 @@
           @endforeach
         </tbody>
     </table> 
+    
+</div>
+<div style="min-height: 10vh"></div>
+<div class="bg-white p-5">
+    <div class="row">
+      <h2 >Konten Beranda</h2>
+      <a class="ml-auto" href="{{route('admin.beranda.konten.edit', $berandakonten->id)}}" data-toggle="tooltip" data-placement="bottom" title="Edit Menu">
+        <button class="btn btn-primary "> 
+          EDIT KONTEN <i class="fas fa-pen"></i> 
+        </button>
+      </a>
+    </div>
+    
+    <hr>
+    <div class="container-fluid mt-5 mb-5">
+      <div class="container p-5">
+        <div class="ml-5 mr-5 mb-3 text-left">
+          <h1 style=" font-weight:bolder;" class="text-left d-inline-block font-1 mb-3" >{{$berandakonten->judul}}</h1>
+          <br>
+          <p class="text-left d-inline-block font-1" >
+            {!! $berandakonten->konten !!}
+          </p>
+        </div>
+        <div class="row ml-5 mr-5">
+          <a href="{{$berandakonten->url}}" class="text-blue" style="border-bottom: 3px inset #FAD02C; text-decoration: none;">
+            <p class="text-left d-inline-block font-1" style=" font-weight:bold;" >Lihat Selengkapnya</p>
+          </a>
+        </div>
+      </div>
+    </div>
     
 </div>
 @endsection
