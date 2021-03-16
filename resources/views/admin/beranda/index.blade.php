@@ -106,15 +106,10 @@
 <div class="bg-white p-5">
     <div class="row">
       <h2 >Konten Beranda</h2>
-      <a class="ml-auto" href="{{route('admin.beranda.konten.edit', $berandakonten->id)}}" data-toggle="tooltip" data-placement="bottom" title="Edit Menu">
-        <button class="btn btn-primary "> 
-          EDIT KONTEN <i class="fas fa-pen"></i> 
-        </button>
-      </a>
     </div>
     
     <hr>
-    <div class="container-fluid mt-5 mb-5">
+    <div class="container-fluid mb-5 text-center">
       <div class="container p-5">
         <div class="ml-5 mr-5 mb-3 text-left">
           <h1 style=" font-weight:bolder;" class="text-left d-inline-block font-1 mb-3" >{{$berandakonten->judul}}</h1>
@@ -129,6 +124,11 @@
           </a>
         </div>
       </div>
+      <a class="m-auto" href="{{route('admin.beranda.konten.edit', $berandakonten->id)}}" data-toggle="tooltip" data-placement="bottom" title="Edit Menu">
+        <button class="btn btn-primary "> 
+          EDIT KONTEN <i class="fas fa-pen"></i> 
+        </button>
+      </a>
     </div>
     
 </div>

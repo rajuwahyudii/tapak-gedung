@@ -53,9 +53,9 @@
           style="text-transform: uppercase;
                     border-bottom:  2px inset #FAD02C;
                     margin-bottom:  -2px;" 
-          href="{{route('user.berita.index', $bahasa)}}">Berita</a>
+          href="{{route('user.berita.index', [$bahasa, 'berita'])}}">Berita</a>
             @else
-            <a class="nav-link" style="text-transform: uppercase;" href="{{route('user.berita.index', $bahasa)}}">Berita</a>
+            <a class="nav-link" style="text-transform: uppercase;" href="{{route('user.berita.index',  [$bahasa, 'berita'])}}">Berita</a>
             @endif
           
         </li>

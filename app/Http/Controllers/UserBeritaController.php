@@ -7,17 +7,17 @@ use Illuminate\Support\Facades\DB;
 
 class UserBeritaController extends Controller
 {
-    public function index($bahasa)
+    public function index($bahasa, $kategori)
     {
         // DATA NAVBAR
 
         if ($bahasa == 'en') {
 
-            $beritas = DB::table('beritas')->orderBy('created_at')->where('bahasa', 'english')->get();
+            $beritas = DB::table('beritas')->where('bahasa', 'english')->where('beritas.kategori', $kategori)->orderBy('created_at')->paginate(4);
             $menus = DB::table('menus')->where('beritas.menus.bahasa', 'english')->orderBy('menus.urutan')->get();
         } else {
 
-            $beritas = DB::table('beritas')->orderBy('created_at')->where('bahasa', 'indonesia')->get();
+            $beritas = DB::table('beritas')->where('bahasa', 'indonesia')->where('beritas.kategori', $kategori)->orderBy('created_at')->paginate(4);
             $menus = DB::table('menus')->where('menus.bahasa', 'indonesia')->orderBy('menus.urutan')->get();
         }
 
@@ -35,7 +35,7 @@ class UserBeritaController extends Controller
             ->with('bahasa', $bahasa);
     }
 
-    public function show($bahasa, $konten)
+    public function show($bahasa, $kategori, $konten)
     {
         // DATA NAVBAR
         if ($bahasa == 'en') {

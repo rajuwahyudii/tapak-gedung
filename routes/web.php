@@ -76,8 +76,8 @@ Route::prefix('admin')->group(function () {
 
 });
 
-Route::get('/{bahasa}/berita', [App\Http\Controllers\UserBeritaController::class, 'index'])->name('user.berita.index');
-Route::get('/{bahasa}/berita/{konten}', [App\Http\Controllers\UserBeritaController::class, 'show'])->name('user.berita.show');
+Route::get('/{bahasa}/berita/{kategori}', [App\Http\Controllers\UserBeritaController::class, 'index'])->name('user.berita.index');
+Route::get('/{bahasa}/berita/{kategori}/{konten}', [App\Http\Controllers\UserBeritaController::class, 'show'])->name('user.berita.show');
 
 Route::get('/{bahasa}', [App\Http\Controllers\UserController::class, 'index'])->name('user.index');
 Route::get('/{bahasa}/{menu}/{judul}', [App\Http\Controllers\UserController::class, 'content'])->name('user.content');

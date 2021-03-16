@@ -45,6 +45,41 @@
         <div>
             @yield('content')
         </div>
+        <div style="min-height: 10vh"></div>
+        <div class="container-fluid bg-blue text-white mt-5">
+            <div class="container p-5">
+              <div class="row">
+                <div class="col-xl-4">
+                  <img src="{{asset('logo/logo.png')}}" width="80" alt=""> <br> <hr>
+                  <b>
+                    UNIVERSITAS BENGKULU <br>
+                    FAKULTAS EKONOMI DAN BISNIS <br>
+                    MAGISTER MANAJEMEN
+                  </b>
+                  <hr>
+                  <p>Jl. W.R. Supratman Kandang Limun</p>
+                  <p>Bengkulu 38371 A</p>
+                  <p>Telp : (0736) 20301</p>
+                  <p>Sumatera – INDONESIA</p>
+                  
+                </div>
+                <div class="col-xl-4 mt-5">
+                  <h5>TAUTAN TERKAIT</h5>
+                  <hr>
+                  <a href="" class="text-white">Universitas Bengkulu</a>
+                  <br>
+                  <a href="" class="text-white">Fakultas Ekonomi Dan Bisnis</a>
+                  <br>
+                  <a href="" class="text-white">Perpustakaan UNIB</a>
+                </div>
+                <div class="col-xl-4 mt-5">
+                  <h5>STATISTIK PENGUNJUNG</h5>
+                  <hr>
+                </div>
+              </div>
+              
+            </div>
+          </div>
     </div>
     {{-- <script>
         $('#summernote').summernote({
