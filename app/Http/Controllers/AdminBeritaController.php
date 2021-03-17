@@ -17,12 +17,12 @@ class AdminBeritaController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index($bahasa, $kategori)
+    public function index($bahasa)
     {
         if ($bahasa == 'english') {
-            $beritas = DB::table('beritas')->where('bahasa', 'english')->where('kategori', $kategori)->paginate(5);
+            $beritas = DB::table('beritas')->where('bahasa', 'english')->paginate(5);
         } else {
-            $beritas = DB::table('beritas')->where('bahasa', 'indonesia')->where('kategori', $kategori)->paginate(5);
+            $beritas = DB::table('beritas')->where('bahasa', 'indonesia')->paginate(5);
         }
 
         return view('admin.berita.index')->with('beritas', $beritas)->with('bahasa', $bahasa);

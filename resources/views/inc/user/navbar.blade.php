@@ -1,4 +1,4 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-custom pr-5 pl-5 pt-3 pb-4">
+<nav class="navbar navbar-expand-lg navbar-custom pr-5 pl-5 pt-3 pb-4">
     <a class="navbar-brand" href="#">
       <img width="50" src="{{asset('logo/logo.png')}}" alt="">
     </a>

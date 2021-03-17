@@ -48,31 +48,6 @@
                 
                 
             </div>
-            <div class="col-xl-4 mt-5">
-                <label>Status : </label>
-                <br>
-                @if ($menu->status == 'aktif')
-                    <div class="d-inline-block mt-2">
-                        <input type="radio" id="Aktif" name="status" value="aktif" checked>
-                        <label for="Aktif" class="mr-5">Aktif</label>
-                    </div>
-                    <div class="d-inline-block mt-2"> 
-                        <input type="radio" id="Nonaktif" name="status" value="nonaktif">
-                        <label for="Nonaktif">Nonaktif</label>
-                    </div>
-                @else
-                    <div class="d-inline-block mt-2">
-                        <input type="radio" id="Aktif" name="status" value="aktif" >
-                        <label for="Aktif" class="mr-5">Aktif</label>
-                    </div>
-                    <div class="d-inline-block mt-2"> 
-                        <input type="radio" id="Nonaktif" name="status" value="nonaktif" checked>
-                        <label for="Nonaktif">Nonaktif</label>
-                    </div>
-                @endif
-                
-                
-            </div>
         </div>
         {{ method_field('PUT') }}
         <button type="submit" class="btn btn-primary mt-3 pr-5 pl-5">Simpan</button>

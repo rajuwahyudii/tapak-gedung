@@ -19,7 +19,7 @@
             <a class="nav-link text-uppercase" href="{{route('admin.berita.index', 'indonesia')}}">Berita</a>
           </li>
           <li class="nav-item {{ Route::is('admin.content.*') ? 'active' : '' }}">
-            <a class="nav-link text-uppercase" href="{{route('admin.content.index', 'daftar-content')}}">Konten</a>
+            <a class="nav-link text-uppercase" href="{{route('admin.content.index', ['indonesia','daftar-content'])}}">Konten</a>
           </li>
           <li class="nav-item {{ Route::is('admin.menu.*') ? 'active' : '' }}">
             <a class="nav-link text-uppercase" href="{{route('admin.menu.index')}}">Menu</a>

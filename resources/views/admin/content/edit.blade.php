@@ -7,7 +7,7 @@
 @section('content')
 <div>
     <h1>content</h1>
-    <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.content.index', $content->menu)}}">content</a> / <a href="{{route('admin.content.show', [$content->menu, $content->judul])}}">{{ strtolower($content->judul)}}</a> / edit </p>
+    <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.content.index', ['indonesia',$content->menu] )}}">content</a> / <a href="{{route('admin.content.show', ['indonesia',$content->menu, $content->judul])}}">{{ strtolower($content->judul)}}</a> / edit </p>
 </div>
 <div class="bg-white p-5">
     <form action="{{route('admin.content.update', $content->id)}}" method="POST">

@@ -18,7 +18,6 @@ class CreateMenusTable extends Migration
             $table->integer('urutan')->nullable();
             $table->string('bahasa')->nullable();
             $table->string('menu')->nullable();
-            $table->enum('status', ['aktif', 'nonaktif'])->default('aktif');
             $table->timestamps();
         });
     }

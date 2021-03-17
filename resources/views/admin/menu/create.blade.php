@@ -36,19 +36,6 @@
                 </div>
                 
             </div>
-            <div class="col-xl-4 mt-5">
-                <label>Status : </label>
-                <br>
-                <div class="d-inline-block mt-2">
-                    <input type="radio" id="Aktif" name="status" value="aktif" checked>
-                    <label for="Aktif" class="mr-5">Aktif</label>
-                </div>
-                <div class="d-inline-block mt-2"> 
-                    <input type="radio" id="Nonaktif" name="status" value="nonaktif">
-                    <label for="Nonaktif">Nonaktif</label>
-                </div>
-                
-            </div>
         </div>
         
         <button type="submit" class="btn btn-primary mt-3 pr-5 pl-5">Simpan</button>

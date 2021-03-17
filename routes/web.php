@@ -65,9 +65,9 @@ Route::prefix('admin')->group(function () {
 
     // ADMIN CONTENT ROUTE
     Route::get('content/create', [App\Http\Controllers\AdminContentController::class, 'create'])->name('admin.content.create');
-    Route::get('content/{menu}/{judul}', [App\Http\Controllers\AdminContentController::class, 'show'])->name('admin.content.show');
-    Route::get('content/{menu}', [App\Http\Controllers\AdminContentController::class, 'index'])->name('admin.content.index');
-    Route::get('content/edit/{menu}/{judul}', [App\Http\Controllers\AdminContentController::class, 'edit'])->name('admin.content.edit');
+    Route::get('content/{bahasa}/{menu}/{judul}', [App\Http\Controllers\AdminContentController::class, 'show'])->name('admin.content.show');
+    Route::get('content/{bahasa}/{menu}', [App\Http\Controllers\AdminContentController::class, 'index'])->name('admin.content.index');
+    Route::get('content/{bahasa}/edit/{menu}/{judul}', [App\Http\Controllers\AdminContentController::class, 'edit'])->name('admin.content.edit');
     Route::post('content', [App\Http\Controllers\AdminContentController::class, 'store'])->name('admin.content.store');
     Route::put('content/{id}', [App\Http\Controllers\AdminContentController::class, 'update'])->name('admin.content.update');
     Route::delete('content/{id}', [App\Http\Controllers\AdminContentController::class, 'destroy'])->name('admin.content.destroy');

@@ -25,29 +25,29 @@
   <div class="col-xl-8">
     @if (Request::segment(3) != 'daftar-content')
     @foreach ($menus as $menu)
-        @if ($menu->id == Request::segment(3))
+        @if ($menu->id == Request::segment(4))
             <h1>Konten {{$menu->menu}}</h1>
-            <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.content.index', 'daftar-content')}}">content</a> / {{$menu->menu}}</p>
+            <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.content.index', ['indonesia','daftar-content'])}}">content</a> / {{$menu->menu}}</p>
         @endif
       @endforeach
     @else
     <h1>Semua Konten</h1>
-    <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.content.index', 'daftar-content')}}">content</a> / Semua Content</p>
+    <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.content.index', ['indonesia','daftar-content'])}}">content</a> / Semua Content</p>
     @endif
   </div>
   <div class="col-xl-4 mt-5 pl-5">
     @if (Request::segment(3) == 'english')  
-      <a href="">
+      <a href="{{route('admin.content.index', ['indonesia','daftar-content' ])}}">
         <button type="button" class="btn mb-3 mr-3"><i class="fas fa-book"></i> Indonesia </button>
       </a>
-      <a href="">
+      <a href="{{route('admin.content.index', ['english','daftar-content' ])}}">
           <button type="button" class="btn btn-dark mb-3"><i class="fas fa-book"></i> English</button>
       </a>
     @else
-      <a href="">
+      <a href="{{route('admin.content.index', ['indonesia','daftar-content' ])}}">
         <button type="button" class="btn btn-dark mb-3 mr-3"><i class="fas fa-book"></i> Indonesia </button>
       </a>
-      <a href="">
+      <a href="{{route('admin.content.index', ['english','daftar-content' ])}}">
           <button type="button" class="btn mb-3"><i class="fas fa-book"></i> English</button>
       </a>
     @endif
@@ -81,7 +81,7 @@
               <td>{{$content->created_at}}</td>
               <td>{{$content->author}}</td>
               <td>
-                  <a href="{{route('admin.content.show', [$content->menu,$content->judul] )}}"><button class="btn btn-primary "> <i class="fas fa-info-circle"></i> Detail Konten </button></a>
+                  <a href="{{route('admin.content.show', [$content->bahasa,$content->menu,$content->judul] )}}"><button class="btn btn-primary "> <i class="fas fa-info-circle"></i> Detail Konten </button></a>
               </td>
             </tr>
           @endforeach

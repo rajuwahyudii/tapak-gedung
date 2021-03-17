@@ -21,28 +21,24 @@ class AdminContentController extends Controller
         $this->middleware('auth');
     }
 
-    public function index($menu_id)
+    public function index($bahasa, $menu_id)
     {
         if ($menu_id == 'daftar-content') {
             $menu = DB::table('menus')
+                ->where('bahasa', $bahasa)
                 ->orderBy('menus.urutan', 'ASC')
                 ->get()
                 ->first();
 
-            return redirect()->route('admin.content.index', $menu->id);
-            // $contents = DB::table('contents')
-            //     ->leftJoin('menus', 'contents.menu_id', 'menus.id')
-            //     ->select('contents.urutan', 'menus.menu', 'contents.judul', 'contents.created_at', 'contents.author')
-            //     ->orderBy('menus.menu', 'ASC')
-            //     ->orderBy('contents.urutan', 'ASC')
-            //     ->paginate(10);
+            return redirect()->route('admin.content.index', [$bahasa, $menu->id]);
         } else {
             // $menu_id = DB::table('menus')->where('id', $menu_id)->get()->first()->id;
 
             $contents = DB::table('contents')
                 ->leftJoin('menus', 'contents.menu_id', 'menus.id')
+                ->where('menus.bahasa', $bahasa)
                 ->where('contents.menu_id', $menu_id)
-                ->select('contents.urutan', 'menus.menu', 'contents.judul', 'contents.created_at', 'contents.author')
+                ->select('contents.urutan', 'menus.menu', 'menus.bahasa', 'menus.bahasa', 'contents.judul', 'contents.created_at', 'contents.author')
                 ->orderBy('menus.menu', 'ASC')
                 ->orderBy('contents.urutan', 'ASC')
                 ->paginate(10);
@@ -152,7 +148,7 @@ class AdminContentController extends Controller
             $menu = DB::table('menus')->where('menus.id', $request->input('menu_id'))->get()->first()->menu;
         }
 
-        return redirect()->route('admin.content.index', $request->input('menu_id'))
+        return redirect()->route('admin.content.index', ['indonesia', $request->input('menu_id')])
             ->with('success', 'konten berhasil dibuat !!');
     }
 
@@ -162,7 +158,7 @@ class AdminContentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($menu, $judul)
+    public function show($bahasa, $menu, $judul)
     {
         $indonesia_menus = DB::table('menus')
             ->where('menus.bahasa', 'indonesia')
@@ -177,13 +173,13 @@ class AdminContentController extends Controller
         $contents = DB::table('contents')
             ->orderBy('urutan', 'ASC')
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
-            ->select('contents.urutan', 'menus.menu', 'contents.judul', 'contents.created_at', 'contents.author')
+            ->select('contents.urutan', 'menus.menu', 'menus.bahasa', 'contents.judul', 'contents.created_at', 'contents.author')
             ->get();
 
         $content = DB::table('contents')
             ->where('contents.judul', $judul)
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
-            ->select('contents.id', 'contents.kontent', 'contents.urutan', 'menus.menu', 'contents.judul', 'contents.created_at', 'contents.author')
+            ->select('contents.id', 'contents.kontent', 'contents.urutan', 'menus.menu', 'menus.bahasa', 'contents.judul', 'contents.created_at', 'contents.author')
             ->get()
             ->first();
 
@@ -198,7 +194,7 @@ class AdminContentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($menu, $judul)
+    public function edit($bahasa, $menu, $judul)
     {
         $indonesia_menus = DB::table('menus')
             ->where('menus.bahasa', 'indonesia')
@@ -213,13 +209,13 @@ class AdminContentController extends Controller
         $contents = DB::table('contents')
             ->orderBy('urutan', 'ASC')
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
-            ->select('contents.urutan', 'menus.menu', 'contents.judul', 'contents.created_at', 'contents.author')
+            ->select('contents.urutan', 'menus.menu', 'menus.bahasa', 'contents.judul', 'contents.created_at', 'contents.author')
             ->get();
 
         $content = DB::table('contents')
             ->where('contents.judul', $judul)
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
-            ->select('contents.id', 'contents.kontent', 'contents.urutan', 'menus.menu', 'contents.judul', 'contents.created_at', 'contents.author')
+            ->select('contents.id', 'contents.kontent', 'contents.urutan', 'menus.menu', 'menus.bahasa', 'contents.judul', 'contents.created_at', 'contents.author')
             ->get()
             ->first();
 
@@ -279,7 +275,7 @@ class AdminContentController extends Controller
 
         $menu = DB::table('menus')->where('menus.id', $request->input('menu_id'))->get()->first()->menu;
 
-        return redirect()->route('admin.content.index', $request->input('menu_id'))
+        return redirect()->route('admin.content.index', ['indonesia', $request->input('menu_id')])
             ->with('success', 'konten berhasil diedit !!');
     }
 
@@ -295,12 +291,11 @@ class AdminContentController extends Controller
             ->where('contents.id', $id)
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
             ->get()
-            ->first()
-            ->menu;
+            ->first();
 
         $content = Content::find($id);
         $content->delete();
 
-        return redirect()->route('admin.content.index', $menu)->with('success', 'konten berhasil dihapus !!');
+        return redirect()->route('admin.content.index', ['indonesia', $menu->id])->with('success', 'konten berhasil dihapus !!');
     }
 }

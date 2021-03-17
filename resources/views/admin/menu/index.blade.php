@@ -21,7 +21,6 @@
             <th scope="col">Urutan</th>
             <th scope="col">Bahasa</th>
             <th scope="col">Menu</th>
-            <th scope="col">Status</th>
             <th scope="col">Dibuat </th>
             <th scope="col" class="text-center">Edit </th>
             <th scope="col" class="text-center">Hapus </th>
@@ -33,7 +32,6 @@
               <td>{{$menu->urutan}}</td>
               <td>{{$menu->bahasa}}</td>
               <td>{{$menu->menu}}</td>
-              <td>{{$menu->status}}</td>
               <td>{{$menu->created_at}}</td>
               <td class="text-center">
                   <a href="{{route('admin.menu.edit', $menu->menu)}}" data-toggle="tooltip" data-placement="bottom" title="Edit Menu">
@@ -62,7 +60,6 @@
             <th scope="col">Urutan</th>
             <th scope="col">Bahasa</th>
             <th scope="col">Menu</th>
-            <th scope="col">Status</th>
             <th scope="col">Dibuat </th>
             <th scope="col" class="text-center">Edit </th>
             <th scope="col" class="text-center">Hapus </th>
@@ -74,7 +71,6 @@
               <td>{{$menu->urutan}}</td>
               <td>{{$menu->bahasa}}</td>
               <td>{{$menu->menu}}</td>
-              <td>{{$menu->status}}</td>
               <td>{{$menu->created_at}}</td>
               <td class="text-center">
                   <a href="{{route('admin.menu.edit', $menu->menu)}}" data-toggle="tooltip" data-placement="bottom" title="Edit Menu">
