@@ -24,6 +24,9 @@
           <li class="nav-item {{ Route::is('admin.menu.*') ? 'active' : '' }}">
             <a class="nav-link text-uppercase" href="{{route('admin.menu.index')}}">Menu</a>
           </li>
+          <li class="nav-item {{ Route::is('admin.menutunggal.*') ? 'active' : '' }}">
+            <a class="nav-link text-uppercase" href="{{route('admin.menutunggal.index')}}">Menu Tunggal</a>
+          </li>
       </ul>
 
       <div class="dropleft show">

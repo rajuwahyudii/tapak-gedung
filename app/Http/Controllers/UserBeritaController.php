@@ -15,10 +15,15 @@ class UserBeritaController extends Controller
 
             $beritas = DB::table('beritas')->where('bahasa', 'english')->where('beritas.kategori', $kategori)->orderBy('created_at')->paginate(4);
             $menus = DB::table('menus')->where('beritas.menus.bahasa', 'english')->orderBy('menus.urutan')->get();
+            $menutunggals = DB::table('menutunggals')
+                ->where('bahasa', 'english')
+                ->get();
         } else {
-
             $beritas = DB::table('beritas')->where('bahasa', 'indonesia')->where('beritas.kategori', $kategori)->orderBy('created_at')->paginate(4);
             $menus = DB::table('menus')->where('menus.bahasa', 'indonesia')->orderBy('menus.urutan')->get();
+            $menutunggals = DB::table('menutunggals')
+                ->where('bahasa', 'indonesia')
+                ->get();
         }
 
         $contents = DB::table('contents')
@@ -29,9 +34,10 @@ class UserBeritaController extends Controller
         // DATA NAVBAR END
 
         return view('user.berita.index')
-            ->with('beritas', $beritas)
             ->with('menus', $menus)
             ->with('contents', $contents)
+            ->with('menutunggals', $menutunggals)
+            ->with('beritas', $beritas)
             ->with('bahasa', $bahasa);
     }
 
@@ -40,8 +46,14 @@ class UserBeritaController extends Controller
         // DATA NAVBAR
         if ($bahasa == 'en') {
             $menus = DB::table('menus')->where('menus.bahasa', 'english')->orderBy('menus.urutan')->get();
+            $menutunggals = DB::table('menutunggals')
+                ->where('bahasa', 'english')
+                ->get();
         } else {
             $menus = DB::table('menus')->where('menus.bahasa', 'indonesia')->orderBy('menus.urutan')->get();
+            $menutunggals = DB::table('menutunggals')
+                ->where('bahasa', 'indonesia')
+                ->get();
         }
 
         $contents = DB::table('contents')
@@ -56,9 +68,10 @@ class UserBeritaController extends Controller
             ->first();
 
         return view('user.berita.show')
-            ->with('berita', $berita)
             ->with('menus', $menus)
             ->with('contents', $contents)
+            ->with('menutunggals', $menutunggals)
+            ->with('berita', $berita)
             ->with('bahasa', $bahasa);
     }
 }

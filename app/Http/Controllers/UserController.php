@@ -26,6 +26,9 @@ class UserController extends Controller
                 ->where('bahasa', 'english')
                 ->get()
                 ->first();
+            $menutunggals = DB::table('menutunggals')
+                ->where('bahasa', 'english')
+                ->get();
         } else {
             $sliders = DB::table('sliders')->where('sliders.bahasa', 'indonesia')->get();
             $menus = DB::table('menus')->where('menus.bahasa', 'indonesia')->orderBy('menus.urutan')->get();
@@ -41,6 +44,9 @@ class UserController extends Controller
                 ->where('bahasa', 'indonesia')
                 ->get()
                 ->first();
+            $menutunggals = DB::table('menutunggals')
+                ->where('bahasa', 'indonesia')
+                ->get();
         }
 
         $contents = DB::table('contents')
@@ -51,9 +57,10 @@ class UserController extends Controller
         // DATA NAVBAR END
 
         return view('user.beranda')
-            ->with('sliders', $sliders)
+            ->with('menutunggals', $menutunggals)
             ->with('menus', $menus)
             ->with('contents', $contents)
+            ->with('sliders', $sliders)
             ->with('beritas', $beritas)
             ->with('pengumumans', $pengumumans)
             ->with('events', $events)
@@ -76,6 +83,9 @@ class UserController extends Controller
             $beasiswas = DB::table('beritas')->orderBy('created_at')->where('kategori', 'beasiswa')->where('bahasa', 'english')->get();
             $lowongankerjas = DB::table('beritas')->orderBy('created_at')->where('kategori', 'lowongankerja')->where('bahasa', 'english')->get();
             $bukurekomedasis = DB::table('beritas')->orderBy('created_at')->where('kategori', 'bukurekomendasi')->where('bahasa', 'english')->get();
+            $menutunggals = DB::table('menutunggals')
+                ->where('bahasa', 'english')
+                ->get();
         } else {
             $menus = DB::table('menus')->where('menus.bahasa', 'indonesia')->orderBy('menus.urutan')->get();
             $beritas = DB::table('beritas')->orderBy('created_at')->where('kategori', 'berita')->where('bahasa', 'indonesia')->get();
@@ -84,6 +94,9 @@ class UserController extends Controller
             $beasiswas = DB::table('beritas')->orderBy('created_at')->where('kategori', 'beasiswa')->where('bahasa', 'indonesia')->get();
             $lowongankerjas = DB::table('beritas')->orderBy('created_at')->where('kategori', 'lowongankerja')->where('bahasa', 'indonesia')->get();
             $bukurekomedasis = DB::table('beritas')->orderBy('created_at')->where('kategori', 'bukurekomendasi')->where('bahasa', 'indonesia')->get();
+            $menutunggals = DB::table('menutunggals')
+                ->where('bahasa', 'indonesia')
+                ->get();
         }
 
         $contents = DB::table('contents')
@@ -99,15 +112,16 @@ class UserController extends Controller
             ->first();
 
         return view('user.content')
+            ->with('menutunggals', $menutunggals)
+            ->with('menus', $menus)
+            ->with('contents', $contents)
             ->with('beritas', $beritas)
             ->with('pengumumans', $pengumumans)
             ->with('events', $events)
             ->with('beasiswas', $beasiswas)
             ->with('lowongankerjas', $lowongankerjas)
             ->with('bukurekomedasis', $bukurekomedasis)
-            ->with('menus', $menus)
             ->with('content', $content)
-            ->with('contents', $contents)
             ->with('bahasa', $bahasa);
     }
 }

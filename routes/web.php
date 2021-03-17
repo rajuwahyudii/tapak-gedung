@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminBeritaController;
 use App\Http\Controllers\AdminAkunController;
 use App\Http\Controllers\AdminContentController;
 use App\Http\Controllers\AdminMenuController;
+use App\Http\Controllers\AdminMenutunggalController;
 use App\Http\Controllers\AdminBerandaController;
 use App\Http\Controllers\AdminBerandaSliderController;
 use App\Http\Controllers\AdminBerandaKontenController;
@@ -37,6 +38,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('', AdminDashboardController::class, ['as' => 'admin']);
     Route::resource('akun', AdminAkunController::class, ['as' => 'admin']);
     Route::resource('menu', AdminMenuController::class, ['as' => 'admin']);
+    Route::resource('menutunggal', AdminMenutunggalController::class, ['as' => 'admin']);
 
     // ADMIN BERANDA ROUTE
     Route::get('beranda/{bahasa}', [App\Http\Controllers\AdminBerandaController::class, 'index'])->name('admin.beranda.index');
@@ -75,6 +77,8 @@ Route::prefix('admin')->group(function () {
 
 
 });
+
+Route::get('/{bahasa}/{menu}/', [App\Http\Controllers\UserMenutunggalController::class, 'index'])->name('user.menutunggal.index');
 
 Route::get('/{bahasa}/berita/{kategori}', [App\Http\Controllers\UserBeritaController::class, 'index'])->name('user.berita.index');
 Route::get('/{bahasa}/berita/{kategori}/{konten}', [App\Http\Controllers\UserBeritaController::class, 'show'])->name('user.berita.show');
