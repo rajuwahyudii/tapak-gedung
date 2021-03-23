@@ -11,18 +11,35 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto" style="font-size: smaller;">
-        <li class="nav-item">
-          @if (Request::segment(2) == null)
-              <a class="nav-link active text-white" style="text-transform: uppercase;
-              border-bottom:  2px inset #FAD02C;
-              margin-bottom:  -2px;" 
-              href="{{route('user.index', $bahasa)}}">Beranda</a>
-            @else
-              <a class="nav-link" style="text-transform: uppercase;" href="{{route('user.index', $bahasa)}}">Beranda</a>
-            @endif
-          
-        </li>
+        @if (Request::segment(1) == 'en')
+          <li class="nav-item">
+            @if (Request::segment(2) == null)
+                <a class="nav-link active text-white" style="text-transform: uppercase;
+                border-bottom:  2px inset #FAD02C;
+                margin-bottom:  -2px;" 
+                href="{{route('user.index', $bahasa)}}">Home</a>
+              @else
+                <a class="nav-link" style="text-transform: uppercase;" href="{{route('user.index', $bahasa)}}">Home</a>
+              @endif
+            
+          </li>
+        @else
+          <li class="nav-item">
+            @if (Request::segment(2) == null)
+                <a class="nav-link active text-white" style="text-transform: uppercase;
+                border-bottom:  2px inset #FAD02C;
+                margin-bottom:  -2px;" 
+                href="{{route('user.index', $bahasa)}}">Beranda</a>
+              @else
+                <a class="nav-link" style="text-transform: uppercase;" href="{{route('user.index', $bahasa)}}">Beranda</a>
+              @endif
+            
+          </li>
+        @endif
+
+        
         @foreach ($menus as $menu)
+          
           <li class="nav-item dropdown">
             @if (Request::segment(2) == $menu->menu)
               <a class="nav-link dropdown-toggle active text-white" 
@@ -39,6 +56,12 @@
             @endif
             
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                @if ($menu->menu == 'Penelitian' || $menu->menu == 'penelitian')
+                  <a class="dropdown-item" href="{{route('user.artikeldosen.index', 'id')}}">Artikel Dosen</a>
+                @endif
+                @if ($menu->menu == 'Research' || $menu->menu == 'research')
+                  <a class="dropdown-item" href="{{route('user.artikeldosen.index', 'en')}}">Lecturer Articles</a>
+                @endif 
                 @foreach ($contents as $content)
                   @if ($content->menu_id == $menu->id)
                     <a class="dropdown-item" href="{{route('user.content', [$bahasa, $menu->menu , $content->judul])}}">{{$content->judul}}</a>
@@ -47,17 +70,33 @@
             </div>
           </li>
         @endforeach
-        <li class="nav-item">
-          @if (Request::segment(2) == 'berita')
-          <a class="nav-link active" 
-          style="text-transform: uppercase;
-                    border-bottom:  2px inset #FAD02C;
-                    margin-bottom:  -2px;" 
-          href="{{route('user.berita.index', [$bahasa, 'berita'])}}">Berita</a>
-            @else
-            <a class="nav-link" style="text-transform: uppercase;" href="{{route('user.berita.index',  [$bahasa, 'berita'])}}">Berita</a>
-            @endif
-        </li>
+
+        @if (Request::segment(1) == 'en')
+          <li class="nav-item">
+            @if (Request::segment(2) == 'berita')
+            <a class="nav-link active" 
+            style="text-transform: uppercase;
+                      border-bottom:  2px inset #FAD02C;
+                      margin-bottom:  -2px;" 
+            href="{{route('user.berita.index', [$bahasa, 'berita'])}}">News</a>
+              @else
+              <a class="nav-link" style="text-transform: uppercase;" href="{{route('user.berita.index',  [$bahasa, 'berita'])}}">News</a>
+              @endif
+          </li>
+        @else
+          <li class="nav-item">
+            @if (Request::segment(2) == 'berita')
+            <a class="nav-link active" 
+            style="text-transform: uppercase;
+                      border-bottom:  2px inset #FAD02C;
+                      margin-bottom:  -2px;" 
+            href="{{route('user.berita.index', [$bahasa, 'berita'])}}">Berita</a>
+              @else
+              <a class="nav-link" style="text-transform: uppercase;" href="{{route('user.berita.index',  [$bahasa, 'berita'])}}">Berita</a>
+              @endif
+          </li>
+        @endif
+        
         @foreach ($menutunggals as $menutunggal)
           <li class="nav-item">
             @if (Request::segment(2) == $menutunggal->judul)

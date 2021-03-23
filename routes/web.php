@@ -49,6 +49,15 @@ Route::prefix('admin')->group(function () {
     Route::resource('beranda/slider', AdminBerandaSliderController::class, ['as' => 'admin']);
     // ADMIN BERANDA ROUTE END
 
+    // ARTIKEL DOSEN ROUTE
+    Route::get('artikeldosen/{bahasa}', [App\Http\Controllers\AdminArtikeldosenController::class, 'index'])->name('admin.artikeldosen.index');
+    Route::get('artikeldosen/{bahasa}/create', [App\Http\Controllers\AdminArtikeldosenController::class, 'create'])->name('admin.artikeldosen.create');
+    Route::get('artikeldosen/{bahasa}/{id}', [App\Http\Controllers\AdminArtikeldosenController::class, 'show'])->name('admin.artikeldosen.show');
+    Route::get('artikeldosen/{bahasa}/edit/{id}', [App\Http\Controllers\AdminArtikeldosenController::class, 'edit'])->name('admin.artikeldosen.edit');
+    Route::post('artikeldosen', [App\Http\Controllers\AdminArtikeldosenController::class, 'store'])->name('admin.artikeldosen.store');
+    Route::put('artikeldosen/{id}', [App\Http\Controllers\AdminArtikeldosenController::class, 'update'])->name('admin.artikeldosen.update');
+    Route::delete('artikeldosen/{id}', [App\Http\Controllers\AdminArtikeldosenController::class, 'destroy'])->name('admin.artikeldosen.destroy');
+    // ARTIKEL DOSEN ROUTE END
 
     // ADMIN BERITA ROUTE
 
@@ -78,10 +87,14 @@ Route::prefix('admin')->group(function () {
 
 });
 
+Route::get('/{bahasa}/artikel-dosen', [App\Http\Controllers\UserArtikeldosenController::class, 'index'])->name('user.artikeldosen.index');
+Route::get('/{bahasa}/artikel-dosen/{judul}', [App\Http\Controllers\UserArtikeldosenController::class, 'show'])->name('user.artikeldosen.show');
+
 Route::get('/{bahasa}/{menu}/', [App\Http\Controllers\UserMenutunggalController::class, 'index'])->name('user.menutunggal.index');
 
 Route::get('/{bahasa}/berita/{kategori}', [App\Http\Controllers\UserBeritaController::class, 'index'])->name('user.berita.index');
 Route::get('/{bahasa}/berita/{kategori}/{konten}', [App\Http\Controllers\UserBeritaController::class, 'show'])->name('user.berita.show');
+
 
 Route::get('/{bahasa}', [App\Http\Controllers\UserController::class, 'index'])->name('user.index');
 Route::get('/{bahasa}/{menu}/{judul}', [App\Http\Controllers\UserController::class, 'content'])->name('user.content');

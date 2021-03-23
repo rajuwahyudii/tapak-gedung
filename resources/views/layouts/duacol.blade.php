@@ -35,12 +35,12 @@
     @yield('style')
 </head>
 <body class="flex justify-content-center bg-light">
-    <div id="app container-fluid" style="width: 85%; margin: auto;">
+    <div id="app container-fluid" >
         {{-- NAVBAR --}}
         @include('inc.admin.navbar')
         {{-- NAVBAR END --}}
-
-        <div class="row" style="width: 101%">
+        
+        <div class="row" style="width: 85%; margin: auto;">
 
             {{-- MAINBAR --}}
             <div class="main col-xl-10 mb-5" style="overflow-x: hidden;"> 

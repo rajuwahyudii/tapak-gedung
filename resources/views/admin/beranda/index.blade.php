@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col-xl-9">
-      <h1>Beranda</h1>
+      <h1 class="font-1 mt-5">Beranda</h1>
       <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / beranda </p>
     </div>
     <div class="col-xl-3 mt-5 pl-5">
@@ -12,11 +12,11 @@
           <button type="button" class="btn mb-3 mr-3"><i class="fas fa-book"></i> Indonesia </button>
         </a>
         <a href="{{route('admin.beranda.index', 'english')}}">
-            <button type="button" class="btn btn-dark mb-3"><i class="fas fa-book"></i> English</button>
+            <button type="button" class="btn bg-blue text-white mb-3"><i class="fas fa-book"></i> English</button>
         </a>
       @else
         <a href="{{route('admin.beranda.index', 'indonesia')}}">
-          <button type="button" class="btn btn-dark mb-3 mr-3"><i class="fas fa-book"></i> Indonesia </button>
+          <button type="button" class="btn bg-blue text-white mb-3 mr-3"><i class="fas fa-book"></i> Indonesia </button>
         </a>
         <a href="{{route('admin.beranda.index', 'english')}}">
             <button type="button" class="btn mb-3"><i class="fas fa-book"></i> English</button>
@@ -25,7 +25,7 @@
       
     </div>
 </div>
-<div class="bg-white p-5">
+<div class="bg-white p-5 shadow">
     @include('inc.messages')
     <div>
       <h2 >Slider</h2>
@@ -63,7 +63,7 @@
         <button type="button" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Tambah Slider</button>
     </a>
     <table class="table bg-white mb-5">
-        <thead class="thead-dark">
+        <thead class="bg-blue text-white">
           <tr>
             <th scope="col">Gambar</th>
             <th scope="col">Judul</th>
@@ -103,7 +103,7 @@
     
 </div>
 <div style="min-height: 10vh"></div>
-<div class="bg-white p-5">
+<div class="bg-white p-5 shadow">
     <div class="row">
       <h2 >Konten Beranda</h2>
     </div>

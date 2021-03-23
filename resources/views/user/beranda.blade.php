@@ -42,7 +42,12 @@
     </div>
     <div class="row ml-5 mr-5">
       <a href="{{$berandakonten->url}}" class="text-blue" style="border-bottom: 3px inset #FAD02C; text-decoration: none;">
+        @if (Request::segment(1) == 'en')
+        <p class="text-left d-inline-block font-1" style=" font-weight:bold;" >View More</p>
+        @else
         <p class="text-left d-inline-block font-1" style=" font-weight:bold;" >Lihat Selengkapnya</p>
+        @endif
+        
       </a>
     </div>
   </div>
@@ -53,9 +58,16 @@
 <div class="container-fluid mb-5">
   <div class="container bg-light p-5">
     <div class="ml-5 mr-5 mb-3 text-left">
-      <h3 style=" font-weight:bolder;" class="text-left d-inline-block font-1" >Terbaru dari Berita</h3>
-      <br>
-      <p class="text-left d-inline-block font-1" style=" font-w\eight:bold;" >Berita terbaru dari magister manajemen universitas bengkulu</p>
+       @if (Request::segment(1) == 'en')
+          <h3 style=" font-weight:bolder;" class="text-left d-inline-block font-1" >Latest News</h3>
+          <br>
+          <p class="text-left d-inline-block font-1" style=" font-w\eight:bold;" >Latest News from Master of Management  Universitas Bengkulu</p>
+        @else
+          <h3 style=" font-weight:bolder;" class="text-left d-inline-block font-1" >Terbaru dari Berita</h3>
+          <br>
+          <p class="text-left d-inline-block font-1" style=" font-w\eight:bold;" >Berita terbaru dari magister manajemen universitas bengkulu</p>
+        @endif
+      
     </div>
     <div class="row justify-content-center">
       <?php $count = 0; ?>
@@ -77,7 +89,13 @@
       @endforeach
       <div class="col-xl-12 text-center">
         <a href="{{route('user.berita.index', [$bahasa, 'berita'])}}" class="text-blue" style="border-bottom: 3px inset #FAD02C; text-decoration: none;">
+          @if (Request::segment(1) == 'en')
+          <p class="text-left d-inline-block font-1" style=" font-weight:bold;" >View More</p>
+          
+          @else
           <p class="text-left d-inline-block font-1" style=" font-weight:bold;" >Lihat berita lainnya</p>
+          
+          @endif
         </a>
       </div>
     </div>
@@ -89,9 +107,15 @@
 <div class="container-fluid bg-blue text-white mt-5 mb-5">
   <div class="container p-5">
     <div class="ml-5 mr-5 mb-3 text-center">
-      <h3 style=" font-weight:bolder;" class="text-left d-inline-block font-1 mt-5" >Pengumuman </h3>
-      <br>
-      <p class="text-left d-inline-block font-1" style=" font-weight:bold;" >Pengumuman terbaru dari magister manajemen universitas bengkulu</p>
+        @if (Request::segment(1) == 'en')
+          <h3 style=" font-weight:bolder;" class="text-left d-inline-block font-1 mt-5" >Announcements</h3>
+          <br>
+          <p class="text-left d-inline-block font-1" style=" font-weight:bold;" >Latest Announcements from Master of Management  Universitas Bengkulu</p>
+        @else
+          <h3 style=" font-weight:bolder;" class="text-left d-inline-block font-1 mt-5" >Pengumuman </h3>
+          <br>
+          <p class="text-left d-inline-block font-1" style=" font-weight:bold;" >Pengumuman terbaru dari magister manajemen universitas bengkulu</p>
+        @endif
     </div>
     <div class="row justify-content-center">
       <?php $count = 0; ?>
@@ -113,7 +137,13 @@
       @endforeach
       <div class="col-xl-12 text-center">
         <a href="{{route('user.berita.index', [$bahasa, 'pengumuman'])}}" class="text-blue mb-5" style="border-bottom: 3px inset #FAD02C; text-decoration: none;">
+          @if (Request::segment(1) == 'en')
+          <p class="text-left d-inline-block text-white font-1" style=" font-weight:bold;" >View More Announcements</p>
+          
+          @else
           <p class="text-left d-inline-block text-white font-1" style=" font-weight:bold;" >Lihat pengumuman lainnya</p>
+            
+          @endif
         </a>
       </div>
     </div>
@@ -125,9 +155,16 @@
 <div class="container-fluid mb-5">
   <div class="container p-5">
     <div class="ml-5 mr-5 mb-3 text-center">
-      <h3 style=" font-weight:bolder;" class="text-left d-inline-block font-1" >Event</h3>
-      <br>
-      <p class="text-left d-inline-block font-1" style=" font-w\eight:bold;" >Event terbaru dari magister manajemen universitas bengkulu</p>
+      
+      @if (Request::segment(1) == 'en')
+        <h3 style=" font-weight:bolder;" class="text-left d-inline-block font-1 mt-5" >Upcoming Events</h3>
+        <br>
+        <p class="text-left d-inline-block font-1" style=" font-weight:bold;" >Upcoming Events from Master of Management  Universitas Bengkulu</p>
+      @else
+        <h3 style=" font-weight:bolder;" class="text-left d-inline-block font-1 mt-5" >Acara Mendatang</h3>
+        <br>
+        <p class="text-left d-inline-block font-1" style=" font-weight:bold;" >Acara Mendatang dari magister manajemen universitas bengkulu</p>
+      @endif
     </div>
     <div class="row justify-content-center">
       <?php $count = 0; ?>
@@ -147,7 +184,11 @@
       @endforeach
       <div class="col-xl-12 text-center">
         <a href="{{route('user.berita.index', [$bahasa, 'acara'])}}" class="text-blue" style="border-bottom: 3px inset #FAD02C; text-decoration: none;">
-          <p class="text-left d-inline-block font-1" style=" font-weight:bold;" >Lihat event lainnya</p>
+          @if (Request::segment(1) == 'en')
+          <p class="text-left d-inline-block font-1" style=" font-weight:bold;" >View More Events</p>
+          @else
+          <p class="text-left d-inline-block font-1" style=" font-weight:bold;" >Lihat Acara lainnya</p>
+          @endif
         </a>
       </div>
     </div>
@@ -159,8 +200,14 @@
 <div class="container">
   <div class="row p-5">
     <div class="col-xl-4">
-      <h4 style=" font-weight:bolder; border-bottom: 3px inset #FAD02C;" class="text-left d-inline-block font-1 mb-4" >Lowongan Kerja</h4>
-      <br>
+      @if (Request::segment(1) == 'en')
+        <h4 style=" font-weight:bolder; border-bottom: 3px inset #FAD02C;" class="text-left d-inline-block font-1 mb-4" >Job Vacancy</h4>
+        <br>
+      @else
+        <h4 style=" font-weight:bolder; border-bottom: 3px inset #FAD02C;" class="text-left d-inline-block font-1 mb-4" >Lowongan Kerja</h4>
+        <br>
+      @endif
+      
       <?php $count = 0; ?>
       @foreach ($lowongankerjas as $lowongankerja)
           <?php if($count == 2) break; ?>
@@ -172,12 +219,23 @@
           <?php $count++; ?>
           <hr  >
       @endforeach
+      @if (Request::segment(1) == 'en')
+      <a href="{{route('user.berita.index', [$bahasa, 'lowongankerja'])}}" class="text-blue">View More <i class="fas fa-arrow-right ml-2 mt-2"></i></a>
+      
+      @else
       <a href="{{route('user.berita.index', [$bahasa, 'lowongankerja'])}}" class="text-blue">Lihat selengkapnya <i class="fas fa-arrow-right ml-2 mt-2"></i></a>
+      
+      @endif
       <div style="min-height: 10vh"></div>
     </div>
     <div class="col-xl-4">
-      <h4 style=" font-weight:bolder; border-bottom: 3px inset #FAD02C;" class="text-left d-inline-block font-1 mb-4" >Informasi Beasiswa</h4>
-      <br>
+      @if (Request::segment(1) == 'en')
+        <h4 style=" font-weight:bolder; border-bottom: 3px inset #FAD02C;" class="text-left d-inline-block font-1 mb-4" >Scholarships</h4>
+        <br>
+      @else
+        <h4 style=" font-weight:bolder; border-bottom: 3px inset #FAD02C;" class="text-left d-inline-block font-1 mb-4" >Informasi Beasiswa</h4>
+        <br>
+      @endif
       <?php $count = 0; ?>
       @foreach ($beasiswas as $beasiswa)
           <?php if($count == 2) break; ?>
@@ -189,12 +247,22 @@
           <?php $count++; ?>
           <hr  >
       @endforeach
+      @if (Request::segment(1) == 'en')
+      <a href="{{route('user.berita.index', [$bahasa, 'beasiswa'])}}" class="text-blue">View More <i class="fas fa-arrow-right ml-2 mt-2"></i></a>
+      @else
       <a href="{{route('user.berita.index', [$bahasa, 'beasiswa'])}}" class="text-blue">Lihat selengkapnya <i class="fas fa-arrow-right ml-2 mt-2"></i></a>
+      @endif
+      
       <div style="min-height: 10vh"></div>
     </div>
     <div class="col-xl-4">
-      <h4 style=" font-weight:bolder; border-bottom: 3px inset #FAD02C;" class="text-left d-inline-block font-1 mb-4" >Rekomendasi Buku</h4>
-      <br>
+      @if (Request::segment(1) == 'en')
+        <h4 style=" font-weight:bolder; border-bottom: 3px inset #FAD02C;" class="text-left d-inline-block font-1 mb-4" >Book Recommendations</h4>
+        <br>
+      @else
+        <h4 style=" font-weight:bolder; border-bottom: 3px inset #FAD02C;" class="text-left d-inline-block font-1 mb-4" >Rekomendasi Buku</h4>
+        <br>  
+      @endif
       <?php $count = 0; ?>
       @foreach ($bukurekomedasis as $bukurekomendasi)
           <?php if($count == 2) break; ?>
@@ -206,7 +274,12 @@
           <?php $count++; ?>
           <hr  >
       @endforeach
-      <a href="{{route('user.berita.index', [$bahasa, 'bukurekomendasi'])}}" class="text-blue">Lihat selengkapnya <i class="fas fa-arrow-right ml-2 mt-2"></i></a>
+      @if (Request::segment(1) == 'en')
+        <a href="{{route('user.berita.index', [$bahasa, 'bukurekomendasi'])}}" class="text-blue">View More <i class="fas fa-arrow-right ml-2 mt-2"></i></a>
+      @else
+        <a href="{{route('user.berita.index', [$bahasa, 'bukurekomendasi'])}}" class="text-blue">Lihat selengkapnya <i class="fas fa-arrow-right ml-2 mt-2"></i></a>
+      @endif
+      
       <div style="min-height: 10vh"></div>
     </div>
     

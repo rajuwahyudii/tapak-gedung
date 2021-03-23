@@ -6,10 +6,11 @@
 
 @section('content')
 <div>
-    <h1>Menu Tunggal</h1>
+    <h1 class="font-1 mt-5">Menu Tunggal</h1>
+    <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.menutunggal.index')}}">menu tunggal</a> / <a href="{{route('admin.menutunggal.show',$menutunggal->id)}}">{{ strtolower($menutunggal->judul)}}</a> / edit</p>
     {{-- <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.berita.index', 'indonesia')}}">berita</a> / <a href="{{route('admin.berita.show', [$menutunggal->bahasa,$menutunggal->id])}}">{{ strtolower($menutunggal->judul)}}</a> / edit </p> --}}
 </div>
-<div class="bg-white p-5">
+<div class="bg-white p-5 shadow">
     <form action="{{route('admin.menutunggal.update', $menutunggal->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group row">

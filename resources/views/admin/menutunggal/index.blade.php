@@ -8,18 +8,18 @@
 
 <div class="row">
   <div class="col-xl-9">
-    <h1>Menu Tunggal</h1>
-    {{-- <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.berita.index','indonesia')}}">berita</a></p> --}}
+    <h1 class="font-1 mt-5">Menu Tunggal</h1>
+    <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / menu tunggal</p>
   </div>
 </div>
 
-<div class="bg-white p-5">
+<div class="bg-white p-5 shadow">
     @include('inc.messages')
     <a href="{{route('admin.menutunggal.create')}}">
         <button type="button" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Tambah Menu Tunggal</button>
     </a>
     <table class="table bg-white mb-5">
-        <thead class="thead-dark">
+        <thead class="bg-blue text-white">
           <tr>
             <th scope="col">Bahasa</th>
             <th scope="col">Judul</th>

@@ -173,13 +173,13 @@ class AdminContentController extends Controller
         $contents = DB::table('contents')
             ->orderBy('urutan', 'ASC')
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
-            ->select('contents.urutan', 'menus.menu', 'menus.bahasa', 'contents.judul', 'contents.created_at', 'contents.author')
+            ->select('contents.urutan', 'menus.menu', 'menus.id as menu_id', 'menus.bahasa', 'contents.judul', 'contents.created_at', 'contents.author')
             ->get();
 
         $content = DB::table('contents')
             ->where('contents.judul', $judul)
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
-            ->select('contents.id', 'contents.kontent', 'contents.urutan', 'menus.menu', 'menus.bahasa', 'contents.judul', 'contents.created_at', 'contents.author')
+            ->select('contents.id', 'contents.kontent', 'contents.urutan', 'menus.menu', 'menus.id as menu_id', 'menus.bahasa', 'contents.judul', 'contents.created_at', 'contents.author')
             ->get()
             ->first();
 

@@ -6,10 +6,10 @@
 
 @section('content')
 <div>
-    <h1>Content</h1>
-    <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.content.index', ['indonesia','daftar-content'])}}">content</a>  / create </p>
+    <h1 class="font-1 mt-5">Konten</h1>
+    <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.content.index', ['indonesia','daftar-content'])}}">konten</a>  / create </p>
 </div>
-<div class="bg-white p-5">
+<div class="bg-white p-5 shadow">
     <form action="{{route('admin.content.store')}}" method="POST">
         @csrf
         <div class="form-group row">

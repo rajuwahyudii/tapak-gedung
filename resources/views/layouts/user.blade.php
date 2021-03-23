@@ -7,7 +7,22 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    {{-- ICON --}}
+    <link rel="icon" href="http://feb.unib.ac.id/wp-content/uploads/2016/03/cropped-fav-unib-e1496768617388-2-32x32.png" sizes="32x32">
+    <link rel="icon" href="http://feb.unib.ac.id/wp-content/uploads/2016/03/cropped-fav-unib-e1496768617388-2-192x192.png" sizes="192x192">
+
+    {{-- <title>{{ config('app.name', 'Magister Manajemen UNIB') }}</title> --}}
+    
+    @if (empty(Request::segment(2)))
+      @if (Request::segment(1) == 'en' )
+      <title>Home - Magister Manajemen UNIB</title>
+      @else
+      <title>Beranda - Magister Manajemen UNIB</title>
+      @endif
+    @else
+      <title>{{ Request::segment(3) }} - Magister Manajemen UNIB</title>
+    @endif
+
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -31,6 +46,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
 
+    
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
@@ -38,7 +54,44 @@
 
 </head>
 <body style="background: #ffff;">
-    <div id="app container-fluid">
+    <div id="app">
+        <div class="pt-2 pb-2 pr-5 pl-5" style="background: #201f31; margin-bottom: 0;">
+          <div class="text-right">
+
+            @if (Request::Segment(1) == 'en')
+              <div class="dropdown d-inline m-2">
+                <a class="text-white dropdown-toggle" id="bahasa" role="button" data-toggle="dropdown" href="">
+                  <img src="{{asset('icon/en.png')}}" alt="">
+                  English</a>
+                <div class="dropdown-menu" aria-labelledby="bahasa">
+                  <a class="dropdown-item" href="/id"> 
+                    <img src="{{asset('icon/id.png')}}" alt=""> 
+                    Indonesia</a>
+                </div>
+              </div>
+              <a class="m-2 text-white" href="http://unib.ac.id/"> <small>About UNIB</small> </a>
+              <a class="m-2 text-white" href="http://feb.unib.ac.id/"> <small>About FEB UNIB</small></a>
+              <a class="m-2 text-white" href="http://admisi.unib.ac.id/"> <small>Admision UNIB</small></a>
+              
+            @else
+              <div class="dropdown d-inline m-2">
+                <a class="text-white dropdown-toggle" id="bahasa" role="button" data-toggle="dropdown" href="">
+                  <img src="{{asset('icon/id.png')}}" alt="">
+                  Indonesia</a>
+                <div class="dropdown-menu" aria-labelledby="bahasa">
+                  <a class="dropdown-item" href="/en"> 
+                    <img src="{{asset('icon/en.png')}}" alt=""> 
+                    English</a>
+                </div>
+              </div>
+              <a class="m-2 text-white" href="http://unib.ac.id/"> <small>Tentang UNIB</small> </a>
+              <a class="m-2 text-white" href="http://feb.unib.ac.id/"> <small>Tentang FEB UNIB</small></a>
+              <a class="m-2 text-white" href="http://admisi.unib.ac.id/"> <small>Admisi UNIB</small></a>
+                
+            @endif
+          </div>
+          
+        </div>
         {{-- NAVBAR --}}
         @include('inc.user.navbar')
         {{-- NAVBAR END --}}
@@ -47,9 +100,9 @@
         </div>
         <div style="min-height: 10vh"></div>
         <div class="container-fluid bg-blue text-white mt-5">
-            <div class="container p-5">
+            <div class="container pt-5 pb-5 pr-2 pl-2">
               <div class="row">
-                <div class="col-xl-4">
+                <div class="col-xl-3">
                   <img src="{{asset('logo/logo.png')}}" width="80" alt=""> <br> <hr>
                   <b>
                     UNIVERSITAS BENGKULU <br>
@@ -63,23 +116,79 @@
                   <p>Sumatera – INDONESIA</p>
                   
                 </div>
-                <div class="col-xl-4 mt-5">
-                  <h5>TAUTAN TERKAIT</h5>
+                <div class="col-xl-3 mt-5">
+                  <h5 class="mt-3">DEPARTMENTS</h5>
                   <hr>
-                  <a href="" class="text-white">Universitas Bengkulu</a>
+                  <a href="http://akuntansi.feb.unib.ac.id/" class="text-white">Diploma Akutansi</a>
                   <br>
-                  <a href="" class="text-white">Fakultas Ekonomi Dan Bisnis</a>
+                  <a href="http://akuntansi.feb.unib.ac.id/" class="text-white">Jurusan Akutansi</a>
                   <br>
-                  <a href="" class="text-white">Perpustakaan UNIB</a>
+                  <a href="http://manajemen.feb.unib.ac.id/" class="text-white">Jurusan Manajemen</a>
+                  <br>
+                  <a href="http://jisp.feb.unib.ac.id/" class="text-white">Jurusan Ilmu Ekonomi Pembangunan</a>
+                  <br>
+                  <a href="http://maksi.feb.unib.ac.id/" class="text-white">Magister Akutansi</a>
+                  <br>
+                  <a href="http://mpp.feb.unib.ac.id/" class="text-white">Magister Perencanaan Pembangunan</a>
+                  <br>
+                  <a href="http://dim.feb.unib.ac.id/" class="text-white">Program Doktor Ilmu Manajemen</a>
+                  <br>
+                  <a href="http://pdie.feb.unib.ac.id/" class="text-white">Program Doktor Ilmu Ekonomi</a>
+                
                 </div>
-                <div class="col-xl-4 mt-5">
-                  <h5>STATISTIK PENGUNJUNG</h5>
+                <div class="col-xl-3 mt-5">
+                  <h5 class="mt-3">FACULTIES</h5>
                   <hr>
+                  <a href="http://fkip.unib.ac.id/" class="text-white">Fakultas KIP</a>
+                  <br>
+                  <a href="http://fkip.unib.ac.id/" class="text-white">Fakultas Hukum</a>
+                  <br>
+                  <a href="http://fkip.unib.ac.id/" class="text-white">Fakultas Pertanian</a>
+                  <br>
+                  <a href="http://fkip.unib.ac.id/" class="text-white">Fakultas Ekonomi dan Bisnis</a>
+                  <br>
+                  <a href="http://fkip.unib.ac.id/" class="text-white">Fakultas ISIPOL</a>
+                  <br>
+                  <a href="http://fkip.unib.ac.id/" class="text-white">Fakultas MIPA</a>
+                  <br>
+                  <a href="http://fkip.unib.ac.id/" class="text-white">Fakultas Teknik</a>
+                  <br>
+                  <a href="http://fkip.unib.ac.id/" class="text-white">Fakultas Kedokteran</a>
+                  <br>
+                </div>
+                <div class="col-xl-3 mt-5">
+                  <h5 class="mt-3">E-CAMPUS</h5>
+                  <hr>
+                  <div class="row">
+                    <div class="col-lg-6">
+                        <a href="http://pak.unib.ac.id/" class="text-white"><img src="{{asset('footer/pak.png')}}" alt=""></a>
+                      <br>
+                        <a href="http://ejournal.unib.ac.id/" class="text-white"><img src="{{asset('footer/ejournal.png')}}" alt=""></a>
+                      <br>
+                        <a href="http://elearning.unib.ac.id/" class="text-white"><img src="{{asset('footer/elearning.png')}}" alt=""></a>
+                      <br>
+                        <a href="http://wisudaonline.unib.ac.id/" class="text-white"><img src="{{asset('footer/wisuda.png')}}" alt=""></a>
+                      <br>
+                    </div>
+                    <div class="col-lg-6">
+                        <a href="http://unib.ac.id/epaper" class="text-white"><img src="{{asset('footer/epaper.png')}}" alt=""></a>
+                      <br>
+                        <a href="http://mail.unib.ac.id/" class="text-white"><img src="{{asset('footer/email.png')}}" alt=""></a>
+                      <br>
+                        <a href="http://repository.unib.ac.id/" class="text-white"><img src="{{asset('footer/repository.png')}}" alt=""></a>
+                      <br>
+                    </div>
+                  </div>
+                  
+                  
                 </div>
               </div>
               
             </div>
-          </div>
+        </div>
+        <div style="background: #201f31" class="text-center text-white pt-2 pb-2">
+            &copy; Magister Manajemen Universitas Bengkulu
+        </div>
     </div>
     {{-- <script>
         $('#summernote').summernote({

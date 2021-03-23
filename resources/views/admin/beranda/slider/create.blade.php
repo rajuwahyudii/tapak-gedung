@@ -6,10 +6,10 @@
 
 @section('content')
 <div>
-    <h1>Slider</h1>
+    <h1 class="font-1 mt-5">Slider</h1>
     <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.beranda.index', 'indonesia')}}">beranda</a>  / <a href="{{route('admin.slider.index')}}">slider</a> / create </p>
 </div>
-<div class="bg-white p-5">
+<div class="bg-white p-5 shadow">
     <form action="{{route('admin.slider.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         

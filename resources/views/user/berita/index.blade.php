@@ -5,28 +5,52 @@
 <div style="min-height: 5vh;"></div>
 <div class="container">
     <h3 class="mt-5 font-1" style="font-weight:bolder;">
-        @switch(Request::segment(3))
-            @case('berita')
-                Berita Umum
-                @break
-            @case('pengumuman')
-                Pengumuman
-                @break
-            @case('acara')
-                Acara / Event
-                @break
-            @case('lowongankerja')
-                Lowongan Kerja
-                @break
-            @case('beasiswa')
-                Beasiswa
-                @break
-            @case('bukurekomendasi')
-                Buku Rekomendasi
-                @break
-            @default
-                
-        @endswitch
+        @if (Request::segment(1) == 'en')
+            @switch(Request::segment(3))
+                @case('berita')
+                    News
+                    @break
+                @case('pengumuman')
+                    Announcements
+                    @break
+                @case('acara')
+                    Events
+                    @break
+                @case('lowongankerja')
+                    Job Vacancy
+                    @break
+                @case('beasiswa')
+                    Scholarships
+                    @break
+                @case('bukurekomendasi')
+                    Book Recommendations
+                    @break
+                @default
+            @endswitch
+        @else
+            @switch(Request::segment(3))
+                @case('berita')
+                    Berita Umum
+                    @break
+                @case('pengumuman')
+                    Pengumuman
+                    @break
+                @case('acara')
+                    Acara
+                    @break
+                @case('lowongankerja')
+                    Lowongan Kerja
+                    @break
+                @case('beasiswa')
+                    Beasiswa
+                    @break
+                @case('bukurekomendasi')
+                    Buku Rekomendasi
+                    @break
+                @default
+            @endswitch
+        @endif
+        
     </h3>
     <hr class="mb-5">
     <div class="row">
@@ -74,52 +98,64 @@
         <div class="col-xl-3">
             <div class="container">
                 <div class="col-xl-12">
-                    <h4 style=" font-weight:bolder; border-bottom: 3px inset #FAD02C;" class="text-left d-inline-block font-1 mb-4" >Kategori Berita</h4>
-                    <br>
-                        <a href="{{route('user.berita.index', [$bahasa, 'berita'])}}" class="text-dark">
-                            <h5 class="card-title"><small><b>Berita Umum</b></small></h5>
-                        </a>
-                        <hr  >
-                        <a href="{{route('user.berita.index', [$bahasa, 'pengumuman'])}}" class="text-dark">
-                            <h5 class="card-title"><small><b>Pengumuman</b></small></h5>
-                        </a>
-                        <hr  >
-                        <a href="{{route('user.berita.index', [$bahasa, 'acara'])}}" class="text-dark">
-                            <h5 class="card-title"><small><b>Acara / Event</b></small></h5>
-                        </a>
-                        <hr  >
-                        <a href="{{route('user.berita.index', [$bahasa, 'lowongankerja'])}}" class="text-dark">
-                            <h5 class="card-title"><small><b>Lowongan Kerja</b></small></h5>
-                        </a>
-                        <hr  >
-                        <a href="{{route('user.berita.index', [$bahasa, 'beasiswa'])}}" class="text-dark">
-                            <h5 class="card-title"><small><b>Beasiswa</b></small></h5>
-                        </a>
-                        <hr  >
-                        <a href="{{route('user.berita.index', [$bahasa, 'bukurekomendasi'])}}" class="text-dark">
-                            <h5 class="card-title"><small><b>Rekomendasi Buku</b></small></h5>
-                        </a>
-                        <hr  >
-                    {{-- <a class="text-blue">Lihat selengkapnya <i class="fas fa-arrow-right ml-2 mt-2"></i></a> --}}
+                        @if (Request::segment(1) == 'en')
+                            <h4 style=" font-weight:bolder; border-bottom: 3px inset #FAD02C;" class="text-left d-inline-block font-1 mb-4" >News Categories</h4>
+                            <br>
+                            <a href="{{route('user.berita.index', [$bahasa, 'berita'])}}" class="text-dark">
+                                <h5 class="card-title"><small><b>General News</b></small></h5>
+                            </a>
+                            <hr  >
+                            <a href="{{route('user.berita.index', [$bahasa, 'pengumuman'])}}" class="text-dark">
+                                <h5 class="card-title"><small><b>Announcements</b></small></h5>
+                            </a>
+                            <hr  >
+                            <a href="{{route('user.berita.index', [$bahasa, 'acara'])}}" class="text-dark">
+                                <h5 class="card-title"><small><b>Events</b></small></h5>
+                            </a>
+                            <hr  >
+                            <a href="{{route('user.berita.index', [$bahasa, 'lowongankerja'])}}" class="text-dark">
+                                <h5 class="card-title"><small><b>Job Vacancy</b></small></h5>
+                            </a>
+                            <hr  >
+                            <a href="{{route('user.berita.index', [$bahasa, 'beasiswa'])}}" class="text-dark">
+                                <h5 class="card-title"><small><b>Scholarships</b></small></h5>
+                            </a>
+                            <hr  >
+                            <a href="{{route('user.berita.index', [$bahasa, 'bukurekomendasi'])}}" class="text-dark">
+                                <h5 class="card-title"><small><b>Book Recommendations</b></small></h5>
+                            </a>
+                            <hr>
+                        @else
+                            <h4 style=" font-weight:bolder; border-bottom: 3px inset #FAD02C;" class="text-left d-inline-block font-1 mb-4" >Kategori Berita</h4>
+                            <br>
+                            <a href="{{route('user.berita.index', [$bahasa, 'berita'])}}" class="text-dark">
+                                <h5 class="card-title"><small><b>Berita Umum</b></small></h5>
+                            </a>
+                            <hr  >
+                            <a href="{{route('user.berita.index', [$bahasa, 'pengumuman'])}}" class="text-dark">
+                                <h5 class="card-title"><small><b>Pengumuman</b></small></h5>
+                            </a>
+                            <hr  >
+                            <a href="{{route('user.berita.index', [$bahasa, 'acara'])}}" class="text-dark">
+                                <h5 class="card-title"><small><b>Acara / Event</b></small></h5>
+                            </a>
+                            <hr  >
+                            <a href="{{route('user.berita.index', [$bahasa, 'lowongankerja'])}}" class="text-dark">
+                                <h5 class="card-title"><small><b>Lowongan Kerja</b></small></h5>
+                            </a>
+                            <hr  >
+                            <a href="{{route('user.berita.index', [$bahasa, 'beasiswa'])}}" class="text-dark">
+                                <h5 class="card-title"><small><b>Beasiswa</b></small></h5>
+                            </a>
+                            <hr  >
+                            <a href="{{route('user.berita.index', [$bahasa, 'bukurekomendasi'])}}" class="text-dark">
+                                <h5 class="card-title"><small><b>Rekomendasi Buku</b></small></h5>
+                            </a>
+                            <hr>
+                        @endif
+                        
                     <div style="min-height: 10vh"></div>
                 </div>
-                {{-- <div class="col-xl-12">
-                    <h4 style=" font-weight:bolder; border-bottom: 3px inset #FAD02C;" class="text-left d-inline-block font-1 mb-4" >Berita</h4>
-                    <br>
-                    <?php $count = 0; ?>
-                    @foreach ($beritas as $berita)
-                        <?php if($count == 2) break; ?>
-                                <small>Tanggal : {{ Str::limit($berita->created_at, 10) }} | </small>
-                                <small><i class="fas fa-flag"></i> {{$berita->kategori}} </small>
-                                <a href="{{route('user.berita.show', [$bahasa, $berita->judul])}}" class="text-dark">
-                                    <h5 class="card-title"><small><b>{{$berita->judul}}</b></small></h5>
-                                </a>
-                        <?php $count++; ?>
-                        <hr  >
-                    @endforeach
-                    <a href="" class="text-blue">Lihat selengkapnya <i class="fas fa-arrow-right ml-2 mt-2"></i></a>
-                    <div style="min-height: 10vh"></div>
-                </div> --}}
             </div>
         </div>
     </div>

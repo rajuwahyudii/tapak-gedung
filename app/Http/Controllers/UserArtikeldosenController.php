@@ -3,23 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use PDO;
 use Illuminate\Support\Facades\DB;
 
-class UserBeritaController extends Controller
+class UserArtikeldosenController extends Controller
 {
-    public function index($bahasa, $kategori)
+    public function index($bahasa)
     {
-        // DATA NAVBAR
 
         if ($bahasa == 'en') {
 
-            $beritas = DB::table('beritas')->where('beritas.bahasa', 'english')->where('beritas.kategori', $kategori)->orderBy('created_at')->paginate(4);
+            $artikeldosens = DB::table('artikeldosens')->where('bahasa', 'english')->orderBy('created_at')->paginate(8);
             $menus = DB::table('menus')->where('menus.bahasa', 'english')->orderBy('menus.urutan')->get();
             $menutunggals = DB::table('menutunggals')
                 ->where('bahasa', 'english')
                 ->get();
         } else {
-            $beritas = DB::table('beritas')->where('bahasa', 'indonesia')->where('beritas.kategori', $kategori)->orderBy('created_at')->paginate(4);
+            $artikeldosens = DB::table('artikeldosens')->where('bahasa', 'indonesia')->orderBy('created_at')->paginate(8);
             $menus = DB::table('menus')->where('menus.bahasa', 'indonesia')->orderBy('menus.urutan')->get();
             $menutunggals = DB::table('menutunggals')
                 ->where('bahasa', 'indonesia')
@@ -31,25 +31,26 @@ class UserBeritaController extends Controller
             ->orderBy('contents.urutan')
             ->get();
 
-        // DATA NAVBAR END
-
-        return view('user.berita.index')
-            ->with('menus', $menus)
+        return view('user.artikeldosen.index')
             ->with('contents', $contents)
+            ->with('menus', $menus)
             ->with('menutunggals', $menutunggals)
-            ->with('beritas', $beritas)
+            ->with('artikeldosens', $artikeldosens)
             ->with('bahasa', $bahasa);
     }
 
-    public function show($bahasa, $kategori, $konten)
+    public function show($bahasa, $judul)
     {
-        // DATA NAVBAR
+
         if ($bahasa == 'en') {
+
+            $artikeldosen = DB::table('artikeldosens')->where('judul', $judul)->where('bahasa', 'english')->get()->first();
             $menus = DB::table('menus')->where('menus.bahasa', 'english')->orderBy('menus.urutan')->get();
             $menutunggals = DB::table('menutunggals')
                 ->where('bahasa', 'english')
                 ->get();
         } else {
+            $artikeldosen = DB::table('artikeldosens')->where('judul', $judul)->where('bahasa', 'indonesia')->get()->first();
             $menus = DB::table('menus')->where('menus.bahasa', 'indonesia')->orderBy('menus.urutan')->get();
             $menutunggals = DB::table('menutunggals')
                 ->where('bahasa', 'indonesia')
@@ -60,18 +61,12 @@ class UserBeritaController extends Controller
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
             ->orderBy('contents.urutan')
             ->get();
-        // DATA NAVBAR END
 
-        $berita = DB::table('beritas')
-            ->where('beritas.judul', $konten)
-            ->get()
-            ->first();
-
-        return view('user.berita.show')
-            ->with('menus', $menus)
+        return view('user.artikeldosen.show')
             ->with('contents', $contents)
+            ->with('menus', $menus)
             ->with('menutunggals', $menutunggals)
-            ->with('berita', $berita)
+            ->with('artikeldosen', $artikeldosen)
             ->with('bahasa', $bahasa);
     }
 }

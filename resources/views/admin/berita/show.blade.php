@@ -6,10 +6,10 @@
 
 @section('content')
 <div>
-    <h1>Berita</h1> 
-    {{-- <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.berita.index', 'indonesia')}}">berita</a> / <a href="{{route('admin.berita.index', 'indonesia')}}"> {{ strtolower($berita->judul)}}</a></p> --}}
+    <h1 class="font-1 mt-5">Berita</h1> 
+    <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.berita.index', 'indonesia')}}">berita</a> / <a href="{{route('admin.berita.index', 'indonesia')}}"> {{ strtolower($berita->judul)}}</a></p>
 </div>
-<div class="bg-white p-5">
+<div class="bg-white p-5 shadow">
     <div class="container">
         <div class="row">
             <div class="col-xl-7">
@@ -20,7 +20,7 @@
                 <a href="{{route('admin.berita.edit', [$berita->bahasa, $berita->id])}}">
                     <button class="btn btn-success mt-3"> <i class="fas fa-pen"></i> Edit</button>
                 </a>
-                <a href="#">
+                <a href="{{route('user.berita.show',[$berita->bahasa, $berita->kategori, $berita->judul])}}">
                     <button class="btn btn-primary mt-3"> <i class="fas fa-eye"></i> Preview</button>
                 </a>
             </div>

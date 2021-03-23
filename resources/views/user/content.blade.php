@@ -10,7 +10,13 @@
         </div>
         <div class="col-xl-3 mt-5 pt-5 pb-5 pl-4 pr-4">
             <div class="col-xl-12">
+                @if (Request::segment(1) == 'en')
+                    
+                <h4 style=" font-weight:bolder; border-bottom: 3px inset #FAD02C;" class="text-left d-inline-block font-1 mb-4" >Announcements</h4>
+                @else
                 <h4 style=" font-weight:bolder; border-bottom: 3px inset #FAD02C;" class="text-left d-inline-block font-1 mb-4" >Pengumuman</h4>
+                    
+                @endif
                 <br>
                 <?php $count = 0; ?>
                 @foreach ($pengumumans as $pengumuman)
@@ -23,11 +29,23 @@
                     <?php $count++; ?>
                     <hr  >
                 @endforeach
+                @if (Request::segment(1) == 'en')
+                    
+                <a href="{{route('user.berita.index', [$bahasa, 'pengumuman'])}}" class="text-blue">View More <i class="fas fa-arrow-right ml-2 mt-2"></i></a>
+                @else
                 <a href="{{route('user.berita.index', [$bahasa, 'pengumuman'])}}" class="text-blue">Lihat selengkapnya <i class="fas fa-arrow-right ml-2 mt-2"></i></a>
+                    
+                @endif
                 <div style="min-height: 10vh"></div>
             </div>
             <div class="col-xl-12">
+                @if (Request::segment(1) == 'en')
+                    
+                <h4 style=" font-weight:bolder; border-bottom: 3px inset #FAD02C;" class="text-left d-inline-block font-1 mb-4" >News</h4>
+                @else
                 <h4 style=" font-weight:bolder; border-bottom: 3px inset #FAD02C;" class="text-left d-inline-block font-1 mb-4" >Berita</h4>
+                    
+                @endif
                 <br>
                 <?php $count = 0; ?>
                 @foreach ($beritas as $berita)
@@ -40,7 +58,13 @@
                     <?php $count++; ?>
                     <hr  >
                 @endforeach
+                @if (Request::segment(1) == 'en')
+                    
+                <a href="{{route('user.berita.index', [$bahasa, 'berita'])}}" class="text-blue">View More <i class="fas fa-arrow-right ml-2 mt-2"></i></a>
+                @else
                 <a href="{{route('user.berita.index', [$bahasa, 'berita'])}}" class="text-blue">Lihat selengkapnya <i class="fas fa-arrow-right ml-2 mt-2"></i></a>
+                    
+                @endif
                 <div style="min-height: 10vh"></div>
             </div>
         </div>

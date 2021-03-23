@@ -7,9 +7,9 @@
 @section('content')
 <div>
     <h1>Menu Tunggal</h1>
-    {{-- <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.menutunggal.index', 'indonesia')}}">berita</a> / <a href="{{route('admin.menutunggal.index', 'indonesia')}}"> {{ strtolower($menutunggal->judul)}}</a></p> --}}
+    <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.menutunggal.index')}}">menu tunggal</a> / {{ strtolower($menutunggal->judul)}}</p>
 </div>
-<div class="bg-white p-5">
+<div class="bg-white p-5 shadow">
     <div class="container">
         <div class="row">
             <div class="col-xl-7">
@@ -20,7 +20,7 @@
                 <a href="{{route('admin.menutunggal.edit', $menutunggal->id)}}">
                     <button class="btn btn-success mt-3"> <i class="fas fa-pen"></i> Edit</button>
                 </a>
-                <a href="#">
+                <a href="{{route('user.menutunggal.index', [$menutunggal->bahasa,$menutunggal->judul])}}">
                     <button class="btn btn-primary mt-3"> <i class="fas fa-eye"></i> Preview</button>
                 </a>
             </div>

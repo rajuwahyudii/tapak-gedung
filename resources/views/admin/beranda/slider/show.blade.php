@@ -6,10 +6,10 @@
 
 @section('content')
 <div>
-    <h1>Berita</h1> 
+    <h1 class="font-1 mt-5">Berita</h1> 
     <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.berita.index')}}">berita</a> / <a href="{{route('admin.berita.index')}}"> {{ strtolower($berita->judul)}}</a></p>
 </div>
-<div class="bg-white p-5">
+<div class="bg-white p-5 shadow">
     <div class="container">
         <div class="row">
             <div class="col-xl-6">

@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.satucol')
 
 @section('sidebar')
     @include('inc.admin.sidebar')
@@ -6,17 +6,17 @@
 
 @section('content')
 <div>
-    <h1>Admin</h1>
+    <h1 class="font-1 mt-5">Admin</h1>
     <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / akun </p>
 </div>
-<div class="bg-white p-5">
+<div class="bg-white p-5 shadow">
     @include('inc.messages')
     
     <a href="{{route('admin.akun.create')}}">
         <button type="button" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Tambah Admin</button>
     </a>
     <table class="table bg-white mb-5">
-        <thead class="thead-dark">
+        <thead class="bg-blue text-white">
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Nama</th>

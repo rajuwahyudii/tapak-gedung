@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.satucol')
 
 @section('sidebar')
     @include('inc.admin.sidebar')
@@ -6,10 +6,10 @@
 
 @section('content')
 <div>
-    <h1>akun</h1>
+    <h1 class="font-1 mt-5">Akun</h1>
     <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.akun.index')}}">akun</a> / <a href="{{route('admin.akun.edit', $akun->id)}}">{{ strtolower($akun->name)}}</a> / edit </p>
 </div>
-<div class="bg-white p-5">
+<div class="bg-white p-5 shadow">
     <form action="{{route('admin.akun.update', $akun->id)}}" method="POST">
         @csrf
         <div class="form-group row">

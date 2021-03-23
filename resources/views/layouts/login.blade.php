@@ -27,58 +27,23 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
+    {{-- FONT --}}
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
 
-    
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     @yield('style')
+
 </head>
-<body class="flex justify-content-center bg-light">
-    <div id="app container-fluid" >
-        {{-- NAVBAR --}}
-        @include('inc.admin.navbar')
-        {{-- NAVBAR END --}}
-
-        <div class="row" style="width: 85%; margin: auto;">
-
-            {{-- MAINBAR --}}
-            <div class="main col-xl-12 mb-5" style="overflow-x: hidden;"> 
-                @yield('content')
-            </div>
-            {{-- MAINBAR END --}}  
-            
+<body class="bg-light">
+    <div id="app container-fluid">
+        <div>
+            @yield('content')
         </div>
+        <div style="min-height: 10vh"></div>
         
     </div>
-    {{-- <script>
-        $('#summernote').summernote({
-        placeholder: 'Tulis Konten Disini',
-        tabsize: 2,
-        height: 500
-        });
-    </script> --}}
-    <script>
-        $(function () {
-         $('[data-toggle="tooltip"]').tooltip()
-        })
-    </script>
-
-    <script>
-        $('#summernote').summernote({
-        placeholder: 'Tulis Konten Disini',
-        tabsize: 2,
-        height: 500,
-        toolbar: [
-          ['style', ['style']],
-          ['font', ['bold', 'underline', 'clear']],
-          ['color', ['color']],
-          ['para', ['ul', 'ol', 'paragraph']],
-          ['table', ['table']],
-          ['insert', ['link', 'picture', 'video']],
-          ['view', ['']]
-        ]
-      });
-    </script>
 </body>
 </html>

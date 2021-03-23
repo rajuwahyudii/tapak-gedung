@@ -6,17 +6,17 @@
 
 @section('content')
 <div>
-    <h1>Menus</h1>
+    <h1 class="font-1 mt-5">Menus</h1>
     <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / menu </p>
 </div>
-<div class="bg-white p-5">
+<div class="bg-white p-5 shadow">
     @include('inc.messages')
     
     <a href="{{route('admin.menu.create')}}">
         <button type="button" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Tambah Menu</button>
     </a>
     <table class="table bg-white mb-5">
-        <thead class="thead-dark">
+        <thead class="bg-blue text-white">
           <tr>
             <th scope="col">Urutan</th>
             <th scope="col">Bahasa</th>
@@ -55,7 +55,7 @@
     </table> 
     
     <table class="table bg-white mb-5">
-        <thead class="thead-dark">
+        <thead class="bg-blue text-white">
           <tr>
             <th scope="col">Urutan</th>
             <th scope="col">Bahasa</th>
