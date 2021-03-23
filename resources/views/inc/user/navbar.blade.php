@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-custom pr-5 pl-5 pt-3 pb-4">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/id">
       <img width="50" src="{{asset('logo/logo.png')}}" alt="">
     </a>
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/id">
       <small>MAGISTER MANAJEMEN <br> UNIVERSITAS BENGKULU</small>
     </a>
     <button class="navbar-toggler text-white"  type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

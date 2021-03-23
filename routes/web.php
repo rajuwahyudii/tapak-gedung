@@ -64,10 +64,10 @@ Route::prefix('admin')->group(function () {
     Route::get('berita/', function () {
         return redirect('admin/berita/indonesia');
     });
-    Route::get('berita/{bahasa}', [App\Http\Controllers\AdminBeritaController::class, 'index'])->name('admin.berita.index');
-    Route::get('berita/{bahasa}/create', [App\Http\Controllers\AdminBeritaController::class, 'create'])->name('admin.berita.create');
-    Route::get('berita/{bahasa}/{id}', [App\Http\Controllers\AdminBeritaController::class, 'show'])->name('admin.berita.show');
-    Route::get('berita/{bahasa}/edit/{id}', [App\Http\Controllers\AdminBeritaController::class, 'edit'])->name('admin.berita.edit');
+    Route::get('berita/{bahasa}/{kategori}', [App\Http\Controllers\AdminBeritaController::class, 'index'])->name('admin.berita.index');
+    Route::get('berita/{bahasa}/{kategori}/create', [App\Http\Controllers\AdminBeritaController::class, 'create'])->name('admin.berita.create');
+    Route::get('berita/{bahasa}/{kategori}/{id}', [App\Http\Controllers\AdminBeritaController::class, 'show'])->name('admin.berita.show');
+    Route::get('berita/{bahasa}/edit/{kategori}/{id}', [App\Http\Controllers\AdminBeritaController::class, 'edit'])->name('admin.berita.edit');
     Route::post('berita', [App\Http\Controllers\AdminBeritaController::class, 'store'])->name('admin.berita.store');
     Route::put('berita/{id}', [App\Http\Controllers\AdminBeritaController::class, 'update'])->name('admin.berita.update');
     Route::delete('berita/{id}', [App\Http\Controllers\AdminBeritaController::class, 'destroy'])->name('admin.berita.destroy');

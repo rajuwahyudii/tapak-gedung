@@ -1,4 +1,4 @@
-@extends('layouts.satucol')
+@extends('layouts.duacol')
 
 @section('sidebar')
     @include('inc.admin.berita_sidebar')
@@ -7,7 +7,7 @@
 @section('content')
 <div>
     <h1 class="font-1 mt-5">Berita</h1>
-    <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.berita.index', 'indonesia')}}">berita</a>  / create </p>
+    <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.berita.index', [$bahasa, 'berita'] )}}">{{Request::segment(4)}}</a>  / create </p>
 </div>
 <div class="bg-white p-5 shadow">
     <form action="{{route('admin.berita.store')}}" method="POST" enctype="multipart/form-data">
@@ -30,27 +30,27 @@
             <div class="col-xl-12 mt-5">
                 <label>Kategori : </label>
                 <br>
-                <div class="d-inline-block mt-2">
+                <div class="d-inline-block mt-2 mr-5">
                     <input type="radio" id="berita" name="kategori" value="berita" checked>
-                    <label for="berita" class="mr-5">Berita Umum</label>
+                    <label for="berita">Berita Umum</label>
                 </div>
-                <div class="d-inline-block mt-2"> 
+                <div class="d-inline-block mt-2 mr-5"> 
                     <input type="radio" id="pengumuman" name="kategori" value="pengumuman">
                     <label for="pengumuman">Pengumuman</label>
                 </div>
-                <div class="d-inline-block mt-2 ml-5"> 
+                <div class="d-inline-block mt-2 mr-5"> 
                     <input type="radio" id="acara" name="kategori" value="acara">
                     <label for="acara">Acara</label>
                 </div>
-                <div class="d-inline-block mt-2 ml-5"> 
+                <div class="d-inline-block mt-2 mr-5"> 
                     <input type="radio" id="beasiswa" name="kategori" value="beasiswa">
                     <label for="beasiswa">Beasiswa</label>
                 </div>
-                <div class="d-inline-block mt-2 ml-5"> 
+                <div class="d-inline-block mt-2 mr-5"> 
                     <input type="radio" id="lowongankerja" name="kategori" value="lowongankerja">
                     <label for="lowongankerja">Lowongan Kerja</label>
                 </div>
-                <div class="d-inline-block mt-2 ml-5"> 
+                <div class="d-inline-block mt-2 mr-5"> 
                     <input type="radio" id="bukurekomendasi" name="kategori" value="bukurekomendasi">
                     <label for="bukurekomendasi">Buku Rekomendasi</label>
                 </div>

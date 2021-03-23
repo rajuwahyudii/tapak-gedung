@@ -1,22 +1,24 @@
-{{-- 
-    <a href="{{route('admin.berita.index')}}">
-        <button class="btn btn-block btn-white"> <b> DAFTAR BERITA </b></button>
-       
+<hr>
+    <a class="mt-5" href="">
+        <button class="btn btn-block btn-white"> <b> KATEGORI BERITA </b></button>
     </a>
     <hr>
-    <h5 class="mb-4"><small> Bahasa </small></h5>
-    <a href="{{route('admin.berita.bahasa_filter', 'indonesia')}}">
-        @if (Request::segment(4) == 'indonesia')
-        <button class="btn mb-2 btn-block btn-dark text-left"> Indonesia </button>
-        @else
-        <button class="btn mb-2 btn-block btn-white text-left"> Indonesia </button>
-        @endif
+    <a href="{{route('admin.berita.index', [$bahasa, 'berita'] )}}">
+        <button class="btn mb-2 btn-block text-left"> Berita Umum </button>
     </a>
-    <a href="{{route('admin.berita.bahasa_filter', 'english')}}">
-        @if (Request::segment(4) == 'english')
-        <button class="btn mb-2 btn-block btn-dark text-left"> English </button>
-        @else
-        <button class="btn mb-2 btn-block btn-white text-left"> English </button>
-        @endif
-    </a> --}}
+    <a href="{{route('admin.berita.index', [$bahasa, 'pengumuman'] )}}">
+        <button class="btn mb-2 btn-block text-left"> Pengumuman </button>
+    </a>
+    <a href="{{route('admin.berita.index', [$bahasa, 'acara'] )}}">
+        <button class="btn mb-2 btn-block text-left"> Acara </button>
+    </a>
+    <a href="{{route('admin.berita.index', [$bahasa, 'lowongankerja'] )}}">
+        <button class="btn mb-2 btn-block text-left"> Lowongan Kerja </button>
+    </a>
+    <a href="{{route('admin.berita.index', [$bahasa, 'beasiswa'] )}}">
+        <button class="btn mb-2 btn-block text-left"> Beasiswa </button>
+    </a>
+    <a href="{{route('admin.berita.index', [$bahasa, 'bukurekomendasi'] )}}">
+        <button class="btn mb-2 btn-block text-left"> Rekomendasi Buku </button>
+    </a>
     

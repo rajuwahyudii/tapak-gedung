@@ -7,7 +7,16 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
+    @if (empty(Request::segment(2)))
+      @if (Request::segment(1) == 'en' )
+      <title>Home - Magister Manajemen UNIB</title>
+      @else
+      <title>Beranda - Magister Manajemen UNIB</title>
+      @endif
+    @else
+      <title>Magister Manajemen UNIB - {{ Request::segment(2) }}</title>
+    @endif
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -18,6 +27,10 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
     
+    {{-- ICON --}}
+    <link rel="icon" href="http://feb.unib.ac.id/wp-content/uploads/2016/03/cropped-fav-unib-e1496768617388-2-32x32.png" sizes="32x32">
+    <link rel="icon" href="http://feb.unib.ac.id/wp-content/uploads/2016/03/cropped-fav-unib-e1496768617388-2-192x192.png" sizes="192x192">
+
 
     <!-- include libraries(jQuery, bootstrap) -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

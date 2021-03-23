@@ -1,5 +1,22 @@
 @extends('layouts.user')
 
+@section('style')
+ <style>
+   .map-responsive{
+      overflow:hidden;
+      padding-bottom:26.25%;
+      position:relative;
+      height:0;
+    }
+    .map-responsive iframe{
+      left:0;
+      top:0;
+      height:100%;
+      width:100%;
+      position:absolute;
+    }
+ </style>
+@endsection
 
 @section('content')
 <div id="sliderIndicators" class="carousel slide" data-ride="carousel">
@@ -57,7 +74,7 @@
 
 <div class="container-fluid mb-5">
   <div class="container bg-light p-5">
-    <div class="ml-5 mr-5 mb-3 text-left">
+    <div class="ml-5 mr-5 mb-3 text-center">
        @if (Request::segment(1) == 'en')
           <h3 style=" font-weight:bolder;" class="text-left d-inline-block font-1" >Latest News</h3>
           <br>
@@ -104,51 +121,37 @@
 
 <div style="min-height: 10vh"></div>
 
-<div class="container-fluid bg-blue text-white mt-5 mb-5">
-  <div class="container p-5">
-    <div class="ml-5 mr-5 mb-3 text-center">
-        @if (Request::segment(1) == 'en')
-          <h3 style=" font-weight:bolder;" class="text-left d-inline-block font-1 mt-5" >Announcements</h3>
-          <br>
-          <p class="text-left d-inline-block font-1" style=" font-weight:bold;" >Latest Announcements from Master of Management  Universitas Bengkulu</p>
-        @else
-          <h3 style=" font-weight:bolder;" class="text-left d-inline-block font-1 mt-5" >Pengumuman </h3>
-          <br>
-          <p class="text-left d-inline-block font-1" style=" font-weight:bold;" >Pengumuman terbaru dari magister manajemen universitas bengkulu</p>
-        @endif
-    </div>
-    <div class="row justify-content-center">
-      <?php $count = 0; ?>
-      @foreach ($pengumumans as $pengumuman)
-          <?php if($count == 3) break; ?>
-          <div class="m-3 d-inline-block m-1" style="width: 20rem;">
-              <img class="card-img-top" width="200" height="200" src="{{ URL::asset('storage/berita') }}/{{$pengumuman->thumbnail}}" alt="Card image cap">
-              <div class="card-body" height="150" >
-                  {{-- <small>Penulis : {{$pengumuman->penulis}}</small>
-                  <br> --}}
-                  <small>Tanggal : {{ Str::limit($pengumuman->created_at, 10) }} | </small>
-                  <small><i class="fas fa-flag"></i> {{$pengumuman->kategori}} </small>
-                  <a href="{{route('user.berita.show', [$bahasa, $pengumuman->kategori , $pengumuman->judul])}}" class="text-white">
-                      <h5 class="card-title"><small><b>{{$pengumuman->judul}}</b></small></h5>
-                  </a>
-              </div>
-          </div>
-          <?php $count++; ?>
-      @endforeach
-      <div class="col-xl-12 text-center">
-        <a href="{{route('user.berita.index', [$bahasa, 'pengumuman'])}}" class="text-blue mb-5" style="border-bottom: 3px inset #FAD02C; text-decoration: none;">
+<div class="jumbotron jumbotron-fluid bg-blue text-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-4">
           @if (Request::segment(1) == 'en')
-          <p class="text-left d-inline-block text-white font-1" style=" font-weight:bold;" >View More Announcements</p>
-          
+            <h3 style=" font-weight:bolder;" class="text-left d-inline-block font-1 mt-5" >Location of Master of Management  Universitas Bengkulu</h3>
+            <hr>
+            {{-- <p class="text-left d-inline-block font-1" style=" font-weight:bold;" >Location of Master of Management  Universitas Bengkulu</p> --}}
           @else
-          <p class="text-left d-inline-block text-white font-1" style=" font-weight:bold;" >Lihat pengumuman lainnya</p>
-            
+            <h3 style=" font-weight:bolder;" class="text-left d-inline-block font-1 mt-5" >Lokasi Magister Manajemen Universitas Bengkulu</h3>
+            <hr>
+            {{-- <p class="text-left d-inline-block font-1" style=" font-weight:bold;" >Lokasi dari magister manajemen universitas bengkulu</p> --}}
           @endif
-        </a>
+      </div>
+      <div class="col-xl-8">
+          <div class="map-responsive">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15924.924568046032!2d102.272444!3d-3.7597956!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1aecc8afb80fdf02!2sBengkulu%20University!5e0!3m2!1sen!2sid!4v1616526992210!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          </div>
       </div>
     </div>
+    
+    
   </div>
 </div>
+
+{{-- <div class="container-fluid mb-5 ">
+  <div class="row justify-content-center">
+    <iframe width="853" height="480" src="https://www.youtube.com/embed/GZ71qA6WXGA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+  </div>
+</div> --}}
 
 <div style="min-height: 10vh"></div>
 
@@ -188,6 +191,54 @@
           <p class="text-left d-inline-block font-1" style=" font-weight:bold;" >View More Events</p>
           @else
           <p class="text-left d-inline-block font-1" style=" font-weight:bold;" >Lihat Acara lainnya</p>
+          @endif
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="min-height: 10vh"></div>
+
+<div class="container-fluid bg-blue text-white mt-5 mb-5">
+  <div class="container p-5">
+    <div class="ml-1 mr-5 mb-3 text-left">
+        @if (Request::segment(1) == 'en')
+          <h3 style=" font-weight:bolder;" class="text-left d-inline-block font-1 mt-5" >Announcements</h3>
+          <br>
+          <p class="text-left d-inline-block font-1" style=" font-weight:bold;" >Latest Announcements from Master of Management  Universitas Bengkulu</p>
+        @else
+          <h3 style=" font-weight:bolder;" class="text-left d-inline-block font-1 mt-5" >Pengumuman </h3>
+          <br>
+          <p class="text-left d-inline-block font-1" style=" font-weight:bold;" >Pengumuman terbaru dari magister manajemen universitas bengkulu</p>
+        @endif
+    </div>
+    <div class="row justify-content-center">
+      <?php $count = 0; ?>
+      @foreach ($pengumumans as $pengumuman)
+          <?php if($count == 3) break; ?>
+          <div class="m-3 d-inline-block m-1" style="width: 20rem;">
+              <img class="card-img-top" width="200" height="200" src="{{ URL::asset('storage/berita') }}/{{$pengumuman->thumbnail}}" alt="Card image cap">
+              <div class="card-body" height="150" >
+                  {{-- <small>Penulis : {{$pengumuman->penulis}}</small>
+                  <br> --}}
+                  <small>Tanggal : {{ Str::limit($pengumuman->created_at, 10) }} | </small>
+                  <small><i class="fas fa-flag"></i> {{$pengumuman->kategori}} </small>
+                  <a href="{{route('user.berita.show', [$bahasa, $pengumuman->kategori , $pengumuman->judul])}}" class="text-white">
+                      <h5 class="card-title"><small><b>{{$pengumuman->judul}}</b></small></h5>
+                  </a>
+              </div>
+          </div>
+          <?php $count++; ?>
+      @endforeach
+      <div class="col-xl-12 text-center">
+        <a href="{{route('user.berita.index', [$bahasa, 'pengumuman'])}}" class="text-blue mb-5" style="border-bottom: 3px inset #FAD02C; text-decoration: none;">
+          @if (Request::segment(1) == 'en')
+          <p class="text-left d-inline-block text-white font-1" style=" font-weight:bold;" >View More Announcements</p>
+          
+          @else
+          <p class="text-left d-inline-block text-white font-1" style=" font-weight:bold;" >Lihat pengumuman lainnya</p>
+            
           @endif
         </a>
       </div>

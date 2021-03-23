@@ -17,12 +17,12 @@ class AdminBeritaController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index($bahasa)
+    public function index($bahasa, $kategori)
     {
         if ($bahasa == 'english') {
-            $beritas = DB::table('beritas')->where('bahasa', 'english')->paginate(5);
+            $beritas = DB::table('beritas')->where('kategori', $kategori)->where('bahasa', 'english')->paginate(5);
         } else {
-            $beritas = DB::table('beritas')->where('bahasa', 'indonesia')->paginate(5);
+            $beritas = DB::table('beritas')->where('kategori', $kategori)->where('bahasa', 'indonesia')->paginate(5);
         }
 
         return view('admin.berita.index')->with('beritas', $beritas)->with('bahasa', $bahasa);
@@ -33,9 +33,9 @@ class AdminBeritaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($kategori, $bahasa)
     {
-        return view('admin.berita.create');
+        return view('admin.berita.create')->with('bahasa', $bahasa)->with('kategori', $kategori);
     }
 
     /**
@@ -96,7 +96,7 @@ class AdminBeritaController extends Controller
         $berita->penulis = Auth::user()->name;
         $berita->save();
 
-        return redirect()->route('admin.berita.index',  $berita->bahasa)->with('success', 'berita berhasil dibuat !!');
+        return redirect()->route('admin.berita.index',  [$berita->bahasa, $berita->kategori])->with('success', 'berita berhasil dibuat !!');
     }
 
     /**
@@ -105,14 +105,18 @@ class AdminBeritaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($bahasa, $id)
+    public function show($bahasa, $kategori, $id)
     {
+
         $berita = DB::table('beritas')
             ->where('beritas.id', $id)
             ->get()
             ->first();
 
-        return view('admin.berita.show')->with('berita', $berita);
+        return view('admin.berita.show')
+            ->with('berita', $berita)
+            ->with('bahasa', $bahasa)
+            ->with('kategori', $kategori);
     }
 
     /**
@@ -121,14 +125,14 @@ class AdminBeritaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($bahasa, $id)
+    public function edit($bahasa, $kategori, $id)
     {
         $berita = DB::table('beritas')
             ->where('beritas.id', $id)
             ->get()
             ->first();
 
-        return view('admin.berita.edit')->with('berita', $berita);
+        return view('admin.berita.edit')->with('berita', $berita)->with('bahasa', $bahasa)->with('kategori', $kategori);
     }
 
     /**
@@ -186,7 +190,7 @@ class AdminBeritaController extends Controller
         $berita->penulis = Auth::user()->name;
         $berita->save();
 
-        return redirect()->route('admin.berita.index',  $berita->bahasa)->with('success', 'berita berhasil diedit !!');
+        return redirect()->route('admin.berita.index',  [$berita->bahasa, $berita->kategori])->with('success', 'berita berhasil diedit !!');
     }
 
     /**
@@ -197,9 +201,11 @@ class AdminBeritaController extends Controller
      */
     public function destroy($id)
     {
+        $databerita = Berita::find($id);
+
         $berita = Berita::find($id);
         $berita->delete();
 
-        return redirect()->route('admin.berita.index',  $berita->bahasa)->with('success', 'berita berhasil dihapus !!');
+        return redirect()->route('admin.berita.index',  [$databerita->bahasa, $databerita->kategori])->with('success', 'berita berhasil dihapus !!');
     }
 }

@@ -7,7 +7,7 @@
 @section('content')
 <div>
     <h1 class="font-1 mt-5">Berita</h1> 
-    <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.berita.index', 'indonesia')}}">berita</a> / <a href="{{route('admin.berita.index', 'indonesia')}}"> {{ strtolower($berita->judul)}}</a></p>
+    <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('user.berita.index', [$bahasa, $kategori])}}">{{$kategori}}</a> / {{ strtolower($berita->judul)}}</p>
 </div>
 <div class="bg-white p-5 shadow">
     <div class="container">
@@ -17,7 +17,7 @@
                 <small>Penulis : {{$berita->penulis}} | Di buat pada : {{$berita->created_at}}</small>
             </div>
             <div class="col-xl-3 text-left">
-                <a href="{{route('admin.berita.edit', [$berita->bahasa, $berita->id])}}">
+                <a href="{{route('admin.berita.edit', [$berita->bahasa, $berita->kategori, $berita->id])}}">
                     <button class="btn btn-success mt-3"> <i class="fas fa-pen"></i> Edit</button>
                 </a>
                 <a href="{{route('user.berita.show',[$berita->bahasa, $berita->kategori, $berita->judul])}}">

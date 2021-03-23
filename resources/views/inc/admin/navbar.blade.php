@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-custom pr-5 pl-5 pt-3 pb-4 mb-5">
-    <a class="navbar-brand ml-5 pl-3" href="#">
+    <a class="navbar-brand ml-5 pl-3" href="/admin">
       <img width="50" src="{{asset('logo/logo.png')}}" alt="">
     </a>
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/admin">
       <small>MAGISTER MANAJEMEN <br> UNIVERSITAS BENGKULU</small>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,7 +21,7 @@
           @endif
           
           <li class="nav-item {{ Route::is('admin.berita.*') ? 'active' : '' }}">
-            <a class="nav-link text-uppercase" href="{{route('admin.berita.index', 'indonesia')}}">Berita</a>
+            <a class="nav-link text-uppercase" href="{{route('admin.berita.index', ['berita', 'indonesia'])}}">Berita</a>
           </li>
           <li class="nav-item {{ Route::is('admin.content.*') ? 'active' : '' }}">
             <a class="nav-link text-uppercase" href="{{route('admin.content.index', ['indonesia','daftar-content'])}}">Konten</a>
