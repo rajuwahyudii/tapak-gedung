@@ -15,6 +15,7 @@ class CreateBerandakontensTable extends Migration
     {
         Schema::create('berandakontens', function (Blueprint $table) {
             $table->id();
+            $table->string('bahasa')->default('indonesia')->nullable();
             $table->string('judul')->nullable();
             $table->text('konten')->nullable();
             $table->string('url')->nullable();

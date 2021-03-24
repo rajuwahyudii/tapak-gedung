@@ -28,11 +28,12 @@
   <div class="carousel-inner">
     @foreach ($sliders as $key => $slider)
       <div class="carousel-item {{$key == 0 ? 'active' : '' }}">
-          <img style="height: 100vh;" class="d-block w-100" src="{{ URL::asset('storage/slider') }}/{{$slider->gambar}}" alt="First slide">
+          <img style="height: 110vh;" class="d-block w-100" src="{{ URL::asset('storage/slider') }}/{{$slider->gambar}}" alt="First slide">
           <div class="carousel-caption d-none d-md-block mb-5">
               <h3 class="font-1 display-4">{{$slider->title}}</h3>
-              <p style="margin-bottom: 15em;">{{$slider->caption}}</p>
-          </div>
+              <h5 class="font-1 pr-5 pl-5" style="font-weight: bolder; margin-bottom: 10em;">{{$slider->caption}}</h5>
+          
+            </div>
       </div>
     @endforeach
   </div>
@@ -48,27 +49,31 @@
 
 <div style="min-height: 10vh"></div>
 
-<div class="container-fluid mt-5 mb-5">
-  <div class="container p-5">
-    <div class="ml-5 mr-5 mb-3 text-left">
-      <h3 style=" font-weight:bolder;" class="text-left d-inline-block font-1 mb-3" >{{$berandakonten->judul}}</h3>
-      <br>
-      <p class="text-left d-inline-block font-1" >
-        {{ Str::limit($berandakonten->konten, 500)  }}
-      </p>
-    </div>
-    <div class="row ml-5 mr-5">
-      <a href="{{$berandakonten->url}}" class="text-blue" style="border-bottom: 3px inset #FAD02C; text-decoration: none;">
-        @if (Request::segment(1) == 'en')
-        <p class="text-left d-inline-block font-1" style=" font-weight:bold;" >View More</p>
-        @else
-        <p class="text-left d-inline-block font-1" style=" font-weight:bold;" >Lihat Selengkapnya</p>
-        @endif
-        
-      </a>
+
+@if (!empty($berandakonten))
+  <div class="container-fluid mt-5 mb-5">
+    <div class="container p-5">
+      <div class="ml-5 mr-5 mb-3 text-left">
+        <h3 style=" font-weight:bolder;" class="text-left d-inline-block font-1 mb-3" >{{$berandakonten->judul}}</h3>
+        <br>
+        <p class="text-left d-inline-block font-1" >
+          {{ Str::limit($berandakonten->konten, 500)  }}
+        </p>
+      </div>
+      <div class="row ml-5 mr-5">
+        <a href="{{$berandakonten->url}}" class="text-blue" style="border-bottom: 3px inset #FAD02C; text-decoration: none;">
+          @if (Request::segment(1) == 'en')
+          <p class="text-left d-inline-block font-1" style=" font-weight:bold;" >View More</p>
+          @else
+          <p class="text-left d-inline-block font-1" style=" font-weight:bold;" >Lihat Selengkapnya</p>
+          @endif
+          
+        </a>
+      </div>
     </div>
   </div>
-</div>
+@endif
+
 
 <div style="min-height: 10vh"></div>
 
@@ -137,7 +142,8 @@
       </div>
       <div class="col-xl-8">
           <div class="map-responsive">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15924.924568046032!2d102.272444!3d-3.7597956!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1aecc8afb80fdf02!2sBengkulu%20University!5e0!3m2!1sen!2sid!4v1616526992210!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            {{-- <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15924.924568046032!2d102.272444!3d-3.7597956!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1aecc8afb80fdf02!2sBengkulu%20University!5e0!3m2!1sen!2sid!4v1616526992210!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe> --}}
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1990.616147943331!2d102.2718085006502!3d-3.759542895465086!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1aecc8afb80fdf02!2sBengkulu%20University!5e0!3m2!1sen!2sid!4v1616575509374!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
           </div>
       </div>
     </div>

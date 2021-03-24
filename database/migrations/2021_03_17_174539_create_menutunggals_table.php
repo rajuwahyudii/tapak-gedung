@@ -16,9 +16,9 @@ class CreateMenutunggalsTable extends Migration
         Schema::create('menutunggals', function (Blueprint $table) {
             $table->id();
             $table->enum('bahasa', ['indonesia', 'english'])->default('indonesia');
-            $table->string('judul')->nullable();
-            $table->text('konten')->nullable();
-            $table->string('author')->nullable();
+            $table->string('judul')->default('-')->nullable();
+            $table->text('konten')->default('-')->nullable();
+            $table->string('author')->default('-')->nullable();
             $table->timestamps();
         });
     }

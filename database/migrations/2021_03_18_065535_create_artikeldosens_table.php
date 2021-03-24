@@ -16,9 +16,9 @@ class CreateArtikeldosensTable extends Migration
         Schema::create('artikeldosens', function (Blueprint $table) {
             $table->id();
             $table->enum('bahasa', ['indonesia', 'english'])->default('indonesia')->nullable();
-            $table->string('judul')->nullable();
-            $table->text('konten')->nullable();
-            $table->string('author')->nullable();
+            $table->string('judul')->default('-')->nullable();
+            $table->text('konten')->default('-')->nullable();
+            $table->string('author')->default('-')->nullable();
             $table->timestamps();
         });
     }

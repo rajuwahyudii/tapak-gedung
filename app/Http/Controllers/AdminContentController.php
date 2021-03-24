@@ -30,7 +30,13 @@ class AdminContentController extends Controller
                 ->get()
                 ->first();
 
-            return redirect()->route('admin.content.index', [$bahasa, $menu->id]);
+            if (!empty($menu)) {
+                $id_menu = $menu->id;
+            } else {
+                $id_menu = '1';
+            }
+
+            return redirect()->route('admin.content.index', [$bahasa, $id_menu]);
         } else {
             // $menu_id = DB::table('menus')->where('id', $menu_id)->get()->first()->id;
 

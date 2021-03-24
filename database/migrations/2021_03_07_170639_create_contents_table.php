@@ -15,12 +15,11 @@ class CreateContentsTable extends Migration
     {
         Schema::create('contents', function (Blueprint $table) {
             $table->id();
-            $table->enum('bahasa', ['id', 'en'])->default('id');
-            $table->string('menu')->nullable();
+            $table->integer('menu_id')->nullable();
             $table->integer('urutan')->default(0);
-            $table->string('judul')->nullable();
-            $table->text('kontent')->nullable();
-            $table->string('author')->nullable();
+            $table->string('judul')->default('-')->nullable();
+            $table->text('kontent')->default('-')->nullable();
+            $table->string('author')->default('-')->nullable();
             $table->timestamps();
         });
     }
