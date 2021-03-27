@@ -45,7 +45,7 @@ class AdminBerandaSliderController extends Controller
     {
         if ($request->hasFile('gambar')) {
             $gambarName = time() . $request->file('gambar')->getClientOriginalName();
-            $request->file('gambar')->move(public_path('storage/slider/'), $gambarName);
+            $request->file('gambar')->move('storage/slider/', $gambarName);
         } else {
             $gambarName = 'default.png';
         }
@@ -95,7 +95,7 @@ class AdminBerandaSliderController extends Controller
     {
         if ($request->hasFile('gambar')) {
             $gambarName = time() . $request->file('gambar')->getClientOriginalName();
-            $request->file('gambar')->move(public_path('storage/slider/'), $gambarName);
+            $request->file('gambar')->move('storage/slider/', $gambarName);
         } else {
             $gambarName = 'default.png';
         }

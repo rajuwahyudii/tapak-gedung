@@ -55,7 +55,7 @@ class AdminBeritaController extends Controller
 
         if ($request->hasFile('thumbnail')) {
             $thumbnailName = time() . $request->file('thumbnail')->getClientOriginalName();
-            $request->file('thumbnail')->move(public_path('storage/berita/'), $thumbnailName);
+            $request->file('thumbnail')->move('storage/berita/', $thumbnailName);
         } else {
             $thumbnailName = 'default.png';
         }
@@ -64,7 +64,8 @@ class AdminBeritaController extends Controller
             $storage = 'storage/content';
             $dom = new \DOMDocument();
             libxml_use_internal_errors(true);
-            $dom->loadHTML($request->konten, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
+            // $dom->loadHTML($request->konten, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
+            $dom->loadHTML($request->konten);
             libxml_clear_errors();
             $images = $dom->getElementsByTagName('img');
             foreach ($images as $img) {
@@ -77,7 +78,7 @@ class AdminBeritaController extends Controller
                     $filepath = ("$storage/$fileNameContentRand.$mimetype");
                     $image = Image::make($src)
                         ->encode($mimetype, 100)
-                        ->save(public_path($filepath));
+                        ->save($filepath);
                     $new_src = asset($filepath);
                     $img->removeAttribute('src');
                     $img->setAttribute('src', $new_src);
@@ -152,7 +153,7 @@ class AdminBeritaController extends Controller
     {
         if ($request->hasFile('thumbnail')) {
             $thumbnailName = time() . $request->file('thumbnail')->getClientOriginalName();
-            $request->file('thumbnail')->move(public_path('storage/berita/'), $thumbnailName);
+            $request->file('thumbnail')->move('storage/berita/', $thumbnailName);
         } else {
             $thumbnailName = 'default.png';
         }
@@ -161,7 +162,8 @@ class AdminBeritaController extends Controller
             $storage = 'storage/content';
             $dom = new \DOMDocument();
             libxml_use_internal_errors(true);
-            $dom->loadHTML($request->konten, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
+            // $dom->loadHTML($request->konten, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
+            $dom->loadHTML($request->konten);
             libxml_clear_errors();
             $images = $dom->getElementsByTagName('img');
             foreach ($images as $img) {
@@ -174,7 +176,7 @@ class AdminBeritaController extends Controller
                     $filepath = ("$storage/$fileNameContentRand.$mimetype");
                     $image = Image::make($src)
                         ->encode($mimetype, 100)
-                        ->save(public_path($filepath));
+                        ->save($filepath);
                     $new_src = asset($filepath);
                     $img->removeAttribute('src');
                     $img->setAttribute('src', $new_src);

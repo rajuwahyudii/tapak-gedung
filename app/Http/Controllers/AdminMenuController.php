@@ -130,7 +130,6 @@ class AdminMenuController extends Controller
         $menu->urutan = $request->input('urutan');
         $menu->bahasa = $request->input('bahasa');
         $menu->menu = $request->input('menu');
-        $menu->status = $request->input('status');
         $menu->save();
 
         return redirect()->route('admin.menu.index')->with('success', 'menu  berhasil diedit !');

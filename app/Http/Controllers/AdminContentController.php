@@ -110,7 +110,8 @@ class AdminContentController extends Controller
             $storage = 'storage/content';
             $dom = new \DOMDocument();
             libxml_use_internal_errors(true);
-            $dom->loadHTML($request->kontent, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
+            // $dom->loadHTML($request->kontent, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
+            $dom->loadHTML($request->kontent);
             libxml_clear_errors();
             $images = $dom->getElementsByTagName('img');
             foreach ($images as $img) {
@@ -123,7 +124,7 @@ class AdminContentController extends Controller
                     $filepath = ("$storage/$fileNameContentRand.$mimetype");
                     $image = Image::make($src)
                         ->encode($mimetype, 100)
-                        ->save(public_path($filepath));
+                        ->save($filepath);
                     $new_src = asset($filepath);
                     $img->removeAttribute('src');
                     $img->setAttribute('src', $new_src);
@@ -244,7 +245,8 @@ class AdminContentController extends Controller
             $storage = 'storage/content';
             $dom = new \DOMDocument();
             libxml_use_internal_errors(true);
-            $dom->loadHTML($request->kontent, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
+            // $dom->loadHTML($request->kontent, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
+            $dom->loadHTML($request->kontent);
             libxml_clear_errors();
             $images = $dom->getElementsByTagName('img');
             foreach ($images as $img) {
@@ -257,7 +259,7 @@ class AdminContentController extends Controller
                     $filepath = ("$storage/$fileNameContentRand.$mimetype");
                     $image = Image::make($src)
                         ->encode($mimetype, 100)
-                        ->save(public_path($filepath));
+                        ->save($filepath);
                     $new_src = asset($filepath);
                     $img->removeAttribute('src');
                     $img->setAttribute('src', $new_src);

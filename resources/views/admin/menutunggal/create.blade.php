@@ -1,8 +1,5 @@
 @extends('layouts.satucol')
 
-@section('sidebar')
-    @include('inc.admin.berita_sidebar')
-@endsection
 
 @section('content')
 <div>

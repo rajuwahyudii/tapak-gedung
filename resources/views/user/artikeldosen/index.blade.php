@@ -13,8 +13,14 @@
             <table class="table table-hover">
                 <thead>
                   <tr class="bg-blue text-white">
+                    @if (Request::segment(1) == 'en')
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    @else
                     <th scope="col">Judul</th>
                     <th scope="col">Penulis</th>
+                    @endif
+                    
                   </tr>
                 </thead>
                 <tbody>
