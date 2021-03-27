@@ -10,13 +10,20 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 use App\Models\Menutunggal;
 
-class AdminMenuTunggalController extends Controller
+class AdminMenutunggalController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function index()
     {
         $menutunggals = DB::table('menutunggals')->paginate(10);

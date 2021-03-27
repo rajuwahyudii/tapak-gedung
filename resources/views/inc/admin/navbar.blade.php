@@ -21,7 +21,7 @@
           @endif
           
           <li class="nav-item {{ Route::is('admin.berita.*') ? 'active' : '' }}">
-            <a class="nav-link text-uppercase" href="{{route('admin.berita.index', ['berita', 'indonesia'])}}">Berita</a>
+            <a class="nav-link text-uppercase" href="{{route('admin.berita.index', ['indonesia','berita'])}}">Berita</a>
           </li>
           <li class="nav-item {{ Route::is('admin.content.*') ? 'active' : '' }}">
             <a class="nav-link text-uppercase" href="{{route('admin.content.index', ['indonesia','daftar-content'])}}">Konten</a>

@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class AdminBerandaController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index($bahasa)
     {
         if ($bahasa == 'english') {

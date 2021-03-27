@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminBeritaFilterController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function bahasaFilter($bahasa)
     {
         $beritas = DB::table('beritas')

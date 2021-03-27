@@ -31,7 +31,7 @@
           <img style="height: 110vh;" class="d-block w-100" src="{{ URL::asset('storage/slider') }}/{{$slider->gambar}}" alt="First slide">
           <div class="carousel-caption d-none d-md-block mb-5">
               <h3 class="font-1 display-4">{{$slider->title}}</h3>
-              <h5 class="font-1 pr-5 pl-5" style="font-weight: bolder; margin-bottom: 10em;">{{$slider->caption}}</h5>
+              <h5 class="font-1 pr-5 pl-5" style="font-weight: bolder; margin-bottom: 13em;">{{$slider->caption}}</h5>
           
             </div>
       </div>

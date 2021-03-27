@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class UserMenuTunggalController extends Controller
+class UserMenutunggalController extends Controller
 {
     public function index($bahasa, $judul)
     {
