@@ -15,6 +15,11 @@ class UserMenutunggalController extends Controller
             $menutunggals = DB::table('menutunggals')
                 ->where('bahasa', 'english')
                 ->get();
+            $menutunggal = DB::table('menutunggals')
+                ->where('bahasa', 'english')
+                ->where('menutunggals.judul', $judul)
+                ->get()
+                ->first();
             $beritas = DB::table('beritas')->orderBy('created_at')->where('kategori', 'berita')->where('bahasa', 'english')->get();
             $pengumumans = DB::table('beritas')->orderBy('created_at')->where('kategori', 'pengumuman')->where('bahasa', 'english')->get();
         } else {
@@ -22,6 +27,11 @@ class UserMenutunggalController extends Controller
             $menutunggals = DB::table('menutunggals')
                 ->where('bahasa', 'indonesia')
                 ->get();
+            $menutunggal = DB::table('menutunggals')
+                ->where('bahasa', 'indonesia')
+                ->where('menutunggals.judul', $judul)
+                ->get()
+                ->first();
 
             $beritas = DB::table('beritas')->orderBy('created_at')->where('kategori', 'berita')->where('bahasa', 'indonesia')->get();
             $pengumumans = DB::table('beritas')->orderBy('created_at')->where('kategori', 'pengumuman')->where('bahasa', 'indonesia')->get();
@@ -32,10 +42,7 @@ class UserMenutunggalController extends Controller
             ->orderBy('contents.urutan')
             ->get();
 
-        $menutunggal = DB::table('menutunggals')
-            ->where('menutunggals.judul', $judul)
-            ->get()
-            ->first();
+
 
         return view('user.menutunggal.index')
             ->with('menus', $menus)

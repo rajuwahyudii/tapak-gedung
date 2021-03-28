@@ -85,6 +85,7 @@ class AdminMenutunggalController extends Controller
         } else {
             $menutunggal->konten = " - ";
         }
+
         $menutunggal->author = Auth::user()->name;
         $menutunggal->save();
 

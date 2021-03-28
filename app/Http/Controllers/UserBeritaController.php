@@ -45,11 +45,24 @@ class UserBeritaController extends Controller
     {
         // DATA NAVBAR
         if ($bahasa == 'en') {
+            $berita = DB::table('beritas')
+                ->where('beritas.bahasa', 'english')
+                ->where('beritas.judul', $konten)
+                ->get()
+                ->first();
+
             $menus = DB::table('menus')->where('menus.bahasa', 'english')->orderBy('menus.urutan')->get();
             $menutunggals = DB::table('menutunggals')
                 ->where('bahasa', 'english')
                 ->get();
         } else {
+
+            $berita = DB::table('beritas')
+                ->where('beritas.bahasa', 'indonesia')
+                ->where('beritas.judul', $konten)
+                ->get()
+                ->first();
+
             $menus = DB::table('menus')->where('menus.bahasa', 'indonesia')->orderBy('menus.urutan')->get();
             $menutunggals = DB::table('menutunggals')
                 ->where('bahasa', 'indonesia')
@@ -61,11 +74,6 @@ class UserBeritaController extends Controller
             ->orderBy('contents.urutan')
             ->get();
         // DATA NAVBAR END
-
-        $berita = DB::table('beritas')
-            ->where('beritas.judul', $konten)
-            ->get()
-            ->first();
 
         return view('user.berita.show')
             ->with('menus', $menus)

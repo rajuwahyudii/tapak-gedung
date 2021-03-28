@@ -117,6 +117,7 @@ class AdminBeritaController extends Controller
 
         $berita = DB::table('beritas')
             ->where('beritas.id', $id)
+            ->where('beritas.bahasa', $bahasa)
             ->get()
             ->first();
 

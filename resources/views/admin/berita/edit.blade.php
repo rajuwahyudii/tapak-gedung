@@ -15,7 +15,7 @@
         <div class="form-group row mb-4">
             <div class="col-xl-4">
                 <label for="thumbnail">Gambar Thumbnail : </label>
-                <input required name="thumbnail" type="file" class="form-control" id="thumbnail" placeholder="thumbnail">
+                <input name="thumbnail" type="file" class="form-control" id="thumbnail" placeholder="thumbnail">
             </div>
         </div>
         <div class="form-group row">

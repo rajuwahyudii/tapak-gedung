@@ -16,16 +16,11 @@
                 <h5>{{$berita->judul}}</h5>
                 <small>Penulis : {{$berita->penulis}} | Di buat pada : {{$berita->created_at}}</small>
             </div>
-            <div class="col-xl-3 text-left">
+            <div class="col-xl-5 text-left">
                 <a href="{{route('admin.berita.edit', [$berita->bahasa, $berita->kategori, $berita->id])}}">
-                    <button class="btn btn-success mt-3"> <i class="fas fa-pen"></i> Edit</button>
+                    <button class="btn btn-success mt-3 pr-5 pl-5"> <i class="fas fa-pen"></i> Edit</button>
                 </a>
-                <a href="{{route('user.berita.show',[$berita->bahasa, $berita->kategori, $berita->judul])}}">
-                    <button class="btn btn-primary mt-3"> <i class="fas fa-eye"></i> Preview</button>
-                </a>
-            </div>
-            <div class="col-xl-2 text-right">
-                <form action="{{route('admin.berita.destroy', $berita->id)}}" method="POST">
+                <form class="d-inline" action="{{route('admin.berita.destroy', $berita->id)}}" method="POST">
                     @csrf
                     {{ method_field('DELETE') }}
                     <button class="btn btn-danger mt-3"> <i class="fas fa-trash"></i> Hapus</button>

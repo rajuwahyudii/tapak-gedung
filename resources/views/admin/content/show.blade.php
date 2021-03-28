@@ -16,16 +16,11 @@
                 <h5>{{$content->judul}}</h5>
                 <small>Penulis : {{$content->author}} | Di buat pada : {{$content->created_at}}</small>
             </div>
-            <div class="col-xl-4 text-left">
+            <div class="col-xl-5 text-left">
                 <a href="{{route('admin.content.edit', [ $content->bahasa,$content->menu, $content->judul])}}">
-                    <button class="btn btn-success mt-3"> <i class="fas fa-pen"></i> Edit</button>
+                    <button class="btn btn-success mt-3 pl-5 pr-5 ml-1"> <i class="fas fa-pen"></i> Edit</button>
                 </a>
-                <a href="{{route('user.content',[$content->bahasa, $content->menu, $content->judul])}}">
-                    <button class="btn btn-primary mt-3"> <i class="fas fa-eye"></i> Preview</button>
-                </a>
-            </div>
-            <div class="col-xl-2 text-right">
-                <form action="{{route('admin.content.destroy', $content->id)}}" method="POST">
+                <form class="d-inline" action="{{route('admin.content.destroy', $content->id)}}" method="POST">
                     @csrf
                     {{ method_field('DELETE') }}
                     <button class="btn btn-danger mt-3"> <i class="fas fa-trash"></i> Hapus</button>
