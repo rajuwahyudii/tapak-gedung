@@ -71,6 +71,21 @@
           </li>
         @endforeach
 
+        @foreach ($menutunggals as $menutunggal)
+          <li class="nav-item">
+            @if (Request::segment(2) == $menutunggal->judul)
+            <a class="nav-link active" 
+            style="text-transform: uppercase;
+                      border-bottom:  2px inset #FAD02C;
+                      margin-bottom:  -2px;" 
+            href="{{route('user.menutunggal.index', [$bahasa,$menutunggal->judul])}}">{{$menutunggal->judul}}</a>
+              @else
+              <a class="nav-link" style="text-transform: uppercase;" href="{{route('user.menutunggal.index', [$bahasa,$menutunggal->judul])}}">
+                {{$menutunggal->judul}}</a>
+              @endif
+          </li>
+        @endforeach
+
         @if (Request::segment(1) == 'en')
           <li class="nav-item">
             @if (Request::segment(2) == 'berita')
@@ -96,21 +111,6 @@
               @endif
           </li>
         @endif
-        
-        @foreach ($menutunggals as $menutunggal)
-          <li class="nav-item">
-            @if (Request::segment(2) == $menutunggal->judul)
-            <a class="nav-link active" 
-            style="text-transform: uppercase;
-                      border-bottom:  2px inset #FAD02C;
-                      margin-bottom:  -2px;" 
-            href="{{route('user.menutunggal.index', [$bahasa,$menutunggal->judul])}}">{{$menutunggal->judul}}</a>
-              @else
-              <a class="nav-link" style="text-transform: uppercase;" href="{{route('user.menutunggal.index', [$bahasa,$menutunggal->judul])}}">
-                {{$menutunggal->judul}}</a>
-              @endif
-          </li>
-        @endforeach
       </ul>
     </div>
 </nav>
