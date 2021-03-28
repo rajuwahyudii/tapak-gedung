@@ -153,9 +153,10 @@ class AdminContentController extends Controller
             $menu = 'daftar-content';
         } else {
             $menu = DB::table('menus')->where('menus.id', $request->input('menu_id'))->get()->first()->menu;
+            $menu_bahasa = DB::table('menus')->where('menus.id', $request->input('menu_id'))->get()->first()->bahasa;
         }
 
-        return redirect()->route('admin.content.index', ['indonesia', $request->input('menu_id')])
+        return redirect()->route('admin.content.index', [$menu_bahasa, $request->input('menu_id')])
             ->with('success', 'konten berhasil dibuat !!');
     }
 
@@ -281,9 +282,16 @@ class AdminContentController extends Controller
         $content->author = Auth::user()->name;
         $content->save();
 
-        $menu = DB::table('menus')->where('menus.id', $request->input('menu_id'))->get()->first()->menu;
 
-        return redirect()->route('admin.content.index', ['indonesia', $request->input('menu_id')])
+
+        if ($request->input('menu_id') == 'kosong') {
+            $menu = 'daftar-content';
+        } else {
+            $menu = DB::table('menus')->where('menus.id', $request->input('menu_id'))->get()->first()->menu;
+            $menu_bahasa = DB::table('menus')->where('menus.id', $request->input('menu_id'))->get()->first()->bahasa;
+        }
+
+        return redirect()->route('admin.content.index', [$menu_bahasa, $request->input('menu_id')])
             ->with('success', 'konten berhasil diedit !!');
     }
 
