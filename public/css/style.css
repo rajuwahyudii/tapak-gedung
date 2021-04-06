@@ -26,6 +26,7 @@
     background-color: #333652;
 }
 
+
 .bg-yellow {
     background-color: #FAD02C;
 }
@@ -40,6 +41,8 @@
 
 .navbar-custom {
     background-color: #333652;
+    /* background-image: linear-gradient(#201f31, #333652); */
+
 }
 
 /* change the brand and text color */

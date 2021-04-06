@@ -26,13 +26,19 @@ class AdminArtikeldosenController extends Controller
     public function index($bahasa)
     {
         if ($bahasa == 'english') {
-            $artikeldosens = DB::table('artikeldosens')->where('bahasa', 'english')->paginate(10);
+            $artikeldosens = DB::table('artikeldosens')->where('bahasa', 'english')->where('kategori', 'artikeldosen')->orderBy('created_at', 'DESC')->paginate(5);
+            $tesises = DB::table('artikeldosens')->where('bahasa', 'english')->where('kategori', 'tesis')->orderBy('created_at', 'DESC')->paginate(5);
+            $disertasis = DB::table('artikeldosens')->where('bahasa', 'english')->where('kategori', 'disertasi')->orderBy('created_at', 'DESC')->paginate(5);
         } else {
-            $artikeldosens = DB::table('artikeldosens')->where('bahasa', 'indonesia')->paginate(10);
+            $artikeldosens = DB::table('artikeldosens')->where('bahasa', 'indonesia')->where('kategori', 'artikeldosen')->orderBy('created_at', 'DESC')->paginate(5);
+            $tesises = DB::table('artikeldosens')->where('bahasa', 'indonesia')->where('kategori', 'tesis')->orderBy('created_at', 'DESC')->paginate(5);
+            $disertasis = DB::table('artikeldosens')->where('bahasa', 'indonesia')->where('kategori', 'disertasi')->orderBy('created_at', 'DESC')->paginate(5);
         }
 
         return view('admin.artikeldosen.index')
             ->with('bahasa', $bahasa)
+            ->with('tesises', $tesises)
+            ->with('disertasis', $disertasis)
             ->with('artikeldosens', $artikeldosens);
     }
 
@@ -86,6 +92,8 @@ class AdminArtikeldosenController extends Controller
         $artikeldosen = new Artikeldosen();
         $artikeldosen->judul = $request->input('judul');
         $artikeldosen->bahasa = $request->input('bahasa');
+        $artikeldosen->kategori = $request->input('kategori');
+        $artikeldosen->tahun = $request->input('tahun');
         if (!empty($request->konten)) {
             $artikeldosen->konten = $dom->saveHTML();
         } else {
@@ -162,6 +170,8 @@ class AdminArtikeldosenController extends Controller
         $artikeldosen = Artikeldosen::find($id);
         $artikeldosen->judul = $request->input('judul');
         $artikeldosen->bahasa = $request->input('bahasa');
+        $artikeldosen->kategori = $request->input('kategori');
+        $artikeldosen->tahun = $request->input('tahun');
         if (!empty($request->konten)) {
             $artikeldosen->konten = $dom->saveHTML();
         } else {

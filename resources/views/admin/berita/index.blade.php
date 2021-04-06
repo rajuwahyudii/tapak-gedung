@@ -64,33 +64,35 @@
       <a href="{{route('admin.berita.create', [$bahasa, 'berita'])}}">
           <button type="button" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Tambah Berita</button>
       </a>
-      <table class="table bg-white mb-5">
-          <thead class="bg-blue text-white">
-            <tr>
-              <th scope="col">Bahasa</th>
-              <th scope="col">Kategori</th>
-              <th scope="col">Judul</th>
-              <th scope="col">Tanggal dibuat </th>
-              <th scope="col" class="text-center">Aksi </th>
-            </tr>
-          </thead>
-          <tbody>
-            @foreach ($beritas as $berita)
+      <div style="overflow-x: scroll;">
+        <table class="table bg-white mb-5">
+            <thead class="bg-blue text-white">
               <tr>
-                <td>{{$berita->bahasa}}</td>
-                <td>{{$berita->kategori}}</td>
-                <td>{{$berita->judul}}</td>
-                <td>{{$berita->created_at}}</td>
-                <td>
-                    <a href="{{route('admin.berita.show', [$berita->bahasa, $berita->kategori ,$berita->id])}}">
-                      <button class="btn btn-primary "> <i class="fas fa-info-circle"></i> Detail Konten </button>
-                    </a>
-                </td>
+                <th scope="col">Bahasa</th>
+                <th scope="col">Kategori</th>
+                <th scope="col">Judul</th>
+                <th scope="col">Tanggal dibuat </th>
+                <th scope="col" class="text-center">Aksi </th>
               </tr>
-            @endforeach
-
-          </tbody>
-      </table>  
+            </thead>
+            <tbody>
+              @foreach ($beritas as $berita)
+                <tr>
+                  <td>{{$berita->bahasa}}</td>
+                  <td>{{$berita->kategori}}</td>
+                  <td>{{$berita->judul}}</td>
+                  <td>{{$berita->created_at}}</td>
+                  <td>
+                      <a href="{{route('admin.berita.show', [$berita->bahasa, $berita->kategori ,$berita->id])}}">
+                        <button class="btn btn-primary "> <i class="fas fa-info-circle"></i> Detail Konten </button>
+                      </a>
+                  </td>
+                </tr>
+              @endforeach
+  
+            </tbody>
+        </table>  
+      </div>
       <div class="row justify-content-center">
         <nav class="mt-5" aria-label="...">
             <ul class="pagination">

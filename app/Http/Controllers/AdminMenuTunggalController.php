@@ -26,7 +26,7 @@ class AdminMenutunggalController extends Controller
 
     public function index()
     {
-        $menutunggals = DB::table('menutunggals')->paginate(10);
+        $menutunggals = DB::table('menutunggals')->orderBy('created_at', 'DESC')->paginate(10);
         return view('admin.menutunggal.index')->with('menutunggals', $menutunggals);
     }
 

@@ -62,44 +62,46 @@
     <a href="{{route('admin.slider.create')}}">
         <button type="button" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Tambah Slider</button>
     </a>
-    <table class="table bg-white mb-5">
-        <thead class="bg-blue text-white">
-          <tr>
-            <th scope="col">Gambar</th>
-            <th scope="col">Judul</th>
-            <th scope="col">Caption</th>
-            <th scope="col">Tanggal Dibuat</th>
-            <th scope="col" class="text-center">Edit </th>
-            <th scope="col" class="text-center">Hapus </th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach ($sliders as $slider)
+    <div style="overflow-x: scroll;">
+      <table class="table bg-white mb-5">
+          <thead class="bg-blue text-white">
             <tr>
-              <td>{{$slider->gambar}}</td>
-              <td>{{$slider->title}}</td>
-              <td>{{$slider->caption}}</td>
-              <td>{{$slider->created_at}}</td>
-              <td class="text-center">
-                  <a href="{{route('admin.slider.edit', $slider->id)}}" data-toggle="tooltip" data-placement="bottom" title="Edit Menu">
-                    <button class="btn btn-primary "> 
-                      <i class="fas fa-pen"></i> 
-                    </button>
-                  </a>
-              </td>
-              <td class="text-center">
-                <form action="{{route('admin.slider.destroy', $slider->id)}}" method="POST">
-                    @csrf
-                    {{ method_field('DELETE') }}
-                    <button class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Hapus Menu"> 
-                      <i class="fas fa-trash"></i>
-                    </button>
-                </form>
-            </td>
+              <th scope="col">Gambar</th>
+              <th scope="col">Judul</th>
+              <th scope="col">Caption</th>
+              <th scope="col">Tanggal Dibuat</th>
+              <th scope="col" class="text-center">Edit </th>
+              <th scope="col" class="text-center">Hapus </th>
             </tr>
-          @endforeach
-        </tbody>
-    </table> 
+          </thead>
+          <tbody>
+            @foreach ($sliders as $slider)
+              <tr>
+                <td>{{$slider->gambar}}</td>
+                <td>{{$slider->title}}</td>
+                <td>{{$slider->caption}}</td>
+                <td>{{$slider->created_at}}</td>
+                <td class="text-center">
+                    <a href="{{route('admin.slider.edit', $slider->id)}}" data-toggle="tooltip" data-placement="bottom" title="Edit Menu">
+                      <button class="btn btn-primary "> 
+                        <i class="fas fa-pen"></i> 
+                      </button>
+                    </a>
+                </td>
+                <td class="text-center">
+                  <form action="{{route('admin.slider.destroy', $slider->id)}}" method="POST">
+                      @csrf
+                      {{ method_field('DELETE') }}
+                      <button class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Hapus Menu"> 
+                        <i class="fas fa-trash"></i>
+                      </button>
+                  </form>
+              </td>
+              </tr>
+            @endforeach
+          </tbody>
+      </table> 
+    </div>
     
 </div>
 <div style="min-height: 10vh"></div>

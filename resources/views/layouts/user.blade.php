@@ -1,3 +1,4 @@
+{{-- edited --}}
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -51,7 +52,6 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     @yield('style')
-
 </head>
 <body style="background: #ffff;">
     <div id="app">
@@ -99,7 +99,7 @@
             @yield('content')
         </div>
         <div style="min-height: 10vh"></div>
-        <div class="container-fluid bg-blue text-white mt-5">
+        <div class="container-fluid text-white mt-5" style="background-image: linear-gradient(#333652,#201f31)">
             <div class="container pt-5 pb-5 pr-2 pl-2">
               <div class="row">
                 <div class="col-xl-3">
@@ -179,8 +179,37 @@
                       <br>
                     </div>
                   </div>
-                  
-                  
+                </div>
+                <div class="col-xl-3">
+                </div>
+                <div class="col-xl-3 mt-5">
+                  <h5 class="mt-3">ACCREDITED BY</h5>
+                  <hr>
+                  <a href="https://www.banpt.or.id/">
+                    <img class="mr-2" width="80" src="{{asset('logo/logo-ban-pt.png')}}" alt="">
+                  </a>
+                  <a href="https://lamemba.or.id/">
+                    <img class="mr-2" width="80" src="{{asset('logo/Logo-LAMEMBA-full-colors-OK.png')}}" alt="">
+                  </a>
+                </div>
+                <div class="col-xl-3 mt-5">
+                  <h5 class="mt-3">MEMBERSHIP</h5>
+                  <hr>
+                  <a href="https://www.abest21.org/">
+                    <img class="mr-2" width="50" src="{{asset('logo/abest.png')}}" alt="">
+                  </a>
+                  <a href="https://apmmi.id/">
+                    <img class="mr-2" width="80" src="{{asset('logo/apmmi.png')}}" alt="">
+                  </a>
+                </div>
+                <div class="col-xl-3 mt-5">
+                  <h5 class="mt-3">SOCIAL MEDIA</h5>
+                  <hr>
+                  <a href=""><i class="fab fa-instagram ml-2 text-white" style="font-size: 2em;"></i></a> 
+                  <a href=""><i class="fab fa-youtube ml-2 text-white" style="font-size: 2em;"></i></a> 
+                  <a href=""><i class="fab fa-facebook ml-2 text-white" style="font-size: 2em;"></i></a> 
+                  <a href=""><i class="fab fa-twitter ml-2 text-white" style="font-size: 2em;"></i></a> 
+                  <a href=""><i class="fab fa-linkedin ml-2 text-white" style="font-size: 2em;"></i></a> 
                 </div>
               </div>
               
@@ -197,6 +226,8 @@
         height: 500
         });
     </script> --}}
+
+    @yield('script')
     <script>
         $(function () {
          $('[data-toggle="tooltip"]').tooltip()

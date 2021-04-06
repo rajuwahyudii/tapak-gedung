@@ -23,6 +23,7 @@ class AdminAkunController extends Controller
     public function index()
     {
         $akuns = DB::table('users')
+            ->orderBy('created_at', 'DESC')
             ->get();
         return view('admin.akun.index')->with('akuns', $akuns);
     }

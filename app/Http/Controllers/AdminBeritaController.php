@@ -26,9 +26,9 @@ class AdminBeritaController extends Controller
     public function index($bahasa, $kategori)
     {
         if ($bahasa == 'english') {
-            $beritas = DB::table('beritas')->where('kategori', $kategori)->where('bahasa', 'english')->paginate(5);
+            $beritas = DB::table('beritas')->where('kategori', $kategori)->where('bahasa', 'english')->orderBy('created_at', 'DESC')->paginate(5);
         } else {
-            $beritas = DB::table('beritas')->where('kategori', $kategori)->where('bahasa', 'indonesia')->paginate(5);
+            $beritas = DB::table('beritas')->where('kategori', $kategori)->where('bahasa', 'indonesia')->orderBy('created_at', 'DESC')->paginate(5);
         }
 
         return view('admin.berita.index')->with('beritas', $beritas)->with('bahasa', $bahasa);

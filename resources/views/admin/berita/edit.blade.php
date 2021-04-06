@@ -22,6 +22,7 @@
             <div class="col-xl-8">
                 <label for="judul">Judul : </label>
                 <input type="text" value="{{$berita->judul}}" name="judul" class="form-control" id="judul" aria-describedby="judul" placeholder="Masukan judul">
+                <small class="form-text text-muted">Judul tidak boleh mengandung garis miring atau slash ( / )</small>
             </div>
             <div class="col-xl-12 mt-5">
                 <label>Kategori : </label>

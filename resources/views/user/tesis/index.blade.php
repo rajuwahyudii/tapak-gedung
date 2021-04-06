@@ -10,13 +10,13 @@
     <div class="row">
         <div class="col-xl-12 pt-5 pb-5">
             @if ($bahasa == 'en')
-              <h3 class="mt-5 font-1" style="font-weight: bolder;">Lecturer Articles</h3>
+              <h3 class="mt-5 font-1" style="font-weight: bolder;">Thesis</h3>
             @else
-             <h3 class="mt-5 font-1" style="font-weight: bolder;">Artikel Dosen</h3>
+             <h3 class="mt-5 font-1" style="font-weight: bolder;">Tesis</h3>
             @endif
             <hr class="mb-5">
             <div style="overflow-x: scroll;">
-              <table class="table table-hover" id="artikeldosen">
+              <table class="table table-hover" id="tesis">
                   <thead>
                     <tr class="bg-blue text-white">
                       @if (Request::segment(1) == 'en')
@@ -34,8 +34,7 @@
                   <tbody>
                     @foreach ($artikeldosens as $artikeldosen)
                       <tr>
-                        <td> <a style="color: black;" href="{{route('user.artikeldosen.show', [$bahasa, 'artikeldosen' , $artikeldosen->judul])}}">{{$artikeldosen->judul}}</a></td>
-                        {{-- <td>{{$artikeldosen->judul}}</td> --}}
+                        <td> <a style="color: black;" href="{{route('user.artikeldosen.show', [$bahasa,'tesis', $artikeldosen->judul])}}">{{$artikeldosen->judul}}</a></td>
                         <td>{{$artikeldosen->author}}</td>
                         <td>{{$artikeldosen->tahun}}</td>
                       </tr>
@@ -55,9 +54,8 @@
 <script>
   $(document).ready( function () {
       $.noConflict();
-      $('#artikeldosen').DataTable();
       $('#tesis').DataTable();
-      $('#disertasi').DataTable();
   } );
 </script>
 @endsection
+

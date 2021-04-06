@@ -14,18 +14,20 @@ class UserMenutunggalController extends Controller
             $menus = DB::table('menus')->where('menus.bahasa', 'english')->orderBy('menus.urutan')->get();
             $menutunggals = DB::table('menutunggals')
                 ->where('bahasa', 'english')
+                ->orderBy('created_at', 'DESC')
                 ->get();
             $menutunggal = DB::table('menutunggals')
                 ->where('bahasa', 'english')
                 ->where('menutunggals.judul', $judul)
                 ->get()
                 ->first();
-            $beritas = DB::table('beritas')->orderBy('created_at')->where('kategori', 'berita')->where('bahasa', 'english')->get();
-            $pengumumans = DB::table('beritas')->orderBy('created_at')->where('kategori', 'pengumuman')->where('bahasa', 'english')->get();
+            $beritas = DB::table('beritas')->orderBy('created_at', 'DESC')->where('kategori', 'berita')->where('bahasa', 'english')->get();
+            $pengumumans = DB::table('beritas')->orderBy('created_at', 'DESC')->where('kategori', 'pengumuman')->where('bahasa', 'english')->get();
         } else {
             $menus = DB::table('menus')->where('menus.bahasa', 'indonesia')->orderBy('menus.urutan')->get();
             $menutunggals = DB::table('menutunggals')
                 ->where('bahasa', 'indonesia')
+                ->orderBy('created_at', 'DESC')
                 ->get();
             $menutunggal = DB::table('menutunggals')
                 ->where('bahasa', 'indonesia')
@@ -33,8 +35,8 @@ class UserMenutunggalController extends Controller
                 ->get()
                 ->first();
 
-            $beritas = DB::table('beritas')->orderBy('created_at')->where('kategori', 'berita')->where('bahasa', 'indonesia')->get();
-            $pengumumans = DB::table('beritas')->orderBy('created_at')->where('kategori', 'pengumuman')->where('bahasa', 'indonesia')->get();
+            $beritas = DB::table('beritas')->orderBy('created_at', 'DESC')->where('kategori', 'berita')->where('bahasa', 'indonesia')->get();
+            $pengumumans = DB::table('beritas')->orderBy('created_at', 'DESC')->where('kategori', 'pengumuman')->where('bahasa', 'indonesia')->get();
         }
 
         $contents = DB::table('contents')

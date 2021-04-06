@@ -22,16 +22,39 @@
                     <label for="english">English</label>
                 </div>
             </div>
+            <div class="col-xl-12 mt-1 mb-4">
+                <label>Kategori : </label>
+                <br>
+                <div class="d-inline-block mt-2">
+                    <input type="radio" id="artikeldosen" name="kategori" value="artikeldosen" {{($artikeldosen->kategori == 'artikeldosen') ? 'checked' : ''}}>
+                    <label for="artikeldosen" class="mr-5">Artikel dosen</label>
+                </div>
+                <div class="d-inline-block mt-2"> 
+                    <input type="radio" id="Tesis" name="kategori" value="tesis" {{($artikeldosen->kategori == 'tesis') ? 'checked' : ''}}>
+                    <label for="Tesis" class="mr-5">Tesis</label>
+                </div>
+                <div class="d-inline-block mt-2"> 
+                    <input type="radio" id="disertasi" name="kategori" value="disertasi" {{($artikeldosen->kategori == 'disertasi') ? 'checked' : ''}}>
+                    <label for="disertasi" class="mr-5">Disertasi</label>
+                </div>
+                
+            </div>
             <div class="col-xl-8">
                 <label for="judul">Judul : </label>
                 <input type="text" value="{{$artikeldosen->judul}}" name="judul" class="form-control" id="judul" aria-describedby="judul" placeholder="Masukan judul">
+                <small class="form-text text-muted">Judul tidak boleh mengandung garis miring atau slash ( / )</small>
             </div>
-            <div class="col-xl-4">
+        </div>
+        <div class="row">
+            <div class="col-xl-6 mt-5">
                 <label for="penulis">Nama Penulis : </label>
-                <input type="text" value="{{$artikeldosen->author}}" name="penulis" class="form-control" id="penulis" aria-describedby="penulis" placeholder="Masukan Nama penulis">
+                <input value="{{$artikeldosen->author}}" type="text" name="penulis" class="form-control" id="penulis" aria-describedby="penulis" placeholder="Masukan Nama penulis">
             </div>
             <br>
-            
+            <div class="col-xl-3 mt-5">
+                <label for="tahun">Tahun : </label>
+                <input value="{{$artikeldosen->tahun}}" type="text" name="tahun" class="form-control" id="tahun" aria-describedby="tahun" placeholder="Masukan Tahun">
+            </div>
         </div>
         <p class=" mt-5">Konten :</p>
         <textarea name="konten" class="form-control" id="summernote" cols="30" rows="10">

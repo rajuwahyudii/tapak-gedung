@@ -56,11 +56,15 @@
             @endif
             
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                @if ($menu->menu == 'Penelitian' || $menu->menu == 'penelitian')
-                  <a class="dropdown-item" href="{{route('user.artikeldosen.index', 'id')}}">Artikel Dosen</a>
+              @if ($menu->menu == 'Penelitian' || $menu->menu == 'penelitian')
+              <a class="dropdown-item" href="{{route('user.artikeldosen.index', ['id', 'artikeldosen'])}}">Artikel Dosen</a>
+                <a class="dropdown-item" href="{{route('user.artikeldosen.index', ['id', 'tesis'])}}">Tesis</a>
+                <a class="dropdown-item" href="{{route('user.artikeldosen.index', ['id', 'disertasi'])}}">Disertasi</a>
                 @endif
                 @if ($menu->menu == 'Research' || $menu->menu == 'research')
-                  <a class="dropdown-item" href="{{route('user.artikeldosen.index', 'en')}}">Lecturer Articles</a>
+                <a class="dropdown-item" href="{{route('user.artikeldosen.index', ['en', 'artikeldosen'])}}">Lecturer Articles</a>
+                  <a class="dropdown-item" href="{{route('user.artikeldosen.index', ['en', 'tesis'])}}">Thesis</a>
+                  <a class="dropdown-item" href="{{route('user.artikeldosen.index', ['en', 'disertasi'])}}">Dissertation</a>
                 @endif 
                 @foreach ($contents as $content)
                   @if ($content->menu_id == $menu->id)

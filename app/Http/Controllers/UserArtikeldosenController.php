@@ -8,18 +8,18 @@ use Illuminate\Support\Facades\DB;
 
 class UserArtikeldosenController extends Controller
 {
-    public function index($bahasa)
+    public function index($bahasa, $kategori)
     {
 
         if ($bahasa == 'en') {
 
-            $artikeldosens = DB::table('artikeldosens')->where('bahasa', 'english')->orderBy('created_at')->paginate(8);
+            $artikeldosens = DB::table('artikeldosens')->where('bahasa', 'english')->where('kategori', $kategori)->orderBy('created_at', 'DESC')->get();
             $menus = DB::table('menus')->where('menus.bahasa', 'english')->orderBy('menus.urutan')->get();
             $menutunggals = DB::table('menutunggals')
                 ->where('bahasa', 'english')
                 ->get();
         } else {
-            $artikeldosens = DB::table('artikeldosens')->where('bahasa', 'indonesia')->orderBy('created_at')->paginate(8);
+            $artikeldosens = DB::table('artikeldosens')->where('bahasa', 'indonesia')->where('kategori', $kategori)->orderBy('created_at', 'DESC')->get();
             $menus = DB::table('menus')->where('menus.bahasa', 'indonesia')->orderBy('menus.urutan')->get();
             $menutunggals = DB::table('menutunggals')
                 ->where('bahasa', 'indonesia')
@@ -31,15 +31,44 @@ class UserArtikeldosenController extends Controller
             ->orderBy('contents.urutan')
             ->get();
 
-        return view('user.artikeldosen.index')
-            ->with('contents', $contents)
-            ->with('menus', $menus)
-            ->with('menutunggals', $menutunggals)
-            ->with('artikeldosens', $artikeldosens)
-            ->with('bahasa', $bahasa);
+        switch ($kategori) {
+            case 'tesis':
+                return view('user.tesis.index')
+                    ->with('contents', $contents)
+                    ->with('menus', $menus)
+                    ->with('menutunggals', $menutunggals)
+                    ->with('artikeldosens', $artikeldosens)
+                    ->with('bahasa', $bahasa);
+                break;
+            case 'disertasi':
+                return view('user.disertasi.index')
+                    ->with('contents', $contents)
+                    ->with('menus', $menus)
+                    ->with('menutunggals', $menutunggals)
+                    ->with('artikeldosens', $artikeldosens)
+                    ->with('bahasa', $bahasa);
+                break;
+            case 'artikeldosen':
+                return view('user.artikeldosen.index')
+                    ->with('contents', $contents)
+                    ->with('menus', $menus)
+                    ->with('menutunggals', $menutunggals)
+                    ->with('artikeldosens', $artikeldosens)
+                    ->with('bahasa', $bahasa);
+                break;
+
+            default:
+                return view('user.artikeldosen.index')
+                    ->with('contents', $contents)
+                    ->with('menus', $menus)
+                    ->with('menutunggals', $menutunggals)
+                    ->with('artikeldosens', $artikeldosens)
+                    ->with('bahasa', $bahasa);
+                break;
+        }
     }
 
-    public function show($bahasa, $judul)
+    public function show($bahasa, $kategori, $judul)
     {
 
         if ($bahasa == 'en') {

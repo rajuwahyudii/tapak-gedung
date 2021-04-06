@@ -5,8 +5,9 @@
     <a class="navbar-brand" href="/admin">
       <small>MAGISTER MANAJEMEN <br> UNIVERSITAS BENGKULU</small>
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <button class="navbar-toggler text-white"  type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+      {{-- <span class="navbar-toggler-icon"></span> --}}
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav m-auto" style="font-size: small;" >
@@ -33,7 +34,7 @@
             <a class="nav-link text-uppercase" href="{{route('admin.menutunggal.index')}}">Menu Tunggal</a>
           </li>
           <li class="nav-item {{ Route::is('admin.artikeldosen.*') ? 'active' : '' }}">
-            <a class="nav-link text-uppercase" href="{{route('admin.artikeldosen.index', 'indonesia')}}">Artikel Dosen</a>
+            <a class="nav-link text-uppercase" href="{{route('admin.artikeldosen.index', 'indonesia')}}">Penelitian</a>
           </li>
       </ul>
 

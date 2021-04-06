@@ -13,16 +13,18 @@ class UserBeritaController extends Controller
 
         if ($bahasa == 'en') {
 
-            $beritas = DB::table('beritas')->where('beritas.bahasa', 'english')->where('beritas.kategori', $kategori)->orderBy('created_at')->paginate(4);
+            $beritas = DB::table('beritas')->where('beritas.bahasa', 'english')->where('beritas.kategori', $kategori)->orderBy('created_at', 'DESC')->paginate(4);
             $menus = DB::table('menus')->where('menus.bahasa', 'english')->orderBy('menus.urutan')->get();
             $menutunggals = DB::table('menutunggals')
                 ->where('bahasa', 'english')
+                ->orderBy('created_at', 'DESC')
                 ->get();
         } else {
-            $beritas = DB::table('beritas')->where('bahasa', 'indonesia')->where('beritas.kategori', $kategori)->orderBy('created_at')->paginate(4);
+            $beritas = DB::table('beritas')->where('bahasa', 'indonesia')->where('beritas.kategori', $kategori)->orderBy('created_at', 'DESC')->paginate(4);
             $menus = DB::table('menus')->where('menus.bahasa', 'indonesia')->orderBy('menus.urutan')->get();
             $menutunggals = DB::table('menutunggals')
                 ->where('bahasa', 'indonesia')
+                ->orderBy('created_at', 'DESC')
                 ->get();
         }
 
@@ -54,6 +56,7 @@ class UserBeritaController extends Controller
             $menus = DB::table('menus')->where('menus.bahasa', 'english')->orderBy('menus.urutan')->get();
             $menutunggals = DB::table('menutunggals')
                 ->where('bahasa', 'english')
+                ->orderBy('created_at', 'DESC')
                 ->get();
         } else {
 
@@ -65,6 +68,7 @@ class UserBeritaController extends Controller
 
             $menus = DB::table('menus')->where('menus.bahasa', 'indonesia')->orderBy('menus.urutan')->get();
             $menutunggals = DB::table('menutunggals')
+                ->orderBy('created_at', 'DESC')
                 ->where('bahasa', 'indonesia')
                 ->get();
         }

@@ -15,7 +15,8 @@
     <a href="{{route('admin.menutunggal.create')}}">
         <button type="button" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Tambah Menu Tunggal</button>
     </a>
-    <table class="table bg-white mb-5">
+    <div style="overflow-x: scroll;">
+      <table class="table bg-white mb-5" >
         <thead class="bg-blue text-white">
           <tr>
             <th scope="col">Bahasa</th>
@@ -40,7 +41,9 @@
             </tr>
           @endforeach
         </tbody>
-    </table>  
+    </table> 
+    </div>
+     
     <div class="row justify-content-center">
       <nav class="mt-5" aria-label="...">
           <ul class="pagination">

@@ -61,31 +61,33 @@
     <a href="{{route('admin.content.create')}}">
         <button type="button" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Tambah Konten</button>
     </a>
-    <table class="table bg-white mb-5">
-        <thead class="bg-blue text-white">
-          <tr>
-            <th scope="col">Urutan</th>
-            <th scope="col">Menu</th>
-            <th scope="col">Judul</th>
-            <th scope="col">Tanggal Dibuat </th>
-            <th scope="col" class="text-center">Aksi </th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach ($contents as $content)
+    <div style="overflow-x: scroll;">
+      <table class="table bg-white mb-5">
+          <thead class="bg-blue text-white">
             <tr>
-              <td>{{$content->urutan}}</td>
-              <td>{{$content->menu}}</td>
-              <td>{{$content->judul}}</td>
-              <td>{{$content->created_at}}</td>
-              <td class="text-center">
-                  <a href="{{route('admin.content.show', [$content->bahasa,$content->menu,$content->judul] )}}"><button class="btn btn-primary "> <i class="fas fa-info-circle"></i> Detail Konten </button></a>
-              </td>
+              <th scope="col">Urutan</th>
+              <th scope="col">Menu</th>
+              <th scope="col">Judul</th>
+              <th scope="col">Tanggal Dibuat </th>
+              <th scope="col" class="text-center">Aksi </th>
             </tr>
-          @endforeach
-        </tbody>
-        
-    </table>  
+          </thead>
+          <tbody>
+            @foreach ($contents as $content)
+              <tr>
+                <td>{{$content->urutan}}</td>
+                <td>{{$content->menu}}</td>
+                <td>{{$content->judul}}</td>
+                <td>{{$content->created_at}}</td>
+                <td class="text-center">
+                    <a href="{{route('admin.content.show', [$content->bahasa,$content->menu,$content->judul] )}}"><button class="btn btn-primary "> <i class="fas fa-info-circle"></i> Detail Konten </button></a>
+                </td>
+              </tr>
+            @endforeach
+          </tbody>
+          
+      </table>  
+    </div>
     <div class="row justify-content-center">
       <nav class="mt-5" aria-label="...">
           <ul class="pagination">

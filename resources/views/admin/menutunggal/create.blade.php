@@ -15,6 +15,7 @@
             <div class="col-xl-8">
                 <label for="judul">Judul : </label>
                 <input type="text" name="judul" class="form-control" id="judul" aria-describedby="judul" placeholder="Masukan judul">
+                <small class="form-text text-muted">Judul tidak boleh mengandung garis miring atau slash ( / )</small>
             </div>
             <br>
             <div class="col-xl-4 mt-1">

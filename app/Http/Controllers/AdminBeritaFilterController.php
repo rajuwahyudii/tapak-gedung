@@ -17,6 +17,7 @@ class AdminBeritaFilterController extends Controller
     {
         $beritas = DB::table('beritas')
             ->where('beritas.bahasa', $bahasa)
+            ->orderBy('created_at', 'DESC')
             ->paginate(5);
 
         return view('admin.berita.index')->with('beritas', $beritas);
