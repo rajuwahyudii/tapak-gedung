@@ -205,11 +205,29 @@
                 <div class="col-xl-3 mt-5">
                   <h5 class="mt-3">SOCIAL MEDIA</h5>
                   <hr>
-                  <a href=""><i class="fab fa-instagram ml-2 text-white" style="font-size: 2em;"></i></a> 
-                  <a href=""><i class="fab fa-youtube ml-2 text-white" style="font-size: 2em;"></i></a> 
-                  <a href=""><i class="fab fa-facebook ml-2 text-white" style="font-size: 2em;"></i></a> 
-                  <a href=""><i class="fab fa-twitter ml-2 text-white" style="font-size: 2em;"></i></a> 
-                  <a href=""><i class="fab fa-linkedin ml-2 text-white" style="font-size: 2em;"></i></a> 
+                  @if (count($sosial_medias) > 0)
+                    @foreach ($sosial_medias as $sosial_media)
+                      @switch($sosial_media->nama)
+                        @case('instagram')
+                            <a href="{{$sosial_media->url}}"><i class="fab fa-instagram ml-2 text-white" style="font-size: 2em;"></i></a> 
+                            @break
+                        @case('youtube')
+                        <a href="{{$sosial_media->url}}"><i class="fab fa-youtube ml-2 text-white" style="font-size: 2em;"></i></a> 
+                            @break
+                        @case('facebook')
+                        <a href="{{$sosial_media->url}}"><i class="fab fa-facebook ml-2 text-white" style="font-size: 2em;"></i></a>
+                            @break
+                        @case('twitter')
+                        <a href="{{$sosial_media->url}}"><i class="fab fa-twitter ml-2 text-white" style="font-size: 2em;"></i></a> 
+                            @break
+                        @case('linkedin')
+                        <a href="{{$sosial_media->url}}"><i class="fab fa-linkedin ml-2 text-white" style="font-size: 2em;"></i></a> 
+                            @break
+                        @default
+                      @endswitch
+                    @endforeach
+                  @endif
+                  
                 </div>
               </div>
               

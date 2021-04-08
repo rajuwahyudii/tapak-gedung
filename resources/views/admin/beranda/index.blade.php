@@ -77,7 +77,7 @@
           <tbody>
             @foreach ($sliders as $slider)
               <tr>
-                <td>{{$slider->gambar}}</td>
+                <td> {{ Str::limit($slider->gambar, 15)}}</td>
                 <td>{{$slider->title}}</td>
                 <td>{{$slider->caption}}</td>
                 <td>{{$slider->created_at}}</td>
@@ -133,5 +133,41 @@
       </a>
     </div>
     
+</div>
+
+<div class="bg-white p-5 shadow">
+  <div class="row">
+    <h2 >Sosial Media</h2>
+  </div>
+  
+  <hr>
+
+  <div style="overflow-x: scroll;">
+    <table class="table bg-white mb-5">
+        <thead class="bg-blue text-white">
+          <tr>
+            <th scope="col">Sosial Media</th>
+            <th scope="col">Url</th>
+            <th scope="col" class="text-center">Edit </th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($sosial_medias as $sosial_media)
+            <tr>
+              <td>{{$sosial_media->nama}}</td>
+              <td>{{$sosial_media->url}}</td>
+              <td class="text-center">
+                  <a href="{{route('admin.sosialmedia.edit', $sosial_media->id)}}" data-toggle="tooltip" data-placement="bottom" title="Edit Menu">
+                    <button class="btn btn-primary "> 
+                      <i class="fas fa-pen"></i> 
+                    </button>
+                  </a>
+              </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table> 
+  </div>
+  
 </div>
 @endsection

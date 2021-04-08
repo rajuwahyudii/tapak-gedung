@@ -27,7 +27,7 @@ class UserBeritaController extends Controller
                 ->orderBy('created_at', 'DESC')
                 ->get();
         }
-
+        $sosial_medias = DB::table('sosialmedias')->get();
         $contents = DB::table('contents')
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
             ->orderBy('contents.urutan')
@@ -36,6 +36,7 @@ class UserBeritaController extends Controller
         // DATA NAVBAR END
 
         return view('user.berita.index')
+            ->with('sosial_medias', $sosial_medias)
             ->with('menus', $menus)
             ->with('contents', $contents)
             ->with('menutunggals', $menutunggals)
@@ -72,7 +73,7 @@ class UserBeritaController extends Controller
                 ->where('bahasa', 'indonesia')
                 ->get();
         }
-
+        $sosial_medias = DB::table('sosialmedias')->get();
         $contents = DB::table('contents')
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
             ->orderBy('contents.urutan')
@@ -80,6 +81,7 @@ class UserBeritaController extends Controller
         // DATA NAVBAR END
 
         return view('user.berita.show')
+            ->with('sosial_medias', $sosial_medias)
             ->with('menus', $menus)
             ->with('contents', $contents)
             ->with('menutunggals', $menutunggals)

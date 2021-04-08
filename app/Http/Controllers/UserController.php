@@ -48,7 +48,7 @@ class UserController extends Controller
                 ->where('bahasa', 'indonesia')
                 ->get();
         }
-
+        $sosial_medias = DB::table('sosialmedias')->get();
         $contents = DB::table('contents')
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
             ->orderBy('contents.urutan')
@@ -57,6 +57,7 @@ class UserController extends Controller
         // DATA NAVBAR END
 
         return view('user.beranda')
+            ->with('sosial_medias', $sosial_medias)
             ->with('menutunggals', $menutunggals)
             ->with('menus', $menus)
             ->with('contents', $contents)
@@ -75,6 +76,7 @@ class UserController extends Controller
     {
 
         if ($bahasa == 'en') {
+
             $menus = DB::table('menus')->where('menus.bahasa', 'english')->orderBy('menus.urutan')->get();
 
             $beritas = DB::table('beritas')->orderBy('created_at', 'DESC')->where('kategori', 'berita')->where('bahasa', 'english')->get();
@@ -98,7 +100,7 @@ class UserController extends Controller
                 ->where('bahasa', 'indonesia')
                 ->get();
         }
-
+        $sosial_medias = DB::table('sosialmedias')->get();
         $contents = DB::table('contents')
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
             ->orderBy('contents.urutan')
@@ -112,6 +114,7 @@ class UserController extends Controller
             ->first();
 
         return view('user.content')
+            ->with('sosial_medias', $sosial_medias)
             ->with('menutunggals', $menutunggals)
             ->with('menus', $menus)
             ->with('contents', $contents)

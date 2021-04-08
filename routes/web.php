@@ -10,8 +10,7 @@ use App\Http\Controllers\AdminMenutunggalController;
 use App\Http\Controllers\AdminBerandaController;
 use App\Http\Controllers\AdminBerandaSliderController;
 use App\Http\Controllers\AdminBerandaKontenController;
-
-
+use App\Http\Controllers\AdminSosialmediaController;
 use Illuminate\Support\Facades\DB;
 
 /*
@@ -56,6 +55,7 @@ Route::prefix('admin')->group(function () {
         return redirect('admin/beranda/indonesia');
     });
     Route::resource('beranda/konten', AdminBerandaKontenController::class, ['as' => 'admin.beranda']);
+    Route::resource('beranda/sosialmedia', AdminSosialmediaController::class, ['as' => 'admin']);
     Route::resource('beranda/slider', AdminBerandaSliderController::class, ['as' => 'admin']);
     // ADMIN BERANDA ROUTE END
 

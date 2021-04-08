@@ -25,7 +25,7 @@ class UserArtikeldosenController extends Controller
                 ->where('bahasa', 'indonesia')
                 ->get();
         }
-
+        $sosial_medias = DB::table('sosialmedias')->get();
         $contents = DB::table('contents')
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
             ->orderBy('contents.urutan')
@@ -34,6 +34,7 @@ class UserArtikeldosenController extends Controller
         switch ($kategori) {
             case 'tesis':
                 return view('user.tesis.index')
+                    ->with('sosial_medias', $sosial_medias)
                     ->with('contents', $contents)
                     ->with('menus', $menus)
                     ->with('menutunggals', $menutunggals)
@@ -42,6 +43,7 @@ class UserArtikeldosenController extends Controller
                 break;
             case 'disertasi':
                 return view('user.disertasi.index')
+                    ->with('sosial_medias', $sosial_medias)
                     ->with('contents', $contents)
                     ->with('menus', $menus)
                     ->with('menutunggals', $menutunggals)
@@ -50,6 +52,7 @@ class UserArtikeldosenController extends Controller
                 break;
             case 'artikeldosen':
                 return view('user.artikeldosen.index')
+                    ->with('sosial_medias', $sosial_medias)
                     ->with('contents', $contents)
                     ->with('menus', $menus)
                     ->with('menutunggals', $menutunggals)
@@ -59,6 +62,7 @@ class UserArtikeldosenController extends Controller
 
             default:
                 return view('user.artikeldosen.index')
+                    ->with('sosial_medias', $sosial_medias)
                     ->with('contents', $contents)
                     ->with('menus', $menus)
                     ->with('menutunggals', $menutunggals)
@@ -85,6 +89,7 @@ class UserArtikeldosenController extends Controller
                 ->where('bahasa', 'indonesia')
                 ->get();
         }
+        $sosial_medias = DB::table('sosialmedias')->get();
 
         $contents = DB::table('contents')
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
@@ -92,6 +97,7 @@ class UserArtikeldosenController extends Controller
             ->get();
 
         return view('user.artikeldosen.show')
+            ->with('sosial_medias', $sosial_medias)
             ->with('contents', $contents)
             ->with('menus', $menus)
             ->with('menutunggals', $menutunggals)

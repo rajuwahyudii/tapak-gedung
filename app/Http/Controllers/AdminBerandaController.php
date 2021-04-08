@@ -31,7 +31,11 @@ class AdminBerandaController extends Controller
                 ->get()
                 ->first();
         }
+        $sosial_medias = DB::table('sosialmedias')->get();
 
-        return view('admin.beranda.index')->with('sliders', $sliders)->with('berandakonten', $berandakonten);
+        return view('admin.beranda.index')
+            ->with('sosial_medias', $sosial_medias)
+            ->with('sliders', $sliders)
+            ->with('berandakonten', $berandakonten);
     }
 }

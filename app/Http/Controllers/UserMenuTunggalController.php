@@ -11,6 +11,7 @@ class UserMenutunggalController extends Controller
     {
         // DATA NAVBAR
         if ($bahasa == 'en') {
+
             $menus = DB::table('menus')->where('menus.bahasa', 'english')->orderBy('menus.urutan')->get();
             $menutunggals = DB::table('menutunggals')
                 ->where('bahasa', 'english')
@@ -38,6 +39,7 @@ class UserMenutunggalController extends Controller
             $beritas = DB::table('beritas')->orderBy('created_at', 'DESC')->where('kategori', 'berita')->where('bahasa', 'indonesia')->get();
             $pengumumans = DB::table('beritas')->orderBy('created_at', 'DESC')->where('kategori', 'pengumuman')->where('bahasa', 'indonesia')->get();
         }
+        $sosial_medias = DB::table('sosialmedias')->get();
 
         $contents = DB::table('contents')
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
@@ -47,6 +49,7 @@ class UserMenutunggalController extends Controller
 
 
         return view('user.menutunggal.index')
+            ->with('sosial_medias', $sosial_medias)
             ->with('menus', $menus)
             ->with('contents', $contents)
             ->with('menutunggals', $menutunggals)
