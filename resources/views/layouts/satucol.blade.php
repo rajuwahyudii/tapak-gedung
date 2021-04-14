@@ -59,10 +59,8 @@
             <div class="main col-xl-12 mb-5" style="overflow-x: hidden;"> 
                 @yield('content')
             </div>
-            {{-- MAINBAR END --}}  
-            
+            {{-- MAINBAR END --}}
         </div>
-        
     </div>
     {{-- <script>
         $('#summernote').summernote({

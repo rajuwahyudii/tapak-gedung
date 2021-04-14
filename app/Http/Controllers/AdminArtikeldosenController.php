@@ -26,13 +26,13 @@ class AdminArtikeldosenController extends Controller
     public function index($bahasa)
     {
         if ($bahasa == 'english') {
-            $artikeldosens = DB::table('artikeldosens')->where('bahasa', 'english')->where('kategori', 'artikeldosen')->orderBy('created_at', 'DESC')->paginate(5);
-            $tesises = DB::table('artikeldosens')->where('bahasa', 'english')->where('kategori', 'tesis')->orderBy('created_at', 'DESC')->paginate(5);
-            $disertasis = DB::table('artikeldosens')->where('bahasa', 'english')->where('kategori', 'disertasi')->orderBy('created_at', 'DESC')->paginate(5);
+            $artikeldosens = DB::table('artikeldosens')->where('bahasa', 'english')->where('kategori', 'artikeldosen')->orderBy('created_at', 'DESC')->get();
+            $tesises = DB::table('artikeldosens')->where('bahasa', 'english')->where('kategori', 'tesis')->orderBy('created_at', 'DESC')->get();
+            $disertasis = DB::table('artikeldosens')->where('bahasa', 'english')->where('kategori', 'disertasi')->orderBy('created_at', 'DESC')->get();
         } else {
-            $artikeldosens = DB::table('artikeldosens')->where('bahasa', 'indonesia')->where('kategori', 'artikeldosen')->orderBy('created_at', 'DESC')->paginate(5);
-            $tesises = DB::table('artikeldosens')->where('bahasa', 'indonesia')->where('kategori', 'tesis')->orderBy('created_at', 'DESC')->paginate(5);
-            $disertasis = DB::table('artikeldosens')->where('bahasa', 'indonesia')->where('kategori', 'disertasi')->orderBy('created_at', 'DESC')->paginate(5);
+            $artikeldosens = DB::table('artikeldosens')->where('bahasa', 'indonesia')->where('kategori', 'artikeldosen')->orderBy('created_at', 'DESC')->get();
+            $tesises = DB::table('artikeldosens')->where('bahasa', 'indonesia')->where('kategori', 'tesis')->orderBy('created_at', 'DESC')->get();
+            $disertasis = DB::table('artikeldosens')->where('bahasa', 'indonesia')->where('kategori', 'disertasi')->orderBy('created_at', 'DESC')->get();
         }
 
         return view('admin.artikeldosen.index')
