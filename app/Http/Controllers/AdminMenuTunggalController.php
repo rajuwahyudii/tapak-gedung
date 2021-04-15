@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Path\To\DOMdocument;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -79,6 +80,7 @@ class AdminMenutunggalController extends Controller
 
         $menutunggal = new Menutunggal();
         $menutunggal->judul = $request->input('judul');
+        $menutunggal->slug = Str::slug($request->input('judul'));
         $menutunggal->bahasa = $request->input('bahasa');
         if (!empty($request->konten)) {
             $menutunggal->konten = $dom->saveHTML();
@@ -154,6 +156,7 @@ class AdminMenutunggalController extends Controller
 
         $menutunggal = Menutunggal::find($id);
         $menutunggal->judul = $request->input('judul');
+        $menutunggal->slug = Str::slug($request->input('judul'));
         $menutunggal->bahasa = $request->input('bahasa');
         if (!empty($request->konten)) {
             $menutunggal->konten = $dom->saveHTML();

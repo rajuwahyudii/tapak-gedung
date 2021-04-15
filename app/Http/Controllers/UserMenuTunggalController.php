@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class UserMenutunggalController extends Controller
 {
-    public function index($bahasa, $judul)
+    public function index($bahasa, $slug)
     {
         // DATA NAVBAR
         if ($bahasa == 'en') {
@@ -19,7 +19,7 @@ class UserMenutunggalController extends Controller
                 ->get();
             $menutunggal = DB::table('menutunggals')
                 ->where('bahasa', 'english')
-                ->where('menutunggals.judul', $judul)
+                ->where('menutunggals.slug', $slug)
                 ->get()
                 ->first();
             $beritas = DB::table('beritas')->orderBy('created_at', 'DESC')->where('kategori', 'berita')->where('bahasa', 'english')->get();
@@ -32,7 +32,7 @@ class UserMenutunggalController extends Controller
                 ->get();
             $menutunggal = DB::table('menutunggals')
                 ->where('bahasa', 'indonesia')
-                ->where('menutunggals.judul', $judul)
+                ->where('menutunggals.slug', $slug)
                 ->get()
                 ->first();
 

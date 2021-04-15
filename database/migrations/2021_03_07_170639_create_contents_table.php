@@ -18,6 +18,7 @@ class CreateContentsTable extends Migration
             $table->integer('menu_id')->nullable();
             $table->integer('urutan')->default(0)->nullable();
             $table->string('judul')->default('-')->nullable();
+            $table->string('slug')->nullable();
             $table->text('kontent')->default('-')->nullable();
             $table->string('author')->default('-')->nullable();
             $table->timestamps();

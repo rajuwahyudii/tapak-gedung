@@ -34,7 +34,8 @@
                   <tbody>
                     @foreach ($artikeldosens as $artikeldosen)
                       <tr>
-                        <td> <a style="color: black;" href="{{route('user.artikeldosen.show', [$bahasa, 'artikeldosen' , $artikeldosen->judul])}}">{{$artikeldosen->judul}}</a></td>
+                        
+                        <td><a style="color: black;" href="{{route('user.artikeldosen.show', [$bahasa, 'artikeldosen' , $artikeldosen->slug])}}">{{$artikeldosen->judul}}</a></td>
                         {{-- <td>{{$artikeldosen->judul}}</td> --}}
                         <td>{{$artikeldosen->author}}</td>
                         <td>{{$artikeldosen->tahun}}</td>

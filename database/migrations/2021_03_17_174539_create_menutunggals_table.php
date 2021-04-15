@@ -17,6 +17,7 @@ class CreateMenutunggalsTable extends Migration
             $table->id();
             $table->enum('bahasa', ['indonesia', 'english'])->default('indonesia');
             $table->string('judul')->default('-')->nullable();
+            $table->string('slug')->nullable();
             $table->text('konten')->default('-')->nullable();
             $table->string('author')->default('-')->nullable();
             $table->timestamps();

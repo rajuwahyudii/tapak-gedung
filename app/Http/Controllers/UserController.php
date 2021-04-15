@@ -72,7 +72,7 @@ class UserController extends Controller
             ->with('bahasa', $bahasa);
     }
 
-    public function content($bahasa, $menu, $judul)
+    public function content($bahasa, $menu, $slug)
     {
 
         if ($bahasa == 'en') {
@@ -109,7 +109,7 @@ class UserController extends Controller
         $content = DB::table('contents')
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
             ->where('menus.menu', $menu)
-            ->where('contents.judul', $judul)
+            ->where('contents.slug', $slug)
             ->get()
             ->first();
 

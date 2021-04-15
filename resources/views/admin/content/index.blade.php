@@ -80,7 +80,7 @@
                 <td>{{$content->judul}}</td>
                 <td>{{$content->created_at}}</td>
                 <td class="text-center">
-                    <a href="{{route('admin.content.show', [$content->bahasa,$content->menu,$content->judul] )}}"><button class="btn btn-primary "> <i class="fas fa-info-circle"></i> Detail Konten </button></a>
+                    <a href="{{route('admin.content.show', [$content->bahasa,$content->menu,$content->id] )}}"><button class="btn btn-primary "> <i class="fas fa-info-circle"></i> Detail Konten </button></a>
                 </td>
               </tr>
             @endforeach

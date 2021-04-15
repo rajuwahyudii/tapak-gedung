@@ -23,7 +23,7 @@
                     <?php if($count == 2) break; ?>
                           <small>Tanggal : {{ Str::limit($pengumuman->created_at, 10) }} | </small>
                           <small><i class="fas fa-flag"></i> {{$pengumuman->kategori}} </small>
-                          <a href="{{route('user.berita.show', [$bahasa, $pengumuman->kategori ,$pengumuman->judul])}}" class="text-dark">
+                          <a href="{{route('user.berita.show', [$bahasa, $pengumuman->kategori ,$pengumuman->slug])}}" class="text-dark">
                               <h5 class="card-title"><small><b>{{$pengumuman->judul}}</b></small></h5>
                           </a>
                     <?php $count++; ?>
@@ -52,7 +52,7 @@
                     <?php if($count == 2) break; ?>
                             <small>Tanggal : {{ Str::limit($berita->created_at, 10) }} | </small>
                             <small><i class="fas fa-flag"></i> {{$berita->kategori}} </small>
-                            <a href="{{route('user.berita.show', [$bahasa, $berita->kategori , $berita->judul])}}" class="text-dark">
+                            <a href="{{route('user.berita.show', [$bahasa, $berita->kategori , $berita->slug])}}" class="text-dark">
                                 <h5 class="card-title"><small><b>{{$berita->judul}}</b></small></h5>
                             </a>
                     <?php $count++; ?>

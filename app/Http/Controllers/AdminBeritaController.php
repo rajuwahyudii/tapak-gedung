@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Path\To\DOMdocument;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\Models\Berita;
@@ -89,6 +90,7 @@ class AdminBeritaController extends Controller
 
         $berita = new Berita();
         $berita->judul = $request->input('judul');
+        $berita->slug = Str::slug($request->input('judul'));
         $berita->kategori = $request->input('kategori');
         $berita->thumbnail = $thumbnailName;
         $berita->kategori = $request->input('kategori');
@@ -188,6 +190,7 @@ class AdminBeritaController extends Controller
 
         $berita = Berita::find($id);
         $berita->judul = $request->input('judul');
+        $berita->slug = Str::slug($request->input('judul'));
         $berita->kategori = $request->input('kategori');
         $berita->bahasa = $request->input('bahasa');
         $berita->thumbnail = $thumbnailName;

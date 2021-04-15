@@ -17,7 +17,7 @@
                 <small>Penulis : {{$content->author}} | Di buat pada : {{$content->created_at}}</small>
             </div>
             <div class="col-xl-5 text-left">
-                <a href="{{route('admin.content.edit', [ $content->bahasa,$content->menu, $content->judul])}}">
+                <a href="{{route('admin.content.edit', [ $content->bahasa,$content->menu, $content->id])}}">
                     <button class="btn btn-success mt-3 pl-5 pr-5 ml-1"> <i class="fas fa-pen"></i> Edit</button>
                 </a>
                 <form class="d-inline" action="{{route('admin.content.destroy', $content->id)}}" method="POST">

@@ -21,7 +21,9 @@
       <title>Beranda - Magister Manajemen UNIB</title>
       @endif
     @else
-      <title>{{ Request::segment(3) }} - Magister Manajemen UNIB</title>
+  
+      <title> {{ ucfirst(trans(basename(request()->path()))) }} - Magister Manajemen UNIB</title>
+      {{-- <title> {{ ucfirst(request()->segment(count(request()->segments())))) }} - Magister Manajemen UNIB</title> --}}
     @endif
 
 

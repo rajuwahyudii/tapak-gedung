@@ -15,7 +15,7 @@
       <title>Beranda - Magister Manajemen UNIB</title>
       @endif
     @else
-      <title>Magister Manajemen UNIB - {{ Request::segment(2) }}</title>
+      <title>{{ ucfirst(trans(basename(request()->path()))) }} - Magister Manajemen UNIB</title>
     @endif
 
     <!-- Scripts -->

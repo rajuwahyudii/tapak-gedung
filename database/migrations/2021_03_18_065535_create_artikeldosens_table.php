@@ -17,6 +17,7 @@ class CreateArtikeldosensTable extends Migration
             $table->id();
             $table->enum('bahasa', ['indonesia', 'english'])->default('indonesia')->nullable();
             $table->string('judul')->default('-');
+            $table->string('slug')->nullable();
             $table->string('kategori')->default('artikeldosen')->nullable();
             $table->string('tahun')->default('-')->nullable();
             $table->text('konten')->default('-')->nullable();

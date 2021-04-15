@@ -100,6 +100,6 @@ Route::get('/{bahasa}/berita/{kategori}/{konten}', [App\Http\Controllers\UserBer
 
 
 Route::get('/{bahasa}', [App\Http\Controllers\UserController::class, 'index'])->name('user.index');
-Route::get('/{bahasa}/{menu}/{judul}', [App\Http\Controllers\UserController::class, 'content'])->name('user.content');
+Route::get('/{bahasa}/{menu}/{slug}', [App\Http\Controllers\UserController::class, 'content'])->name('user.content');
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

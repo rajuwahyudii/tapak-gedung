@@ -72,7 +72,9 @@
                   @endif 
                   @foreach ($contents as $content)
                     @if ($content->menu_id == $menu->id)
-                      <a class="dropdown-item" href="{{route('user.content', [$bahasa, $menu->menu , $content->judul])}}">{{$content->judul}}</a>
+                      {{-- <a class="dropdown-item" href="{{route('user.content', [$bahasa, $menu->menu , $content->slug])}}">{{$content->judul}}</a> --}}
+                      {{-- {{$content->slug}} --}}
+                      <a class="dropdown-item" href="{{route('user.content', [$bahasa, $menu->menu , $content->slug])}}">{{$content->judul}}</a>
                     @endif
                   @endforeach
               </div>
@@ -81,14 +83,14 @@
   
           @foreach ($menutunggals as $menutunggal)
             <li class="nav-item">
-              @if (Request::segment(2) == $menutunggal->judul)
+              @if (Request::segment(2) == $menutunggal->slug)
               <a class="nav-link active" 
               style="text-transform: uppercase;
                         border-bottom:  2px inset #FAD02C;
                         margin-bottom:  -2px;" 
-              href="{{route('user.menutunggal.index', [$bahasa,$menutunggal->judul])}}">{{$menutunggal->judul}}</a>
+              href="{{route('user.menutunggal.index', [$bahasa,$menutunggal->slug])}}">{{$menutunggal->judul}}</a>
                 @else
-                <a class="nav-link" style="text-transform: uppercase;" href="{{route('user.menutunggal.index', [$bahasa,$menutunggal->judul])}}">
+                <a class="nav-link" style="text-transform: uppercase;" href="{{route('user.menutunggal.index', [$bahasa,$menutunggal->slug])}}">
                   {{$menutunggal->judul}}</a>
                 @endif
             </li>

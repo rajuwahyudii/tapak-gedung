@@ -77,7 +77,7 @@
                                 <br> --}}
                                 <small>Tanggal : {{ Str::limit($berita->created_at, 10) }} | </small>
                                 <small><i class="fas fa-flag"></i> {{$berita->kategori}} </small>
-                                <a href="{{route('user.berita.show', [$bahasa, $berita->kategori , $berita->judul])}}" class="text-dark">
+                                <a href="{{route('user.berita.show', [$bahasa, $berita->kategori , $berita->slug])}}" class="text-dark">
                                     <h5 class="card-title"><small><b>{{$berita->judul}}</b></small></h5>
                                 </a>
                             </div>

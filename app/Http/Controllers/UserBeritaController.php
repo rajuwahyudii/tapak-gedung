@@ -44,13 +44,13 @@ class UserBeritaController extends Controller
             ->with('bahasa', $bahasa);
     }
 
-    public function show($bahasa, $kategori, $konten)
+    public function show($bahasa, $kategori, $slug)
     {
         // DATA NAVBAR
         if ($bahasa == 'en') {
             $berita = DB::table('beritas')
                 ->where('beritas.bahasa', 'english')
-                ->where('beritas.judul', $konten)
+                ->where('beritas.slug', $slug)
                 ->get()
                 ->first();
 
@@ -63,7 +63,7 @@ class UserBeritaController extends Controller
 
             $berita = DB::table('beritas')
                 ->where('beritas.bahasa', 'indonesia')
-                ->where('beritas.judul', $konten)
+                ->where('beritas.slug', $slug)
                 ->get()
                 ->first();
 

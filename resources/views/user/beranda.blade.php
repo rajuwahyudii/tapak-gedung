@@ -102,7 +102,7 @@
                   <br> --}}
                   <small>Tanggal : {{ Str::limit($berita->created_at, 10) }} | </small>
                   <small><i class="fas fa-flag"></i> {{$berita->kategori}} </small>
-                  <a href="{{route('user.berita.show', [$bahasa, $berita->kategori , $berita->judul])}}" class="text-dark">
+                  <a href="{{route('user.berita.show', [$bahasa, $berita->kategori , $berita->slug])}}" class="text-dark">
                       <h5 class="card-title"><small><b>{{$berita->judul}}</b></small></h5>
                   </a>
               </div>
@@ -184,7 +184,7 @@
               <div class="card-body" height="150" >
                   <small>Tanggal : {{ Str::limit($event->created_at, 10) }} | </small>
                   <small><i class="fas fa-flag"></i> {{$event->kategori}} </small>
-                  <a href="{{route('user.berita.show', [$bahasa, $event->kategori , $event->judul])}}" class="text-dark">
+                  <a href="{{route('user.berita.show', [$bahasa, $event->kategori , $event->slug])}}" class="text-dark">
                       <h5 class="card-title"><small><b>{{$event->judul}}</b></small></h5>
                   </a>
               </div>
@@ -230,7 +230,7 @@
                   <br> --}}
                   <small>Tanggal : {{ Str::limit($pengumuman->created_at, 10) }} | </small>
                   <small><i class="fas fa-flag"></i> {{$pengumuman->kategori}} </small>
-                  <a href="{{route('user.berita.show', [$bahasa, $pengumuman->kategori , $pengumuman->judul])}}" class="text-white">
+                  <a href="{{route('user.berita.show', [$bahasa, $pengumuman->kategori , $pengumuman->slug])}}" class="text-white">
                       <h5 class="card-title"><small><b>{{$pengumuman->judul}}</b></small></h5>
                   </a>
               </div>
@@ -270,7 +270,7 @@
           <?php if($count == 2) break; ?>
                 <small>Tanggal : {{ Str::limit($lowongankerja->created_at, 10) }} | </small>
                 <small><i class="fas fa-flag"></i> {{$lowongankerja->kategori}} </small>
-                <a href="{{route('user.berita.show', [$bahasa, $lowongankerja->kategori , $lowongankerja->judul])}}" class="text-dark">
+                <a href="{{route('user.berita.show', [$bahasa, $lowongankerja->kategori , $lowongankerja->slug])}}" class="text-dark">
                     <h5 class="card-title"><small><b>{{$lowongankerja->judul}}</b></small></h5>
                 </a>
           <?php $count++; ?>
@@ -298,7 +298,7 @@
           <?php if($count == 2) break; ?>
                 <small>Tanggal : {{ Str::limit($beasiswa->created_at, 10) }} | </small>
                 <small><i class="fas fa-flag"></i> {{$beasiswa->kategori}} </small>
-                <a href="{{route('user.berita.show', [$bahasa, $beasiswa->kategori ,$beasiswa->judul])}}" class="text-dark">
+                <a href="{{route('user.berita.show', [$bahasa, $beasiswa->kategori ,$beasiswa->slug])}}" class="text-dark">
                     <h5 class="card-title"><small><b>{{$beasiswa->judul}}</b></small></h5>
                 </a>
           <?php $count++; ?>
@@ -325,7 +325,7 @@
           <?php if($count == 2) break; ?>
                 <small>Tanggal : {{ Str::limit($bukurekomendasi->created_at, 10) }} | </small>
                 <small><i class="fas fa-flag"></i> {{$bukurekomendasi->kategori}} </small>
-                <a href="{{route('user.berita.show', [$bahasa, $bukurekomendasi->kategori , $bukurekomendasi->judul])}}" class="text-dark">
+                <a href="{{route('user.berita.show', [$bahasa, $bukurekomendasi->kategori , $bukurekomendasi->slug])}}" class="text-dark">
                     <h5 class="card-title"><small><b>{{$bukurekomendasi->judul}}</b></small></h5>
                 </a>
           <?php $count++; ?>

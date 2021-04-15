@@ -6,6 +6,7 @@ use App\Models\Content;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Path\To\DOMdocument;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -44,7 +45,7 @@ class AdminContentController extends Controller
                 ->leftJoin('menus', 'contents.menu_id', 'menus.id')
                 ->where('menus.bahasa', $bahasa)
                 ->where('contents.menu_id', $menu_id)
-                ->select('contents.urutan', 'menus.menu', 'menus.bahasa', 'menus.bahasa', 'contents.judul', 'contents.created_at', 'contents.author')
+                ->select('contents.urutan', 'menus.menu', 'menus.bahasa', 'menus.bahasa', 'contents.id', 'contents.judul', 'contents.slug', 'contents.created_at', 'contents.author')
                 ->orderBy('menus.menu', 'ASC')
                 ->orderBy('contents.urutan', 'ASC')
                 ->paginate(10);
@@ -141,6 +142,7 @@ class AdminContentController extends Controller
             $content->menu_id = $request->input('menu_id');
         }
         $content->judul = $request->input('judul');
+        $content->slug = Str::slug($request->input('judul'));
         if (!empty($request->kontent)) {
             $content->kontent = $dom->saveHTML();
         } else {
@@ -166,7 +168,7 @@ class AdminContentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($bahasa, $menu, $judul)
+    public function show($bahasa, $menu, $id)
     {
         $indonesia_menus = DB::table('menus')
             ->where('menus.bahasa', 'indonesia')
@@ -181,13 +183,13 @@ class AdminContentController extends Controller
         $contents = DB::table('contents')
             ->orderBy('urutan', 'ASC')
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
-            ->select('contents.urutan', 'menus.menu', 'menus.id as menu_id', 'menus.bahasa', 'contents.judul', 'contents.created_at', 'contents.author')
+            ->select('contents.urutan', 'menus.menu', 'menus.id as menu_id', 'menus.bahasa', 'contents.judul', 'contents.slug', 'contents.created_at', 'contents.author')
             ->get();
 
         $content = DB::table('contents')
-            ->where('contents.judul', $judul)
+            ->where('contents.id', $id)
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
-            ->select('contents.id', 'contents.kontent', 'contents.urutan', 'menus.menu', 'menus.id as menu_id', 'menus.bahasa', 'contents.judul', 'contents.created_at', 'contents.author')
+            ->select('contents.id', 'contents.kontent', 'contents.urutan', 'menus.menu', 'menus.id as menu_id', 'menus.bahasa', 'contents.judul', 'contents.slug', 'contents.created_at', 'contents.author')
             ->get()
             ->first();
 
@@ -202,7 +204,7 @@ class AdminContentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($bahasa, $menu, $judul)
+    public function edit($bahasa, $menu, $id)
     {
         $indonesia_menus = DB::table('menus')
             ->where('menus.bahasa', 'indonesia')
@@ -221,7 +223,7 @@ class AdminContentController extends Controller
             ->get();
 
         $content = DB::table('contents')
-            ->where('contents.judul', $judul)
+            ->where('contents.id', $id)
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
             ->select('contents.id', 'contents.kontent', 'contents.urutan', 'menus.menu', 'menus.bahasa', 'contents.judul', 'contents.created_at', 'contents.author')
             ->get()
@@ -272,6 +274,7 @@ class AdminContentController extends Controller
         $content = Content::find($id);
         $content->menu_id = $request->input('menu_id');
         $content->judul = $request->input('judul');
+        $content->slug = Str::slug($request->input('judul'));
         $content->urutan = $request->input('urutan');
         $content->kontent = $request->input('kontent');
         if (!empty($request->kontent)) {
@@ -281,8 +284,6 @@ class AdminContentController extends Controller
         }
         $content->author = Auth::user()->name;
         $content->save();
-
-
 
         if ($request->input('menu_id') == 'kosong') {
             $menu = 'daftar-content';

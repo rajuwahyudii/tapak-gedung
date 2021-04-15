@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Path\To\DOMdocument;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -91,6 +92,7 @@ class AdminArtikeldosenController extends Controller
 
         $artikeldosen = new Artikeldosen();
         $artikeldosen->judul = $request->input('judul');
+        $artikeldosen->slug = Str::slug($request->input('judul'));
         $artikeldosen->bahasa = $request->input('bahasa');
         $artikeldosen->kategori = $request->input('kategori');
         $artikeldosen->tahun = $request->input('tahun');
@@ -169,6 +171,7 @@ class AdminArtikeldosenController extends Controller
 
         $artikeldosen = Artikeldosen::find($id);
         $artikeldosen->judul = $request->input('judul');
+        $artikeldosen->slug = Str::slug($request->input('judul'));
         $artikeldosen->bahasa = $request->input('bahasa');
         $artikeldosen->kategori = $request->input('kategori');
         $artikeldosen->tahun = $request->input('tahun');
