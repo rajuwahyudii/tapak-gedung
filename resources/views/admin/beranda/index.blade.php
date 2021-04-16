@@ -105,6 +105,7 @@
     
 </div>
 <div style="min-height: 10vh"></div>
+
 <div class="bg-white p-5 shadow">
     <div class="row">
       <h2 >Konten Beranda</h2>
@@ -134,14 +135,13 @@
     </div>
     
 </div>
+<div style="min-height: 10vh"></div>
 
 <div class="bg-white p-5 shadow">
   <div class="row">
     <h2 >Sosial Media</h2>
   </div>
-  
   <hr>
-
   <div style="overflow-x: scroll;">
     <table class="table bg-white mb-5">
         <thead class="bg-blue text-white">
@@ -163,6 +163,55 @@
                     </button>
                   </a>
               </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table> 
+  </div>
+  
+</div>
+<div style="min-height: 10vh"></div>
+<div class="bg-white p-5 shadow">
+  <div class="row mb-5">
+    <h2 >Membership / Accredited By</h2>
+  </div>
+  <hr>
+  <div style="overflow-x: scroll;">
+    <table class="table bg-white mb-5">
+        <a href="{{route('admin.membership_akreditasi.create')}}">
+          <button type="button" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Tambah Membership / Accredited By</button>
+        </a>
+        <thead class="bg-blue text-white">
+          <tr>
+            <th scope="col">Kategori</th>
+            <th scope="col">Logo</th>
+            <th scope="col">Url</th>
+            <th scope="col" class="text-center">Edit </th>
+            <th scope="col" class="text-center">Hapus </th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($membershipakreditasis as $membershipakreditasi)
+            <tr>
+              <td style="text-transform: capitalize">{{$membershipakreditasi->kategori}}</td>
+              <td>{{$membershipakreditasi->gambar}}</td>
+              <td>{{$membershipakreditasi->url}}</td>
+              <td class="text-center">
+                <a href="{{route('admin.membership_akreditasi.edit', $membershipakreditasi->id)}}" data-toggle="tooltip" data-placement="bottom" title="Edit Menu">
+                  <button class="btn btn-primary "> 
+                    <i class="fas fa-pen"></i> 
+                  </button>
+                </a>
+            </td>
+            <td class="text-center">
+                <form action="{{route('admin.membership_akreditasi.destroy', $membershipakreditasi->id)}}" method="POST">
+                    @csrf
+                    {{ method_field('DELETE') }}
+                    <button class="btn btn-danger" data-toggle="tooltip" data-placement="bottom" title="Hapus Menu"> 
+                      <i class="fas fa-trash"></i>
+                    </button>
+                </form>
+            </td>
             </tr>
             @endforeach
         </tbody>

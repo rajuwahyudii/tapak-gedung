@@ -13,11 +13,11 @@
       <ul class="navbar-nav m-auto" style="font-size: small;" >
           @if (Request::segment(2) == 'beranda')
             <li class="nav-item active">
-              <a class="nav-link text-uppercase" href="{{route('admin.beranda.index', 'id')}}">Beranda</a>
+              <a class="nav-link text-uppercase" href="{{route('admin.beranda.index', 'indonesia')}}">Beranda</a>
             </li>
           @else
             <li class="nav-item">
-              <a class="nav-link text-uppercase" href="{{route('admin.beranda.index', 'id')}}">Beranda</a>
+              <a class="nav-link text-uppercase" href="{{route('admin.beranda.index', 'indonesia')}}">Beranda</a>
             </li>
           @endif
           

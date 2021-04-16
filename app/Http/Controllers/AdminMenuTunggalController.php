@@ -117,7 +117,6 @@ class AdminMenutunggalController extends Controller
         $menutunggal = Menutunggal::find($id);
         return view('admin.menutunggal.edit')->with('menutunggal', $menutunggal);
     }
-
     /**
      * Update the specified resource in storage.
      *

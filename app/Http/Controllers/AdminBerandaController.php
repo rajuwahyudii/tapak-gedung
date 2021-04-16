@@ -32,10 +32,12 @@ class AdminBerandaController extends Controller
                 ->first();
         }
         $sosial_medias = DB::table('sosialmedias')->get();
+        $membershipakreditasis = DB::table('membershipakreditasis')->get();
 
         return view('admin.beranda.index')
             ->with('sosial_medias', $sosial_medias)
             ->with('sliders', $sliders)
+            ->with('membershipakreditasis', $membershipakreditasis)
             ->with('berandakonten', $berandakonten);
     }
 }

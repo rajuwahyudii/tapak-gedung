@@ -49,6 +49,7 @@ class UserController extends Controller
                 ->get();
         }
         $sosial_medias = DB::table('sosialmedias')->get();
+        $membershipakreditasis = DB::table('membershipakreditasis')->get();
         $contents = DB::table('contents')
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
             ->orderBy('contents.urutan')
@@ -58,6 +59,7 @@ class UserController extends Controller
 
         return view('user.beranda')
             ->with('sosial_medias', $sosial_medias)
+            ->with('membershipakreditasis', $membershipakreditasis)
             ->with('menutunggals', $menutunggals)
             ->with('menus', $menus)
             ->with('contents', $contents)
@@ -101,6 +103,7 @@ class UserController extends Controller
                 ->get();
         }
         $sosial_medias = DB::table('sosialmedias')->get();
+        $membershipakreditasis = DB::table('membershipakreditasis')->get();
         $contents = DB::table('contents')
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
             ->orderBy('contents.urutan')
@@ -115,6 +118,7 @@ class UserController extends Controller
 
         return view('user.content')
             ->with('sosial_medias', $sosial_medias)
+            ->with('membershipakreditasis', $membershipakreditasis)
             ->with('menutunggals', $menutunggals)
             ->with('menus', $menus)
             ->with('contents', $contents)

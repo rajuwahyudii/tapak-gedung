@@ -11,6 +11,7 @@ use App\Http\Controllers\AdminBerandaController;
 use App\Http\Controllers\AdminBerandaSliderController;
 use App\Http\Controllers\AdminBerandaKontenController;
 use App\Http\Controllers\AdminSosialmediaController;
+use App\Http\Controllers\AdminMembershipAkreditasiController;
 use Illuminate\Support\Facades\DB;
 
 /*
@@ -48,12 +49,14 @@ Route::prefix('admin')->group(function () {
     Route::resource('akun', AdminAkunController::class, ['as' => 'admin']);
     Route::resource('menu', AdminMenuController::class, ['as' => 'admin']);
     Route::resource('menutunggal', AdminMenutunggalController::class, ['as' => 'admin']);
+    Route::resource('membership_akreditasi', AdminMembershipAkreditasiController::class, ['as' => 'admin']);
 
     // ADMIN BERANDA ROUTE
     Route::get('beranda/{bahasa}', [App\Http\Controllers\AdminBerandaController::class, 'index'])->name('admin.beranda.index');
     Route::get('beranda/', function () {
         return redirect('admin/beranda/indonesia');
     });
+
     Route::resource('beranda/konten', AdminBerandaKontenController::class, ['as' => 'admin.beranda']);
     Route::resource('beranda/sosialmedia', AdminSosialmediaController::class, ['as' => 'admin']);
     Route::resource('beranda/slider', AdminBerandaSliderController::class, ['as' => 'admin']);

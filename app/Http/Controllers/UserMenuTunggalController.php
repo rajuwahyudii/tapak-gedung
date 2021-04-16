@@ -40,16 +40,16 @@ class UserMenutunggalController extends Controller
             $pengumumans = DB::table('beritas')->orderBy('created_at', 'DESC')->where('kategori', 'pengumuman')->where('bahasa', 'indonesia')->get();
         }
         $sosial_medias = DB::table('sosialmedias')->get();
+        $membershipakreditasis = DB::table('membershipakreditasis')->get();
 
         $contents = DB::table('contents')
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
             ->orderBy('contents.urutan')
             ->get();
 
-
-
         return view('user.menutunggal.index')
             ->with('sosial_medias', $sosial_medias)
+            ->with('membershipakreditasis', $membershipakreditasis)
             ->with('menus', $menus)
             ->with('contents', $contents)
             ->with('menutunggals', $menutunggals)
