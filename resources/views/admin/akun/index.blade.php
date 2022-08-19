@@ -6,12 +6,10 @@
 
 @section('content')
 <div>
-    <h1 class="font-1 mt-5">Admin</h1>
-    <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / akun </p>
+    <h1 class="font-1 mt-5 mb-5">Admin</h1>
 </div>
 <div class="bg-white p-5 shadow">
     @include('inc.messages')
-    
     <a href="{{route('admin.akun.create')}}">
         <button type="button" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Tambah Admin</button>
     </a>
@@ -20,6 +18,7 @@
           <thead class="bg-blue text-white">
             <tr>
               <th scope="col">ID</th>
+              <th scope="col">Role</th>
               <th scope="col">Nama</th>
               <th scope="col">Email</th>
               <th scope="col">Dibuat </th>
@@ -31,6 +30,7 @@
             @foreach ($akuns as $akun)
               <tr>
                 <td>{{$akun->id}}</td>
+                <td>{{$akun->role}}</td>
                 <td>{{$akun->name}}</td>
                 <td>{{$akun->email}}</td>
                 <td>{{$akun->created_at}}</td>

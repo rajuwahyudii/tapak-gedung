@@ -19,7 +19,7 @@ class AdminDashboardController extends Controller
 
     public function index()
     {
-        return redirect('admin/beranda/indonesia');
+        return redirect('admin/beranda');
         // return view('admin.dashboard.index');
     }
 

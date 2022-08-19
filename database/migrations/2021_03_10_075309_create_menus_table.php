@@ -18,6 +18,7 @@ class CreateMenusTable extends Migration
             $table->integer('urutan')->nullable();
             $table->string('bahasa')->nullable();
             $table->string('menu')->nullable();
+            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }

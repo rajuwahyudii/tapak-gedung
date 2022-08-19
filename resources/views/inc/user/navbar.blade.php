@@ -1,130 +1,119 @@
+	<!--================ Offcanvus Menu Area =================-->
+		{{-- <div class="side_menu">
+			<div class="logo">
+				<a href="{{ url('/')}}">
+					<img width="100px" height="100px" src="{{ asset('template1/img/logo.png')}}" alt="">
+				</a>
+			</div>
+			<ul class="list menu-left">
+				<li>
+					<a href="{{ url('/')}}">Beranda</a>
+				</li>
+				<li>
+					<div class="dropdown">
+						<button type="button" class="dropdown-toggle" data-toggle="dropdown">
+							Blog
+						</button>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="{{ url('blog')}}">Blog</a>
+							<a class="dropdown-item" href="{{ url('blog/detail_blog')}}">Detail Blog</a>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="dropdown">
+						<button type="button" class="dropdown-toggle" data-toggle="dropdown">
+							Pariwisata
+						</button>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="{{ url('spot/wisata')}}">Spot Pariwisata</a>
+							<a class="dropdown-item" href="{{ url('spot/kategori')}}">Kategori</a>
+						</div>
+					</div>
+				</li>
+				<li>
+					<a href="{{ url('paket')}}">Paket</a>
+				</li>
+				<li>
+					<a href="{{ url('tentang_desa')}}">Tentang Desa</a>
+				</li>
+				<li>
+					<a href="{{ url('kontak')}}">Kontak</a>
+				</li>
+				<li>
+					<button  class="btn btn-primary"><a style="font-size:12px;color: white" href="{{ url('admin/login')}}">Login Admin</a></button>
+				</li>
+			</ul>
+		</div> --}}
+	<!--================ End Offcanvus Menu Area =================-->
 
+	<!--================ Canvus Menu Area =================-->
+	{{-- <div class="canvus_menu">
+		<div class="container">
+			<div class="toggle_icon" title="Menu Bar">
+				<span></span>
+			</div>
+		</div>
+	</div> --}}
+	<!--================ End Canvus Menu Area =================-->
 
-<div class="container-fluid" style="background: #333652;">
-  <div class="row">
-    <div class="col-xl-3 pt-2 pb-3" style=" padding-left:5em; background: #333652; margin-bottom: 0; box-sizing: border-box;">
-      <div class="row">
-        <img width="50" height="50" class="align-self-center" src="{{asset('logo/logo.png')}}" alt="">
-        <p class="mt-4 ml-3 text-white">MAGISTER MANAJEMEN <br> UNIVERSITAS BENGKULU</p>
-      </div>
-    </div>
-    <nav class="col-xl-9 pr-5 pl-5 navbar navbar-expand-lg navbar-custom">
-      <button class="navbar-toggler text-white ml-auto"  type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-        {{-- <span class="navbar-toggler-icon"></span> --}}
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto" style="font-size: smaller;">
-          @if (Request::segment(1) == 'en')
-            <li class="nav-item">
-              @if (Request::segment(2) == null)
-                  <a class="nav-link active text-white" style="text-transform: uppercase;
-                  border-bottom:  2px inset #FAD02C;
-                  margin-bottom:  -2px;" 
-                  href="{{route('user.index', $bahasa)}}">Home</a>
-                @else
-                  <a class="nav-link" style="text-transform: uppercase;" href="{{route('user.index', $bahasa)}}">Home</a>
-                @endif
-              
-            </li>
-          @else
-            <li class="nav-item">
-              @if (Request::segment(2) == null)
-                  <a class="nav-link active text-white" style="text-transform: uppercase;
-                  border-bottom:  2px inset #FAD02C;
-                  margin-bottom:  -2px;" 
-                  href="{{route('user.index', $bahasa)}}">Beranda</a>
-                @else
-                  <a class="nav-link" style="text-transform: uppercase;" href="{{route('user.index', $bahasa)}}">Beranda</a>
-                @endif
-              
-            </li>
-          @endif
-  
-          
-          @foreach ($menus as $menu)
-            
-            <li class="nav-item dropdown">
-              @if (Request::segment(2) == $menu->menu)
-                <a class="nav-link dropdown-toggle active text-white" 
-                style="text-transform: uppercase;
-                      border-bottom:  2px inset #FAD02C;
-                      margin-bottom:  -2px;" 
-                href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                   {{$menu->menu}}
-                </a>
-              @else
-                <a class="nav-link dropdown-toggle" style="text-transform: uppercase;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  {{$menu->menu}}
-                </a>
-              @endif
-              
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                @if ($menu->menu == 'Penelitian' || $menu->menu == 'penelitian')
-                <a class="dropdown-item" href="{{route('user.artikeldosen.index', ['id', 'artikeldosen'])}}">Artikel Dosen</a>
-                  <a class="dropdown-item" href="{{route('user.artikeldosen.index', ['id', 'tesis'])}}">Tesis</a>
-                  <a class="dropdown-item" href="{{route('user.artikeldosen.index', ['id', 'disertasi'])}}">Disertasi</a>
-                  @endif
-                  @if ($menu->menu == 'Research' || $menu->menu == 'research')
-                  <a class="dropdown-item" href="{{route('user.artikeldosen.index', ['en', 'artikeldosen'])}}">Lecturer Articles</a>
-                    <a class="dropdown-item" href="{{route('user.artikeldosen.index', ['en', 'tesis'])}}">Thesis</a>
-                    <a class="dropdown-item" href="{{route('user.artikeldosen.index', ['en', 'disertasi'])}}">Dissertation</a>
-                  @endif 
-                  @foreach ($contents as $content)
-                    @if ($content->menu_id == $menu->id)
-                      {{-- <a class="dropdown-item" href="{{route('user.content', [$bahasa, $menu->menu , $content->slug])}}">{{$content->judul}}</a> --}}
-                      {{-- {{$content->slug}} --}}
-                      <a class="dropdown-item" href="{{route('user.content', [$bahasa, $menu->menu , $content->slug])}}">{{$content->judul}}</a>
-                    @endif
-                  @endforeach
-              </div>
-            </li>
-          @endforeach
-  
-          @foreach ($menutunggals as $menutunggal)
-            <li class="nav-item">
-              @if (Request::segment(2) == $menutunggal->slug)
-              <a class="nav-link active" 
-              style="text-transform: uppercase;
-                        border-bottom:  2px inset #FAD02C;
-                        margin-bottom:  -2px;" 
-              href="{{route('user.menutunggal.index', [$bahasa,$menutunggal->slug])}}">{{$menutunggal->judul}}</a>
-                @else
-                <a class="nav-link" style="text-transform: uppercase;" href="{{route('user.menutunggal.index', [$bahasa,$menutunggal->slug])}}">
-                  {{$menutunggal->judul}}</a>
-                @endif
-            </li>
-          @endforeach
-  
-          @if (Request::segment(1) == 'en')
-            <li class="nav-item">
-              @if (Request::segment(2) == 'berita')
-              <a class="nav-link active" 
-              style="text-transform: uppercase;
-                        border-bottom:  2px inset #FAD02C;
-                        margin-bottom:  -2px;" 
-              href="{{route('user.berita.index', [$bahasa, 'berita'])}}">News</a>
-                @else
-                <a class="nav-link" style="text-transform: uppercase;" href="{{route('user.berita.index',  [$bahasa, 'berita'])}}">News</a>
-                @endif
-            </li>
-          @else
-            <li class="nav-item">
-              @if (Request::segment(2) == 'berita')
-              <a class="nav-link active" 
-              style="text-transform: uppercase;
-                        border-bottom:  2px inset #FAD02C;
-                        margin-bottom:  -2px;" 
-              href="{{route('user.berita.index', [$bahasa, 'berita'])}}">Berita</a>
-                @else
-                <a class="nav-link" style="text-transform: uppercase;" href="{{route('user.berita.index',  [$bahasa, 'berita'])}}">Berita</a>
-                @endif
-            </li>
-          @endif
-        </ul>
-      </div>
+	{{-- <section class="top-btn-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<a href="#" class="main_btn">
+						Pesan via WA
+						<img src="{{ asset('template1/img/next.png')}}" alt="">
+					</a>
+				</div>
+			</div>
+		</div>
+	</section> --}}
+    <div style="min-height: 5vh"></div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white" style="font-size:1.3em;">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <div class="logo pr-5">
+                    <a href="{{ url('/')}}">
+                        <img width="80px" height="80px" src="{{ asset('logo/logo.png')}}" alt="">
+                    </a>
+                </div>
+            </a>
+            <button class="navbar-toggler bg-white" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item {{ Route::is('user.index') ? 'active' : '' }}">
+                    <a class="nav-link ml-1" href="/">Beranda</a>
+                </li>
+                <li class="nav-item dropdown {{ Route::is('user.blog.wisata') ? 'active' : '' }}">
+                    <a class="nav-link ml-1 dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Objek Wisata	
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						@foreach ($wisatas as $wisata)
+							<a class="dropdown-item" href="{{route('user.blog.wisata', $wisata->slug)}}">{{$wisata->wisata}}</a>
+						@endforeach
+                    </div>
+                </li>
+				@foreach ($menus as $menu)
+					@if (Request::segment(2) == $menu->slug)
+						<li class="nav-item active">
+							<a class="nav-link ml-1" href="{{route('user.blog.index', $menu->slug)}}">{{$menu->menu}}</a>
+						</li>
+					@else
+						<li class="nav-item">
+							<a class="nav-link ml-1" href="{{route('user.blog.index', $menu->slug)}}">{{$menu->menu}}</a>
+						</li>
+					@endif
+					
+				@endforeach
+                </ul>
+                {{-- <a href="#" class="main_btn">
+                    Pesan via WA
+                    <img src="{{ asset('img/next.png')}}" alt="">
+                </a> --}}
+            </div>
+        </div>
     </nav>
-  </div>
-  
-</div>
-

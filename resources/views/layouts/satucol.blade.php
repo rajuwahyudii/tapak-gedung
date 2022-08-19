@@ -3,27 +3,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    @yield('meta')
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
-    @if (empty(Request::segment(2)))
-      @if (Request::segment(1) == 'en' )
-      <title>Home - Magister Manajemen UNIB</title>
-      @else
-      <title>Beranda - Magister Manajemen UNIB</title>
-      @endif
-    @else
-      <title>Magister Manajemen UNIB - {{ ucfirst(trans(basename(request()->path()))) }}</title>
-    @endif
+    <link rel="icon" href="{{ asset('logo/logo.png')}}" type="image/png">
+    <title>DESA TAPAK GEDUNG</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     {{-- ICON --}}
-    <link rel="icon" href="http://feb.unib.ac.id/wp-content/uploads/2016/03/cropped-fav-unib-e1496768617388-2-32x32.png" sizes="32x32">
-    <link rel="icon" href="http://feb.unib.ac.id/wp-content/uploads/2016/03/cropped-fav-unib-e1496768617388-2-192x192.png" sizes="192x192">
+    {{-- <link rel="icon" href="http://feb.unib.ac.id/wp-content/uploads/2016/03/cropped-fav-unib-e1496768617388-2-32x32.png" sizes="32x32">
+    <link rel="icon" href="http://feb.unib.ac.id/wp-content/uploads/2016/03/cropped-fav-unib-e1496768617388-2-192x192.png" sizes="192x192"> --}}
 
 
     <!-- Fonts -->

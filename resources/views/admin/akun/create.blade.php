@@ -12,6 +12,16 @@
 <div class="bg-white p-5 shadow">
     <form action="{{route('admin.akun.store')}}" method="POST">
         @csrf
+        <div class="col-xl-12 mb-5">
+            <label for="role">Role</label>
+            <br>
+            <div class="d-inline-block mt-2">
+                <input type="radio" id="admin" name="role" value="admin" checked>
+                <label for="admin" class="mr-5">Admin</label>
+                <input type="radio" id="super_admin" name="role" value="super admin">
+                <label for="super_admin" class="mr-5">Super Admin</label>
+            </div>
+        </div>
         <div class="form-group row">
             <div class="col-xl-6 mt-1">
                 <label for="nama">Nama : </label>
@@ -24,6 +34,7 @@
                 <input type="email" name="email" class="form-control" id="email" aria-describedby="email" placeholder="Masukan Email">
             </div>
         </div>
+        
         <div class="form-group row">
             <div class="col-xl-6 mt-1">
                 <label for="password">Password : </label>

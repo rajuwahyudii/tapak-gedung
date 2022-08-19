@@ -16,11 +16,14 @@ class CreateContentsTable extends Migration
         Schema::create('contents', function (Blueprint $table) {
             $table->id();
             $table->integer('menu_id')->nullable();
+            $table->integer('wisata_id')->nullable();
             $table->integer('urutan')->default(0)->nullable();
+            $table->string('thumbnail')->nullable()->default('default.png');
             $table->string('judul')->default('-')->nullable();
             $table->string('slug')->nullable();
             $table->text('kontent')->default('-')->nullable();
             $table->string('author')->default('-')->nullable();
+            $table->enum('status', ['draf', 'aktif'])->default('draf');
             $table->timestamps();
         });
     }

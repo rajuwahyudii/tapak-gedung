@@ -6,6 +6,7 @@ use App\Models\Content;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Path\To\DOMdocument;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -17,16 +18,23 @@ class AdminContentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
     public function __construct()
     {
-        $this->middleware('auth');
+        // Middleware only applied to these methods
+        $this->middleware('superadmin')->only([
+            'status'  // Could add bunch of more methods too
+        ]);
     }
 
-    public function index($bahasa, $menu_id)
+
+    public function index($menu_id)
     {
         if ($menu_id == 'daftar-content') {
             $menu = DB::table('menus')
-                ->where('bahasa', $bahasa)
                 ->orderBy('menus.urutan', 'ASC')
                 ->get()
                 ->first();
@@ -37,17 +45,16 @@ class AdminContentController extends Controller
                 $id_menu = '1';
             }
 
-            return redirect()->route('admin.content.index', [$bahasa, $id_menu]);
+            return redirect()->route('admin.content.index', $id_menu);
         } else {
             // $menu_id = DB::table('menus')->where('id', $menu_id)->get()->first()->id;
 
             $contents = DB::table('contents')
                 ->leftJoin('menus', 'contents.menu_id', 'menus.id')
-                ->where('menus.bahasa', $bahasa)
                 ->where('contents.menu_id', $menu_id)
-                ->select('contents.urutan', 'menus.menu', 'menus.bahasa', 'menus.bahasa', 'contents.id', 'contents.judul', 'contents.slug', 'contents.created_at', 'contents.author')
+                ->select('contents.status', 'contents.created_at', 'menus.menu', 'menus.bahasa', 'menus.bahasa', 'contents.id', 'contents.judul', 'contents.slug', 'contents.created_at', 'contents.author')
                 ->orderBy('menus.menu', 'ASC')
-                ->orderBy('contents.urutan', 'ASC')
+                ->orderBy('contents.created_at', 'DESC')
                 ->paginate(10);
         }
 
@@ -56,21 +63,9 @@ class AdminContentController extends Controller
             ->orderBy('menus.urutan', 'ASC')
             ->get();
 
-        $indonesia_menus = DB::table('menus')
-            ->where('menus.bahasa', 'indonesia')
-            ->orderBy('menus.urutan', 'ASC')
-            ->get();
-
-        $english_menus = DB::table('menus')
-            ->where('menus.bahasa', 'english')
-            ->orderBy('menus.urutan', 'ASC')
-            ->get();
-
         return view('admin.content.index')
             ->with('menus', $menus)
-            ->with('contents', $contents)
-            ->with('indonesia_menus', $indonesia_menus)
-            ->with('english_menus', $english_menus);
+            ->with('contents', $contents);
     }
 
     /**
@@ -80,13 +75,7 @@ class AdminContentController extends Controller
      */
     public function create()
     {
-        $indonesia_menus = DB::table('menus')
-            ->where('menus.bahasa', 'indonesia')
-            ->orderBy('menus.urutan', 'ASC')
-            ->get();
-
-        $english_menus = DB::table('menus')
-            ->where('menus.bahasa', 'english')
+        $menus = DB::table('menus')
             ->orderBy('menus.urutan', 'ASC')
             ->get();
 
@@ -94,9 +83,14 @@ class AdminContentController extends Controller
             ->orderBy('urutan', 'ASC')
             ->get();
 
-        return view('admin.content.create')->with('contents', $contents)
-            ->with('indonesia_menus', $indonesia_menus)
-            ->with('english_menus', $english_menus);
+        $wisatas = DB::table('wisatas')
+            ->orderBy('wisatas.urutan', 'ASC')
+            ->get();
+
+        return view('admin.content.create')
+            ->with('contents', $contents)
+            ->with('wisatas', $wisatas)
+            ->with('menus', $menus);
     }
 
     /**
@@ -107,6 +101,14 @@ class AdminContentController extends Controller
      */
     public function store(Request $request)
     {
+
+        if ($request->hasFile('thumbnail')) {
+            $thumbnailName = time() . $request->file('thumbnail')->getClientOriginalName();
+            $request->file('thumbnail')->move('storage/berita/', $thumbnailName);
+        } else {
+            $thumbnailName = 'default.png';
+        }
+
         if (!empty($request->kontent)) {
             $storage = 'storage/content';
             $dom = new \DOMDocument();
@@ -134,6 +136,13 @@ class AdminContentController extends Controller
             }
         }
 
+        if ($request->input('wisata_id' == 'kosong')) {
+            $wisata_id = null;
+        } else {
+            $wisata_id = $request->input('wisata_id');
+        }
+
+
         $content = new Content();
         $content->urutan = $request->input('urutan');
         if ($request->input('menu_id') == 'kosong') {
@@ -141,6 +150,7 @@ class AdminContentController extends Controller
         } else {
             $content->menu_id = $request->input('menu_id');
         }
+        $content->thumbnail = $thumbnailName;
         $content->judul = $request->input('judul');
         $content->slug = Str::slug($request->input('judul'));
         if (!empty($request->kontent)) {
@@ -148,7 +158,9 @@ class AdminContentController extends Controller
         } else {
             $content->kontent = " - ";
         }
+        $content->status = 'draf';
         $content->author = Auth::user()->name;
+        $content->wisata_id = $wisata_id;
         $content->save();
 
         if ($request->input('menu_id') == 'kosong') {
@@ -158,7 +170,7 @@ class AdminContentController extends Controller
             $menu_bahasa = DB::table('menus')->where('menus.id', $request->input('menu_id'))->get()->first()->bahasa;
         }
 
-        return redirect()->route('admin.content.index', [$menu_bahasa, $request->input('menu_id')])
+        return redirect()->route('admin.content.index', $request->input('menu_id'))
             ->with('success', 'konten berhasil dibuat !!');
     }
 
@@ -168,34 +180,30 @@ class AdminContentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($bahasa, $menu, $id)
+    public function show($menu, $id)
     {
-        $indonesia_menus = DB::table('menus')
-            ->where('menus.bahasa', 'indonesia')
-            ->orderBy('menus.urutan', 'ASC')
-            ->get();
 
-        $english_menus = DB::table('menus')
-            ->where('menus.bahasa', 'english')
+        $menus = DB::table('menus')
             ->orderBy('menus.urutan', 'ASC')
             ->get();
 
         $contents = DB::table('contents')
-            ->orderBy('urutan', 'ASC')
+            ->orderBy('created_at', 'ASC')
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
-            ->select('contents.urutan', 'menus.menu', 'menus.id as menu_id', 'menus.bahasa', 'contents.judul', 'contents.slug', 'contents.created_at', 'contents.author')
+            ->select('contents.status', 'contents.created_at', 'menus.menu', 'menus.id as menu_id', 'menus.bahasa', 'contents.judul', 'contents.slug', 'contents.created_at', 'contents.author')
             ->get();
 
         $content = DB::table('contents')
             ->where('contents.id', $id)
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
-            ->select('contents.id', 'contents.kontent', 'contents.urutan', 'menus.menu', 'menus.id as menu_id', 'menus.bahasa', 'contents.judul', 'contents.slug', 'contents.created_at', 'contents.author')
+            ->leftJoin('wisatas', 'contents.wisata_id', 'wisatas.id')
+            ->select('wisatas.id', 'wisatas.wisata', 'contents.status', 'contents.id', 'contents.thumbnail', 'contents.kontent', 'contents.created_at', 'menus.menu', 'menus.id as menu_id', 'menus.bahasa', 'contents.judul', 'contents.slug', 'contents.created_at', 'contents.author')
             ->get()
             ->first();
 
+
         return view('admin.content.show')->with('contents', $contents)->with('content', $content)
-            ->with('indonesia_menus', $indonesia_menus)
-            ->with('english_menus', $english_menus);
+            ->with('menus', $menus);
     }
 
     /**
@@ -204,35 +212,34 @@ class AdminContentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($bahasa, $menu, $id)
+    public function edit($menu, $id)
     {
-        $indonesia_menus = DB::table('menus')
-            ->where('menus.bahasa', 'indonesia')
-            ->orderBy('menus.urutan', 'ASC')
-            ->get();
-
-        $english_menus = DB::table('menus')
-            ->where('menus.bahasa', 'english')
+        $menus = DB::table('menus')
             ->orderBy('menus.urutan', 'ASC')
             ->get();
 
         $contents = DB::table('contents')
-            ->orderBy('urutan', 'ASC')
+            ->orderBy('created_at', 'ASC')
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
-            ->select('contents.urutan', 'menus.menu', 'menus.bahasa', 'contents.judul', 'contents.created_at', 'contents.author')
+            ->select('contents.status', 'contents.created_at', 'menus.menu', 'menus.bahasa', 'contents.judul', 'contents.created_at', 'contents.author')
             ->get();
 
         $content = DB::table('contents')
             ->where('contents.id', $id)
             ->leftJoin('menus', 'contents.menu_id', 'menus.id')
-            ->select('contents.id', 'contents.kontent', 'contents.urutan', 'menus.menu', 'menus.bahasa', 'contents.judul', 'contents.created_at', 'contents.author')
+            ->leftJoin('wisatas', 'contents.wisata_id', 'wisatas.id')
+            ->select('contents.wisata_id', 'contents.status', 'contents.id', 'contents.kontent', 'contents.created_at', 'menus.menu', 'menus.bahasa', 'contents.judul', 'contents.created_at', 'contents.author')
             ->get()
             ->first();
 
+        $wisatas = DB::table('wisatas')
+            ->orderBy('wisatas.urutan', 'ASC')
+            ->get();
+
         return view('admin.content.edit')->with('contents', $contents)
             ->with('content', $content)
-            ->with('indonesia_menus', $indonesia_menus)
-            ->with('english_menus', $english_menus);
+            ->with('menus', $menus)
+            ->with('wisatas', $wisatas);
     }
 
     /**
@@ -244,6 +251,13 @@ class AdminContentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if ($request->hasFile('thumbnail')) {
+            $thumbnailName = time() . $request->file('thumbnail')->getClientOriginalName();
+            $request->file('thumbnail')->move('storage/berita/', $thumbnailName);
+        } else {
+            $thumbnailName = 'default.png';
+        }
+
         if (!empty($request->kontent)) {
             $storage = 'storage/content';
             $dom = new \DOMDocument();
@@ -271,10 +285,19 @@ class AdminContentController extends Controller
             }
         }
 
+        if ($request->input('wisata_id' == 'kosong')) {
+            $wisata_id = null;
+        } else {
+            $wisata_id = $request->input('wisata_id');
+        }
+
         $content = Content::find($id);
         $content->menu_id = $request->input('menu_id');
+        $content->wisata_id = $wisata_id;
+        $content->status = 'draf';
         $content->judul = $request->input('judul');
         $content->slug = Str::slug($request->input('judul'));
+        $content->thumbnail = $thumbnailName;
         $content->urutan = $request->input('urutan');
         $content->kontent = $request->input('kontent');
         if (!empty($request->kontent)) {
@@ -292,7 +315,7 @@ class AdminContentController extends Controller
             $menu_bahasa = DB::table('menus')->where('menus.id', $request->input('menu_id'))->get()->first()->bahasa;
         }
 
-        return redirect()->route('admin.content.index', [$menu_bahasa, $request->input('menu_id')])
+        return redirect()->route('admin.content.index', $request->input('menu_id'))
             ->with('success', 'konten berhasil diedit !!');
     }
 
@@ -302,6 +325,23 @@ class AdminContentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function status($id)
+    {
+        $content = Content::find($id);
+
+        if ($content->status == 'draf') {
+            $status = 'aktif';
+        } else {
+            $status = 'draf';
+        }
+
+        $content->status = $status;
+        $content->save();
+
+        return redirect()->route('admin.content.index',  $content->menu_id)
+            ->with('success', 'status konten berhasil di ubah !!');
+    }
+
     public function destroy($id)
     {
         $menu = DB::table('contents')
@@ -311,8 +351,13 @@ class AdminContentController extends Controller
             ->first();
 
         $content = Content::find($id);
+        if (File::exists(public_path('storage/berita/' . $content->thumbnail))) {
+            if ($content->thumbnail != 'default.png') {
+                File::delete(public_path('storage/berita/' . $content->thumbnail));
+            }
+        }
         $content->delete();
 
-        return redirect()->route('admin.content.index', ['indonesia', $menu->id])->with('success', 'konten berhasil dihapus !!');
+        return redirect()->route('admin.content.index', $menu->id)->with('success', 'konten berhasil dihapus !!');
     }
 }

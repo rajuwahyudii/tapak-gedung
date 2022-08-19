@@ -11,10 +11,18 @@ use App\Models\User;
 class AdminAkunController extends Controller
 {
 
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
     public function __construct()
     {
-        $this->middleware('auth');
+        // Middleware only applied to these methods
+        $this->middleware('superadmin')->only([
+            'index', 'create', 'store', 'show', 'destroy'  // Could add bunch of more methods too
+        ]);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -48,6 +56,7 @@ class AdminAkunController extends Controller
     {
         $user = new User;
         $user->name = $request->input('name');
+        $user->role = $request->input('role');
         $user->email = $request->input('email');
         $user->password =  Hash::make($request->input('password'));
         $user->save();
@@ -91,12 +100,23 @@ class AdminAkunController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // return $request->input('role');
+        // return $request;
+        if (empty($request->input('role'))) {
+            $role = 'admin';
+        } else {
+            $role = $request->input('role');
+        }
         $user = User::find($id);
         $user->name = $request->input('name');
+        $user->role = $role;
         $user->password =  Hash::make($request->input('password'));
         $user->save();
-
-        return redirect()->route('admin.akun.index')->with('success', 'Admin berhasil di edit !');
+        if (auth()->user()->role == 'super admin') {
+            return redirect()->route('admin.akun.index')->with('success', 'Admin berhasil di edit !');
+        } else {
+            return redirect()->route('admin.menu.index')->with('success', 'akun berhasil di update !');
+        }
     }
 
     /**

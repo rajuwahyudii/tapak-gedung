@@ -5,13 +5,11 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card shadow" style="background: #333f72; color: #ffff; border-radius:25px;">
+            <div class="card shadow bg-white text-dark">
                 <div class=" m-auto text-center pt-5 pb-4">
-                    <img src="{{asset('logo/logo.png')}}" width="80" alt=""> <br>
+                    <img class="mb-3" src="{{asset('logo/logo.png')}}" width="80" alt=""> <br>
                     <b>
-                        UNIVERSITAS BENGKULU <br>
-                        FAKULTAS EKONOMI DAN BISNIS <br>
-                        MAGISTER MANAJEMEN
+                       DESA TAPAK GEDUNG
                     </b>
                 </div>
                 <div class="card-body">
@@ -47,8 +45,8 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-4 ">
-                            <button type="submit" class="btn btn-light pr-5 pl-5 m-auto">
+                        <div class="form-group row mb-4">
+                            <button type="submit" class="btn btn-dark pr-5 pl-5 m-auto">
                                 {{ __('Login') }}
                             </button>
                         </div>

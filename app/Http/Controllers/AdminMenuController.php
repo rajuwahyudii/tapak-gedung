@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use App\Models\Menu;
 
 class AdminMenuController extends Controller
@@ -14,28 +16,28 @@ class AdminMenuController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    //     // $this->middleware('superadmin');
+    // }
     public function __construct()
     {
-        $this->middleware('auth');
+        // Middleware only applied to these methods
+        $this->middleware('superadmin')->only([
+            // 'create' // Could add bunch of more methods too
+        ]);
     }
 
     public function index()
     {
 
         // $menus = Menu::all()->orderBy('urutan', 'ASC');
-        $indonesia_menus = DB::table('menus')
-            ->where('menus.bahasa', 'indonesia')
+        $menus = DB::table('menus')
             ->orderBy('menus.urutan', 'ASC')
             ->get();
-
-        $english_menus = DB::table('menus')
-            ->where('menus.bahasa', 'english')
-            ->orderBy('menus.urutan', 'ASC')
-            ->get();
-
         return view('admin.menu.index')
-            ->with('indonesia_menus', $indonesia_menus)
-            ->with('english_menus', $english_menus);
+            ->with('menus', $menus);
     }
 
     /**
@@ -45,19 +47,13 @@ class AdminMenuController extends Controller
      */
     public function create()
     {
-        $indonesia_menus = DB::table('menus')
-            ->where('menus.bahasa', 'indonesia')
+        $menus = DB::table('menus')
             ->orderBy('menus.urutan', 'ASC')
             ->get();
 
-        $english_menus = DB::table('menus')
-            ->where('menus.bahasa', 'english')
-            ->orderBy('menus.urutan', 'ASC')
-            ->get();
 
         return view('admin.menu.create')
-            ->with('indonesia_menus', $indonesia_menus)
-            ->with('english_menus', $english_menus);
+            ->with('menus', $menus);
     }
 
     /**
@@ -72,6 +68,7 @@ class AdminMenuController extends Controller
         $menu->urutan = $request->input('urutan');
         $menu->bahasa = $request->input('bahasa');
         $menu->menu = $request->input('menu');
+        $menu->slug = Str::slug($request->input('menu'));
         $menu->save();
 
         return redirect()->route('admin.menu.index')->with('success', 'menu  berhasil dibuat !');
@@ -93,28 +90,22 @@ class AdminMenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($menu)
+    // public function edit($slug)
+    public function edit($id)
     {
 
-        $indonesia_menus = DB::table('menus')
-            ->where('menus.bahasa', 'indonesia')
-            ->orderBy('menus.urutan', 'ASC')
-            ->get();
-
-        $english_menus = DB::table('menus')
-            ->where('menus.bahasa', 'english')
+        $menus = DB::table('menus')
             ->orderBy('menus.urutan', 'ASC')
             ->get();
 
         $menu = DB::table('menus')
-            ->where('menu', $menu)
+            ->where('menus.id', $id)
             ->get()
             ->first();
 
         return view('admin.menu.edit')
             ->with('menu', $menu)
-            ->with('indonesia_menus', $indonesia_menus)
-            ->with('english_menus', $english_menus);
+            ->with('menus', $menus);
     }
 
     /**
@@ -130,6 +121,7 @@ class AdminMenuController extends Controller
         $menu->urutan = $request->input('urutan');
         $menu->bahasa = $request->input('bahasa');
         $menu->menu = $request->input('menu');
+        $menu->slug = Str::slug($request->input('menu'));
         $menu->save();
 
         return redirect()->route('admin.menu.index')->with('success', 'menu  berhasil diedit !');
@@ -143,16 +135,20 @@ class AdminMenuController extends Controller
      */
     public function destroy($id)
     {
-        $menu = Menu::find($id);
-        $menu->delete();
 
         $contents = DB::table('contents')->where('menu_id', $id);
-        // if (!empty($contents)) {
-        //     foreach ($contents as $content) {
-        //         $content->delete();
-        //     }
-        // }
-        $contents->delete();
+        if (!empty($contents)) {
+            foreach ($contents as $content) {
+                if (File::exists(public_path('storage/berita/' . $content->thumbnail))) {
+                    File::delete(public_path('storage/berita/' . $content->thumbnail));
+                    $content->delete();
+                } else {
+                    $content->delete();
+                }
+            }
+        }
+        $menu = Menu::find($id);
+        $menu->delete();
 
         return redirect()->route('admin.menu.index')->with('success', 'menu berhasil dihapus !!');
     }

@@ -3,41 +3,40 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use App\Models\Youtube;
 
 class AdminBerandaController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
+        $this->middleware('superadmin')->only([
+            'youtube'  // Could add bunch of more methods too
+        ]);
     }
-    public function index($bahasa)
-    {
-        if ($bahasa == 'english') {
-            $sliders = DB::table('sliders')
-                ->where('bahasa', 'english')
-                ->orderBy('created_at', 'DESC')->get();
-            $berandakonten = DB::table('berandakontens')
-                ->where('bahasa', 'english')
-                ->get()
-                ->first();
-        } else {
-            $sliders = DB::table('sliders')->where('bahasa', 'indonesia')
-                ->orderBy('created_at', 'DESC')
-                ->get();
-            $berandakonten = DB::table('berandakontens')
-                ->where('bahasa', 'indonesia')
-                ->get()
-                ->first();
-        }
-        $sosial_medias = DB::table('sosialmedias')->get();
-        $membershipakreditasis = DB::table('membershipakreditasis')->get();
 
-        return view('admin.beranda.index')
-            ->with('sosial_medias', $sosial_medias)
-            ->with('sliders', $sliders)
-            ->with('membershipakreditasis', $membershipakreditasis)
-            ->with('berandakonten', $berandakonten);
+    public function index()
+    {
+        $youtubes = Youtube::all();
+        if ($youtubes->isEmpty()) {
+            $youtube = 'kosong';
+        } else {
+            $youtube = Youtube::first();
+        }
+
+        return view('admin.beranda.index')->with('youtube', $youtube);
+    }
+
+    // public function youtube()
+    public function youtube(Request $request, $id)
+    {
+        $youtube = Youtube::find($id);
+        $youtube->link = $request->input('link');
+        $youtube->save();
+
+        return redirect()->route('admin.beranda.index')->with('success', 'youtube berhasil diedit !');
     }
 }

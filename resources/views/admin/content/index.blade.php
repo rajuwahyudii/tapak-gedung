@@ -25,33 +25,15 @@
   <div class="col-xl-8">
     @if (Request::segment(3) != 'daftar-content')
     @foreach ($menus as $menu)
-        @if ($menu->id == Request::segment(4))
-            <h1 class="font-1 mt-5">Konten {{$menu->menu}}</h1>
-            <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.content.index', ['indonesia','daftar-content'])}}">konten</a> / {{$menu->menu}}</p>
+        @if ($menu->id == Request::segment(3))
+            <h1 class="font-1 mt-5">{{$menu->menu}}</h1>
+            
         @endif
       @endforeach
     @else
-    <h1 class="font-1 mt-5">Semua Konten</h1>
-    <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.content.index', ['indonesia','daftar-content'])}}">content</a> / Semua Content</p>
+    <h1 class="font-1 mt-5">Semua Post</h1>
+    <p class="p-2"><a href="{{route('admin..index')}}">admin</a> / <a href="{{route('admin.content.index','daftar-content')}}">content</a> / Semua Content</p>
     @endif
-  </div>
-  <div class="col-xl-4 mt-5 pl-5">
-    @if (Request::segment(3) == 'english')  
-      <a href="{{route('admin.content.index', ['indonesia','daftar-content' ])}}">
-        <button type="button" class="btn mb-3 mr-3"><i class="fas fa-book"></i> Indonesia </button>
-      </a>
-      <a href="{{route('admin.content.index', ['english','daftar-content' ])}}">
-          <button type="button" class="btn bg-blue text-white mb-3"><i class="fas fa-book"></i> English</button>
-      </a>
-    @else
-      <a href="{{route('admin.content.index', ['indonesia','daftar-content' ])}}">
-        <button type="button" class="btn bg-blue text-white mb-3 mr-3"><i class="fas fa-book"></i> Indonesia </button>
-      </a>
-      <a href="{{route('admin.content.index', ['english','daftar-content' ])}}">
-          <button type="button" class="btn mb-3"><i class="fas fa-book"></i> English</button>
-      </a>
-    @endif
-    
   </div>
 </div>
 
@@ -59,29 +41,45 @@
     @include('inc.messages')
 
     <a href="{{route('admin.content.create')}}">
-        <button type="button" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Tambah Konten</button>
+        <button type="button" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Tambah Post</button>
     </a>
     <div style="overflow-x: scroll;">
       <table class="table bg-white mb-5">
           <thead class="bg-blue text-white">
             <tr>
-              <th scope="col">Urutan</th>
-              <th scope="col">Menu</th>
+              <th scope="col">Kategori</th>
               <th scope="col">Judul</th>
               <th scope="col">Tanggal Dibuat </th>
+              <th scope="col">Status</th>
               <th scope="col" class="text-center">Aksi </th>
             </tr>
           </thead>
           <tbody>
             @foreach ($contents as $content)
               <tr>
-                <td>{{$content->urutan}}</td>
                 <td>{{$content->menu}}</td>
-                <td>{{$content->judul}}</td>
-                <td>{{$content->created_at}}</td>
-                <td class="text-center">
-                    <a href="{{route('admin.content.show', [$content->bahasa,$content->menu,$content->id] )}}"><button class="btn btn-primary "> <i class="fas fa-info-circle"></i> Detail Konten </button></a>
-                </td>
+                <td>{{ Str::limit($content->judul, 30, '...')}}</td>
+                <td>{{ Carbon\Carbon::parse($content->created_at)->format('Y-m-d') }}</td>
+                @if ($content->status == 'draf')
+                  <td> <i class=" text-danger fas fa-circle"></i> Draf</td>
+                  @else
+                  <td> <i class=" text-success fas fa-circle"></i> Aktif</td>
+                @endif
+
+                @if (auth()->user()->role == 'super admin')
+                  <td class="text-center">
+                      @if ($content->status == 'draf')
+                        <a href="{{route('admin.content.status', $content->id)}}"><button class="btn btn-success "> <i class="fas fa-check"></i> Setujui </button></a>
+                      @else
+                        <a href="{{route('admin.content.status', $content->id)}}"><button class="btn btn-danger "> <i class="fas fa-ban"></i> Draf </button></a>
+                      @endif
+                      <a href="{{route('admin.content.show', [$content->menu,$content->id] )}}"><button class="btn btn-primary "> <i class="fas fa-info-circle"></i> Detail Post </button></a>
+                  </td> 
+                @else
+                  <td class="text-center">
+                      <a href="{{route('admin.content.show', [$content->menu,$content->id] )}}"><button class="btn btn-primary "> <i class="fas fa-info-circle"></i> Detail Post </button></a>
+                  </td>
+                @endif
               </tr>
             @endforeach
           </tbody>
